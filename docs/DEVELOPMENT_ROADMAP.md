@@ -2,8 +2,8 @@
 
 **Project Name**: Vedic Book Translator  
 **Delivery Model**: Phased Milestones with Strict Acceptance Gates  
-**Current Phase**: Phase 0 (Initialization & Architectural Foundation)  
-**Document Version**: 1.0.0  
+**Current Phase**: Phase 0 (Initialization, Audit & Corrective Baseline)  
+**Document Version**: 1.1.0 (Post-Audit Revision)  
 
 ---
 
@@ -11,58 +11,58 @@
 
 ```
 +-------------------------------------------------------------------------------------------------------+
-|  Phase 0: Initialization & Architecture (COMPLETED IN CURRENT STEP)                                   |
+│  Phase 0: Initialization, Architectural Audit & Baseline (CURRENT)                                    │
+│  - Environment inspection & documentation suite                                                       │
+│  - Corrective audit (decoupling model IDs, 6-dimension quality framework, digital-first scope)       │
 +-------------------------------------------------------------------------------------------------------+
-                                                   |
-                                                   v
+                                                   │
+                                                   ▼
 +-------------------------------------------------------------------------------------------------------+
-|  Phase 1: Ingestion, OCR & Canonical Document AST                                                     |
-|  - Parsers (PDF, EPUB, DOCX, TXT)                                                                     |
-|  - Semantic Verse & Commentary Segmenter                                                              |
-|  - OCR Engine for Scanned Texts                                                                       |
+│  Phase 1: Digital Document Ingestion & Canonical Document AST                                         │
+│  - Digital Parsers (Digital PDF, EPUB, DOCX, TXT)                                                     │
+│  - Semantic Verse & Commentary Segmenter (Devanagari, IAST, Anvaya, Anuvada, Tatparya)                │
+│  - Canonical Document AST Validation & Golden Ingestion Tests                                         │
 +-------------------------------------------------------------------------------------------------------+
-                                                   |
-                                                   v
+                                                   │
+                                                   ▼
 +-------------------------------------------------------------------------------------------------------+
-|  Phase 2: Translation Memory & Terminology Store                                                      |
-|  - SQLite Storage Engine                                                                              |
-|  - Gaudiya Vaishnava Lexicon & BBT Russian Rules                                                      |
-|  - Sanskrit Diacritics Mapping & Declension Rules                                                     |
+│  Phase 2: Translation Memory, Configurable Glossaries & Orthography Profiles                          │
+│  - SQLite Storage Engine (ACID transactions, WAL mode)                                                │
+│  - Pluggable Orthography Profiles (BBT Russian Profile, Academic Cyrillic Profile)                    │
+│  - Custom Lexicon Loader & Sanskrit-Russian Morphological Declension Integration                     │
 +-------------------------------------------------------------------------------------------------------+
-                                                   |
-                                                   v
+                                                   │
+                                                   ▼
 +-------------------------------------------------------------------------------------------------------+
-|  Phase 3: Multi-Provider Adapters & 4-Stage Translation Pipeline                                      |
-|  - Adapters: Gemini, Claude, OpenAI, Local LLM                                                        |
-|  - Stage 1: Literal Deconstruction                                                                    |
-|  - Stage 2: Theological & Commentary Alignment                                                        |
-|  - Stage 3: Literary Russian Prose Styling                                                            |
-|  - Stage 4: Terminology & Diacritic Harmonization                                                     |
+│  Phase 3: Multi-Provider Adapters & 4-Stage Translation Pipeline                                      │
+│  - Independent Provider Adapters: OpenAI, Anthropic Claude, Google Gemini, Local LLMs                 │
+│  - Dynamic Stage Configuration: Independent model ID & parameter selection per stage                  │
+│  - Stage 1 (Literal) -> Stage 2 (Philosophical) -> Stage 3 (Literary) -> Stage 4 (Terminology)        │
 +-------------------------------------------------------------------------------------------------------+
-                                                   |
-                                                   v
+                                                   │
+                                                   ▼
 +-------------------------------------------------------------------------------------------------------+
-|  Phase 4: Automated Quality Control & Auditing Engine                                                 |
-|  - Terminology Compliance & Mayavada Leakage Auditor                                                  |
-|  - Diacritics Completeness Auditor                                                                    |
-|  - Verse Numbering & Omission Verifier                                                                |
+│  Phase 4: Multi-Dimensional Quality Control & Human Editorial Gate                                    │
+│  - Automated Diagnostic Audits (Linguistic, Philosophical, Terminology, Structural, Literary)        │
+│  - Human Editorial Sign-Off Workflow & Anomaly Routing                                                │
+│  - Golden Verse Reference Test Suite (Bhagavad-gita 2.13, Srimad-Bhagavatam 1.1.1)                   │
 +-------------------------------------------------------------------------------------------------------+
-                                                   |
-                                                   v
+                                                   │
+                                                   ▼
 +-------------------------------------------------------------------------------------------------------+
-|  Phase 5: Publishing Engine & Multi-Format Exporters                                                  |
-|  - Publication-Grade DOCX Exporter (Styles, Footnotes)                                                |
-|  - Validated EPUB 3 Exporter with Font Embedding                                                      |
-|  - Typeset PDF Exporter (Dual-Script Typography)                                                      |
-|  - Parallel Bilingual Layout Generator                                                                |
+│  Phase 5: Publishing Engine, Multi-Format Exporters & Scanned OCR Subsystem                           │
+│  - Publication-Grade DOCX Exporter (Styles, Footnotes, Parallel Layouts)                              │
+│  - Validated EPUB 3 Exporter with Font Embedding                                                      │
+│  - Typeset PDF Exporter (Dual-Script Typography)                                                      │
+│  - Planned Scanned OCR Subsystem (Advanced Devanagari Ligature Pre-processing & Vision-LLM Assistance)│
 +-------------------------------------------------------------------------------------------------------+
-                                                   |
-                                                   v
+                                                   │
+                                                   ▼
 +-------------------------------------------------------------------------------------------------------+
-|  Phase 6: CLI Runner, Job Orchestration & Production Hardening                                        |
-|  - Atomic Checkpointing & Resume Lifecycle                                                            |
-|  - Rich CLI Progress Dashboard                                                                        |
-|  - Full Book E2E Golden Verification                                                                  |
+│  Phase 6: CLI Runner, Job Orchestration & Production Hardening                                        │
+│  - Atomic Checkpointing & Resumable Job State Machine                                                 │
+│  - Rich Terminal Dashboard (Progress, Cost Estimates, Audit Findings)                                 │
+│  - Full Multi-Chapter Book End-to-End Stress Testing                                                  │
 +-------------------------------------------------------------------------------------------------------+
 ```
 
@@ -70,116 +70,106 @@
 
 ## 2. Phase Breakdown & Acceptance Gates
 
-### Phase 0: Project Initialization & Architectural Foundation (Completed)
-- **Objective**: Establish development standards, dependency manifests, repository layout, and foundational specifications.
+### Phase 0: Project Initialization, Corrective Audit & Baseline (Current)
+- **Objective**: Establish foundational documentation, verify environment, decouple model configurations, and set quality standards.
 - **Deliverables**:
-  - `README.md`, `AGENTS.md`, `CHANGELOG.md`
-  - `.gitignore`, `.env.example`, `pyproject.toml`
-  - Comprehensive documentation suite under `docs/`
-  - Directory skeleton and module structures
-- **Acceptance Gate**: Architecture approved by project leadership.
+  - Full documentation suite under `docs/`
+  - Corrective audit addressing test failures, hardcoded model decoupling, and quality architecture.
+- **Acceptance Gate**: Explicit client review and approval of the Corrective Audit Report.
 
 ---
 
-### Phase 1: Ingestion, OCR & Canonical Document AST
-- **Objective**: Build robust, non-destructive document ingestion capable of extracting complex structured Vedic texts into a strongly-typed Document AST.
+### Phase 1: Digital Document Ingestion & Canonical Document AST
+- **Objective**: Build robust, non-destructive digital document ingestion that parses structured Vedic texts into a strongly-typed Document AST.
 - **Key Deliverables**:
-  1. `DocumentExtractor` base interface and format adapters:
-     - `PDFExtractor` (PyMuPDF) supporting digital text, bookmarks, and font extraction.
+  1. `DocumentExtractor` abstract port and concrete digital extractors:
+     - `PDFExtractor` (PyMuPDF) supporting digital vector text, bookmarks, and font extraction.
      - `EPUBExtractor` (EbookLib + BeautifulSoup4) retaining chapter hierarchy.
      - `DOCXExtractor` (python-docx) extracting styled headings, italics, and footnotes.
      - `TXTExtractor` with regex pattern recognition for markdown/plain text.
-  2. `OCREngine` (pytesseract) with image pre-processing for Sanskrit (Devanagari) and Russian/English scanned books.
-  3. `SemanticSegmenter`: Rule-based and pattern-based classifier that detects:
+  2. `SemanticSegmenter`: Pattern-based classifier that identifies:
      - Devanagari verse blocks (*Mūla-śloka*).
      - IAST transliteration blocks.
      - Word-for-word synonyms (*Anvaya*).
      - Literary translations (*Anuvāda*).
      - Commentaries/purports (*Tātparya*).
-     - Prose chapters, headings, and footnotes.
+     - Headings and prose narrative paragraphs.
 - **Acceptance Gate**:
-  - Ingestion of test sample (Bhagavad-gita Chapter 2) creates 100% accurate AST with zero dropped verses and correct block classifications.
-  - 100% passing unit tests for each parser.
+  - Ingestion of test sample (*Bhagavad-gītā* Chapter 2) produces a 100% accurate Document AST with zero dropped verses, zero corrupted footnotes, and exact block classifications.
+  - All Phase 1 tests pass in an isolated virtual environment.
 
 ---
 
-### Phase 2: Translation Memory & Terminology Store
-- **Objective**: Implement zero-dependency local storage for translation memory, terminology lookup, and Russian orthographic rules.
+### Phase 2: Translation Memory, Configurable Glossaries & Orthography Profiles
+- **Objective**: Implement zero-dependency local storage for translation memory, terminology lookup, and interchangeable orthographic profiles.
 - **Key Deliverables**:
   1. `SQLiteTranslationMemory`:
      - SHA-256 hash indexing of source segments.
      - Exact match and fuzzy match retrieval.
-     - Provenance tracking (AI model, date, human approval status).
-  2. `TerminologyDatabase`:
-     - Comprehensive Gaudiya Vaishnava lexicon (seeded with 500+ fundamental theological terms).
-     - Russian BBT orthography mapping table (e.g., *Caitanya* → Чайтанья, *Kṛṣṇa* → Кришна).
-     - Sanskrit-Russian declension rules engine for Sanskrit loanwords in Russian.
-  3. `DiacriticsMap`:
-     - Bidirectional conversion between IAST, Cyrillic academic transliteration, and Devanagari.
+     - Full provenance tracking (model used, stage history, human approval status).
+  2. `OrthographyProfileManager`:
+     - Pluggable profile system: BBT Russian Profile (default) and Academic Cyrillic Profile.
+     - Dynamic custom glossary loader for user-provided dictionaries.
+     - Sanskrit-Russian morphological declension integration.
 - **Acceptance Gate**:
   - Sub-millisecond lookup latency for terminology queries.
   - Test suite validating declension cases for all terms in the seed dictionary.
 
 ---
 
-### Phase 3: AI Provider Adapters & 4-Stage Translation Pipeline
-- **Objective**: Implement pluggable AI provider adapters and orchestrate the 4-stage translation pipeline.
+### Phase 3: Multi-Provider Adapters & 4-Stage Translation Pipeline
+- **Objective**: Implement independent, pluggable AI provider adapters with dynamic model ID configuration.
 - **Key Deliverables**:
-  1. `ITranslationProvider` interface and concrete adapters:
-     - `GeminiProvider` (using native `google-genai`).
-     - `AnthropicProvider` (using native `anthropic`).
-     - `OpenAIProvider` (using native `openai`, also compatible with vLLM/Ollama).
-  2. Resilient API calling layer with token-bucket rate-limiting and exponential backoff retry.
-  3. Specialized pipeline stages:
-     - `LiteralStage`: Extracts grammatical structure and literal word meanings.
-     - `PhilosophicalStage`: Injects Gaudiya Siddhanta context and verifies personalist theology.
-     - `LiteraryStage`: Formulates natural, dignified, elevated Russian literary prose.
-     - `TerminologyStage`: Enforces BBT Russian orthography and diacritical precision.
-  4. Prompt versioning system with Jinja2 templates.
+  1. `ITranslationProvider` abstract port and independent concrete adapters:
+     - `OpenAIProvider` (supporting `gpt-4o`, `gpt-4o-mini`, `o1`, `o3-mini`, etc.).
+     - `AnthropicProvider` (supporting `claude-3-5-sonnet`, `claude-3-5-haiku`, etc.).
+     - `GeminiProvider` (supporting `gemini-1.5-pro`, `gemini-1.5-flash`, `gemini-2.0-flash`, etc.).
+     - `LocalProvider` (OpenAI-compatible endpoints: vLLM, Ollama, LM Studio).
+  2. Fully independent stage model selection: each stage specifies its own provider and dynamic model ID.
+  3. Resilient API layer with token-bucket rate limiting and exponential backoff retry.
 - **Acceptance Gate**:
-  - Translation of 10 golden test verses (from Gita and Bhagavatam) passes human theological inspection.
-  - Mocked provider tests ensuring pipeline resilience against HTTP 429 and timeouts.
+  - Verification with recorded mock fixtures proving seamless provider switching and zero hardcoded model dependencies.
 
 ---
 
-### Phase 4: Automated Quality Control & Auditing Engine
-- **Objective**: Develop automated verification mechanisms to guarantee translation fidelity before publishing.
+### Phase 4: Multi-Dimensional Quality Control & Human Editorial Gate
+- **Objective**: Implement automated diagnostic checks across the 6 quality dimensions and provide human editorial workflows.
 - **Key Deliverables**:
-  1. `TerminologyAuditor`: Flags forbidden terms (e.g., Mayavada jargon) and unapproved spelling variants.
-  2. `DiacriticsAuditor`: Validates completeness of Unicode diacritical marks in transliterated blocks.
-  3. `VerseIntegrityAuditor`: Detects missing verse numbers, skipped lines, or concatenated verses.
-  4. `HallucinationChecker`: Flags anomalous length ratios between source and target segments.
-  5. `QCAuditReport`: Generates structured diagnostic reports in JSON and Markdown.
+  1. Automated diagnostic auditors:
+     - Linguistic & Syntactic Auditor.
+     - Philosophical & Doctrinal Auditor (Gaudiya Siddhanta contrast rubrics).
+     - Terminology & Orthography Profile Auditor.
+     - Structural Completeness Auditor (100% invariant check).
+     - Literary Register Auditor (Russian stylistic balance).
+  2. Human-in-the-Loop Editorial Gate:
+     - Flagging low-confidence or doctrine-sensitive blocks.
+     - Capturing human corrections directly back into Translation Memory.
 - **Acceptance Gate**:
-  - Verification engine detects 100% of synthetic deliberate errors (injected wrong terms, stripped diacritics, dropped verses) in test fixtures.
+  - Verification engine detects 100% of synthetic errors (injected Mayavada phrasing, dropped verses, broken diacritics).
 
 ---
 
-### Phase 5: Publishing Engine & Multi-Format Exporters
-- **Objective**: Transform translated Document AST into publication-ready files for commercial printing and digital reading.
+### Phase 5: Publishing Engine, Multi-Format Exporters & Scanned OCR Subsystem
+- **Objective**: Transform verified AST into publication-ready files, and deliver the planned advanced OCR subsystem for scanned books.
 - **Key Deliverables**:
-  1. `DOCXExporter`: Formats text with customizable styles, running headers, footnotes, and verse callout boxes.
-  2. `EPUBExporter`: Produces EPUB 3 packages with embedded TrueType/OpenType fonts for Devanagari and Cyrillic, fully validated via `epubcheck`.
-  3. `PDFExporter`: Typesets dual-script pages with proper hyphenation and font embedding.
-  4. `ParallelBilingualExporter`: Generates parallel text editions (Sanskrit original + Russian translation) for academic study.
+  1. Exporters:
+     - `DOCXExporter`: Publication styles, running headers, footnotes, verse callouts.
+     - `EPUBExporter`: EPUB 3 compliant with embedded Devanagari and Cyrillic fonts.
+     - `PDFExporter`: Typeset dual-script layouts.
+  2. Scanned OCR Subsystem:
+     - Advanced image pre-processing (binarization, skew correction, noise removal).
+     - Sanskrit conjunct ligature normalization.
+     - Vision-LLM assisted transcription review for ancient manuscripts.
 - **Acceptance Gate**:
-  - Exported DOCX opens cleanly in Microsoft Word and LibreOffice without formatting corruption.
-  - Exported EPUB passes official EPUB 3 validation.
+  - Exported DOCX and EPUB pass strict third-party validator checks (`epubcheck`).
 
 ---
 
-### Phase 6: Orchestration, CLI & Production Hardening
-- **Objective**: Tie all subsystems together into a reliable, resumable command-line interface and test on end-to-end book translations.
+### Phase 6: CLI Runner, Job Orchestration & Production Hardening
+- **Objective**: Integrate all components into a robust, resumable CLI tool.
 - **Key Deliverables**:
-  1. `JobManager`: Manages background jobs, concurrency, and persistent checkpoints in SQLite and JSONL.
-  2. `Typer` CLI interface:
-     - `vedic-translate start <input-file> --target ru --model gemini-2.5-pro`
-     - `vedic-translate resume <job-id>`
-     - `vedic-translate status <job-id>`
-     - `vedic-translate export <job-id> --format docx,epub,pdf`
-     - `vedic-translate glossary add / search / audit`
-  3. Rich interactive terminal UI with live progress bars, tokens consumed, and audit findings.
-  4. End-to-end integration test translating a full multi-chapter text.
+  1. `JobManager`: Background worker pool, concurrency limits, and atomic SQLite/JSONL checkpoints.
+  2. Interactive `Typer` CLI with rich progress dashboards.
+  3. Multi-chapter end-to-end translation testing.
 - **Acceptance Gate**:
-  - A process killed via `kill -9` or interrupted abruptly resumes without duplicating or omitting a single word.
-  - Zero critical memory leaks over a 500-page translation job.
+  - Abrupt process interruption (kill -9) resumes cleanly without missing or duplicating text.

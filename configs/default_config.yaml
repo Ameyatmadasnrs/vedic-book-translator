@@ -1,5 +1,6 @@
 # ==============================================================================
 # Vedic Book Translator - Default Configuration
+# Model IDs are dynamic configuration values and must never be hardcoded in code.
 # ==============================================================================
 
 app:
@@ -7,25 +8,40 @@ app:
   version: "0.1.0"
   environment: "development"
 
+# Independent Model Selection per Pipeline Stage
 pipeline:
-  # Provider routing: assign specific models to pipeline stages
-  providers:
+  stages:
+    # 1. Literal syntactic deconstruction stage
     literal_stage:
-      provider: "gemini"
-      model: "gemini-2.5-pro"
+      provider: "gemini"                      # Options: gemini, anthropic, openai, local
+      model_id: "gemini-1.5-pro"              # Dynamic Model ID (configurable per environment)
       temperature: 0.1
+      fallback_provider: "openai"
+      fallback_model_id: "gpt-4o"
+
+    # 2. Theological & philosophical alignment stage (Gaudiya Siddhanta)
     philosophical_stage:
-      provider: "anthropic"
-      model: "claude-3-7-sonnet-20250219"
+      provider: "anthropic"                   # Options: gemini, anthropic, openai, local
+      model_id: "claude-3-5-sonnet-20241022"  # Dynamic Model ID
       temperature: 0.2
+      fallback_provider: "gemini"
+      fallback_model_id: "gemini-1.5-pro"
+
+    # 3. Literary Russian stylization stage
     literary_stage:
-      provider: "openai"
-      model: "gpt-4o"
+      provider: "openai"                      # Options: gemini, anthropic, openai, local
+      model_id: "gpt-4o"                      # Dynamic Model ID
       temperature: 0.3
+      fallback_provider: "anthropic"
+      fallback_model_id: "claude-3-5-sonnet-20241022"
+
+    # 4. Terminology profile & diacritics harmonization stage
     terminology_stage:
-      provider: "gemini"
-      model: "gemini-2.5-pro"
+      provider: "gemini"                      # Options: gemini, anthropic, openai, local
+      model_id: "gemini-1.5-flash"            # Dynamic Model ID
       temperature: 0.0
+      fallback_provider: "openai"
+      fallback_model_id: "gpt-4o-mini"
 
   concurrency:
     max_parallel_blocks: 4
@@ -43,23 +59,25 @@ translation_memory:
   similarity_threshold: 0.95
   auto_commit: true
 
-glossary:
-  primary_standard: "bbt_russian" # Options: "bbt_russian", "academic_cyrillic"
-  enforce_diacritics: true
-  seed_files:
+# Configurable Orthography Profile
+orthography:
+  active_profile: "bbt_russian"               # Options: "bbt_russian", "academic_cyrillic", "custom"
+  profile_definitions_path: "./glossaries/bbt_russian_orthography_rules.json"
+  custom_glossary_paths:
     - "./glossaries/gaudiya_vaishnava_terms.json"
     - "./glossaries/sanskrit_diacritics_map.json"
-    - "./glossaries/bbt_russian_orthography_rules.json"
 
+# Quality Control Diagnostics (Heuristics & Invariant Gates)
 quality_control:
-  min_terminology_fidelity_score: 99.0
-  min_diacritics_completeness_score: 98.0
-  enforce_verse_structural_invariance: true
-  min_length_ratio: 0.90
-  max_length_ratio: 1.55
+  enforce_human_approval_for_publishing: true
+  structural_invariance_required: true        # 100% verse completeness required
+  min_terminology_consistency_threshold: 98.0
+  min_diacritics_completeness_threshold: 98.0
+  length_ratio_lower_bound: 0.85
+  length_ratio_upper_bound: 1.60
 
 publishing:
-  default_format: "docx"
+  default_format: "docx"                      # Options: "docx", "epub", "pdf"
   embed_fonts: true
   devanagari_font: "Siddhanta"
   cyrillic_font: "Times New Roman"

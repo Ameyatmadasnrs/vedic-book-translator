@@ -1,186 +1,123 @@
 # Quality Standards & Verification Framework
 
 **Project Name**: Vedic Book Translator  
-**Quality Philosophy**: Zero-Tolerance for Theological Distortion & Structural Omission  
-**Target Coverage**: Minimum 85% Code Coverage; 100% Invariant Validation on Sacred Verses  
-**Document Version**: 1.0.0  
-**Status**: Pending Architecture Approval  
+**Quality Philosophy**: Non-Negotiable Philosophical Fidelity & Structural Invariance  
+**Document Version**: 1.1.0 (Post-Audit Revision)  
+**Status**: Revised Foundation  
 
 ---
 
-## 1. Engineering & Code Quality Standards
+## 1. Multi-Dimensional Translation Quality Framework
 
-Every line of code committed to this repository must satisfy strict static analysis, type checking, and architectural rules.
+In translating sacred Vedic literature and Gaudiya Vaishnava commentaries, **automated numerical scores do NOT constitute proof of translation correctness**. 
 
-### 1.1 Python Language Standards
-- **Runtime**: Python 3.12+
-- **Style Guide**: PEP 8 enforced via **Ruff** with a maximum line length of 100 characters.
-- **Type Checking**: Strict mode enforced via **Mypy**:
-  - `disallow_untyped_defs = true`
-  - `disallow_incomplete_defs = true`
-  - `check_untyped_defs = true`
-  - `no_implicit_optional = true`
-  - `warn_redundant_casts = true`
-  - `warn_unused_ignores = true`
-  - `warn_return_any = true`
-- **Data Modeling**: All domain entities, AST nodes, configuration objects, and API schemas must inherit from `pydantic.BaseModel` (v2) with strict field validation.
-
-### 1.2 Exception Handling Protocol
-All exceptions in the system must derive from a single root domain exception: `VedicTranslatorError`.
+A translation achieving a 99% glossary match can still suffer from subtle Mayavada contamination, awkward Anglicized phrasing, or misplaced syntactic agency. Quality is therefore decomposed into **six independent dimensions**, each with a distinct definition, validation methodology, known limitations, and remedial action:
 
 ```
-VedicTranslatorError (Base)
-├── IngestionError
-│   ├── UnsupportedFormatError
-│   ├── CorruptedDocumentError
-│   └── OCREngineError
-├── SegmentationError
-│   ├── MalformedVerseStructureError
-│   └── InconsistentVerseNumberingError
-├── ProviderError
-│   ├── RateLimitExceededError
-│   ├── AuthenticationError
-│   └── ProviderTimeoutError
-├── PipelineError
-│   ├── StageExecutionError
-│   └── ContextInjectionError
-├── QualityControlError
-│   ├── TerminologyViolationError
-│   ├── MissingDiacriticsError
-│   └── HallucinationDetectedError
-└── PublishingError
-    ├── FontEmbeddingError
-    └── ExportValidationError
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                SIX INDEPENDENT QUALITY DIMENSIONS                                │
+└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+         │                          │                          │                          │
+         ▼                          ▼                          ▼                          ▼
+┌──────────────────┐       ┌──────────────────┐       ┌──────────────────┐       ┌──────────────────┐
+│ 1. LINGUISTIC    │       │ 2. PHILOSOPHICAL │       │ 3. TERMINOLOGY   │       │ 4. STRUCTURAL    │
+│    ACCURACY      │       │    ACCURACY      │       │    CONSISTENCY   │       │    COMPLETENESS  │
+└──────────────────┘       └──────────────────┘       └──────────────────┘       └──────────────────┘
+         │                          │                          │                          │
+         └──────────────────────────┼──────────────────────────┘                          │
+                                    │                                                     │
+                                    ▼                                                     ▼
+                         ┌──────────────────┐                                  ┌──────────────────┐
+                         │ 5. LITERARY      │                                  │ 6. HUMAN         │
+                         │    QUALITY       │                                  │    APPROVAL      │
+                         └──────────────────┘                                  └──────────────────┘
 ```
-
-- **Rule**: Catching bare `Exception` is strictly forbidden except at the top-level CLI runner boundary.
-- **Rule**: Exceptions must provide actionable diagnostic messages, including document name, chapter index, and block ID.
-
-### 1.3 Logging Standards
-- **Engine**: Structured logging powered by `loguru`.
-- **Formatting**: JSON output in automated environments; colored, human-readable terminal output during local CLI execution.
-- **Privacy & Security**: Never log raw API keys, bearer tokens, or full un-redacted user files.
 
 ---
 
-## 2. Testing Architecture & Verification Protocols
-
-The test suite is structured into three distinct tiers:
-
-```
-                  +-----------------------------------+
-                  |         E2E Golden Tests          |  (Complete chapters from
-                  |     (Verse Invariant Checks)      |   Gita & Bhagavatam)
-                  +-----------------+-----------------+
-                                    |
-                  +-----------------+-----------------+
-                  |      Integration Test Suite       |  (Mocked AI Providers,
-                  |  (AST Pipeline, TM & QC Audits)   |   SQLite persistence)
-                  +-----------------+-----------------+
-                                    |
-                  +-----------------+-----------------+
-                  |         Unit Test Suite           |  (Parsers, Segmenters,
-                  |     (Pure Functions & Mappers)    |   Orthography Rules, Models)
-                  +-----------------------------------+
-```
-
-### 2.1 Unit Tests (`tests/unit/`)
-- Target isolated components without network or disk I/O.
-- Test coverage must exceed 85% across all core packages.
-- Test suites must execute within seconds using `pytest`.
-
-### 2.2 Integration Tests (`tests/integration/`)
-- Verify interactions between subsystems:
-  - Parsing a sample PDF/DOCX file and verifying the generated Document AST.
-  - Querying and persisting entries into the SQLite Translation Memory.
-  - Simulating the 4-stage pipeline using recorded provider responses (mock fixtures).
-  - Executing automated QC checks against deliberately corrupted test cases.
-
-### 2.3 E2E Golden Verification (`tests/e2e/`)
-- Golden tests run against authoritative, verified benchmark texts:
-  - *Bhagavad-gītā*, Chapter 2, Verses 11–25 (Classical verse structure, complex *anvaya*, profound philosophy).
-  - *Śrīmad-Bhāgavatam*, Canto 1, Chapter 1, Verse 1 (Theological synthesis of *janmādy asya yataḥ*).
-  - *Śrī Caitanya-caritāmṛta*, Ādi-līlā, Chapter 1, Verse 1 (Bengali/Sanskrit bilingual structure).
-- E2E tests verify that the output meets all translation metrics defined in Section 3.
+### Dimension 1: Linguistic Accuracy
+- **Definition**: The degree to which the target Russian text accurately represents the grammatical relations, semantic predicates, verbal tenses, and case relationships of the source text (Sanskrit or English).
+- **Validation Method**:
+  - *Automated Diagnostic*: Cross-lingual syntactic dependency verification and entity extraction. Check for dropped negation particles (*na*, *mā*), inverted subject-object relations, and corrupted passive/active voice.
+  - *Human Verification*: Expert bilingual philological review comparing Sanskrit verbal roots (*dhātus*) and case endings (*vibhakti*) against the Russian rendering.
+- **Known Limitations of Automated Checks**: LLMs and parsers can misinterpret complex Sanskrit compound words (*bahuvrīhi* vs. *tatpuruṣa* vs. *karmadhāraya*).
+- **Remediation**: Flagging ambiguous syntactic trees for human philological inspection.
 
 ---
 
-## 3. Automated Translation Quality Metrics
-
-The Quality Control Engine evaluates every completed translation block against four quantitative metrics:
-
-### 3.1 Terminology Fidelity Index (TFI)
-Measures the percentage of specialized Vedic and Gaudiya Vaishnava terms translated in exact compliance with the approved glossary:
-
-$$\text{TFI} = \left( \frac{N_{\text{valid\_terms}}}{N_{\text{total\_terms}}} \right) \times 100\%$$
-
-- **Acceptance Threshold**: $\ge 99.0\%$
-- **Enforcement**: Any presence of forbidden Mayavada translations (e.g., translating *Brahman* as generic "God" or *bhakti* as "idolatry/sect") triggers an immediate validation failure.
-
-### 3.2 Diacritics Completeness Score (DCS)
-Measures the preservation and correctness of Unicode diacritical marks in transliterated Sanskrit text (*IAST*) and scholarly Cyrillic notation:
-
-$$\text{DCS} = \left( \frac{N_{\text{valid\_diacritics}}}{N_{\text{expected\_diacritics}}} \right) \times 100\%$$
-
-- **Acceptance Threshold**: $100.0\%$ for `VERSE_IAST` and `SYNONYMS` blocks; $\ge 98.0\%$ for citations within `PURPORT` blocks.
-- **Monitored Characters**: `ā, ī, ū, ṛ, ṝ, ḷ, ḹ, ṅ, ñ, ṭ, ḍ, ṇ, ś, ṣ, ḥ, ṁ`.
-
-### 3.3 Verse Structural Invariance (VSI)
-Verifies that all structural components of canonical verse units are present and correctly ordered:
-
-$$\text{VSI} = \frac{\sum \text{Present Components}}{\sum \text{Expected Components}} \times 100\%$$
-
-- **Acceptance Threshold**: $100.0\%$
-- **Invariants**:
-  - No dropped verses or missed line numbers.
-  - Multi-verse spans (e.g., verses 4–6) must match between source and target.
-  - Word-for-word synonyms must match the lexical tokens in the transliterated verse.
-
-### 3.4 Hallucination & Omission Ratio (HOR)
-Measures anomalous expansions or omissions by comparing character counts, word counts, and semantic density:
-
-$$\text{Ratio} = \frac{\text{Length}(\text{Russian Target})}{\text{Length}(\text{Source Text})}$$
-
-- **Normal Bounds**:
-  - English to Russian: $1.05 \le \text{Ratio} \le 1.35$ (Russian prose is typically 10–25% longer than English due to morphology).
-  - Sanskrit Verse to Russian Translation: Monitored via sentence count and semantic similarity rather than character length.
-- Any segment with $\text{Ratio} > 1.60$ or $\text{Ratio} < 0.85$ is flagged for human review as a potential hallucination or truncation.
+### Dimension 2: Philosophical Accuracy (*Siddhānta-śuddhi*)
+- **Definition**: The strict preservation of the personalist theology of the *Brahma-Mādhva-Gauḍīya-Sampradāya*, the ontological hierarchy (*acintya-bhedābheda-tattva*), and the insights of canonical Acharya commentaries (*ṭīkās*).
+- **Validation Method**:
+  - *Automated Diagnostic*: Semantic classifier specifically trained or prompted on Gaudiya theological contrast rubrics:
+    - Verifying distinction between *Brahman* (effulgence), *Paramātmā* (localized Supersoul), and *Bhagavān* (Supreme Personality of Godhead).
+    - Verifying distinction between *kāma* (lust/selfish desire) and *prema* (pure transcendental love).
+    - Verifying that the individuality of the *jīva* is preserved (*nitya-dāsa*).
+    - Screening for forbidden impersonal/Mayavada interpretations (e.g. "слияние с Богом", "иллюзия бытия", "космический разум").
+  - *Human Verification*: Review and sign-off by a qualified Gaudiya Vaishnava scholar or editor.
+- **Known Limitations of Automated Checks**: AI cannot grasp spiritual realization; subtle impersonalism can be masked by superficially pious vocabulary.
+- **Remediation**: Immediate routing of flagged doctrinal anomalies to human theological review.
 
 ---
 
-## 4. Human-in-the-Loop (HITL) Review Protocol
+### Dimension 3: Terminology Consistency
+- **Definition**: Exact, invariant conformance to the active **Orthography Profile** (e.g., Russian BBT profile vs. Academic Cyrillic profile) and project-specific glossaries across all chapters.
+- **Validation Method**:
+  - *Automated Diagnostic*: Deterministic token scanner auditing Sanskrit loanwords, names of personalities, sacred places, and philosophical terms against configured glossary tables.
+  - *Morphological Check*: Running `pymorphy3` to confirm correct Russian declension cases without stem corruption (e.g., *прасада*, *вайшнавом*, *карме*).
+- **Metric (Heuristic Only)**:
+  $$\text{Terminology Consistency Score (TCS)} = \left( \frac{N_{\text{compliant\_terms}}}{N_{\text{total\_audited\_terms}}} \right) \times 100\%$$
+- **Known Limitations**: Does not evaluate whether the chosen term is contextually elegant or natural.
+- **Remediation**: Automated correction proposals with human confirmation.
 
-While the translation engine is autonomous, certain high-ambiguity situations require human editorial intervention:
+---
 
-```
-[Translation Completed]
-          |
-          v
-[Automated QC Audit]
-          |
-    +-----+-----+
-    |           |
-[PASS]       [FAIL or Low Confidence]
-    |           |
-    |           v
-    |     [Flagged for HITL Review]
-    |           |
-    |     [Editor Approves / Edits in CLI or Review UI]
-    |           |
-    +-----> [Update Translation Memory & Terminology DB]
-          |
-          v
-    [Release to Publishing Engine]
-```
+### Dimension 4: Structural Completeness
+- **Definition**: 100% preservation of all textual components, including original Devanagari meter (*ślokas*), Roman transliteration (*IAST*), word-for-word synonyms (*anvaya*), translation (*anuvāda*), commentaries (*tātparya*), verse numbering, headings, and footnotes.
+- **Validation Method**:
+  - *Automated Deterministic Invariant*: Strict Document AST schema validation.
+  - Sequential verse continuity checks (detecting missed verses like skipping from 2.14 to 2.16).
+  - Bidirectional element counting: Source segment count vs. target segment count.
+- **Metric (Deterministic Invariant)**:
+  $$\text{Structural Completeness Ratio} = 1.00 \quad (100\% \text{ required})$$
+- **Known Limitations**: Does not measure internal text quality within a block.
+- **Remediation**: Pipeline execution is blocked from exporting until structural invariants reach 100%.
 
-### 4.1 Trigger Conditions for Human Review
-1. **Critical QC Failure**: Any block failing TFI, DCS, or VSI thresholds.
-2. **Ambiguous Polysemy**: The AI models report low confidence or conflicting readings in Stage 2.
-3. **New Uncataloged Terms**: Terms identified as philosophical or sacred that do not exist in `glossaries/`.
-4. **Complex Multi-Verse Merges**: Scanned texts with ambiguous verse boundaries.
+---
 
-### 4.2 Feedback Loop
-When a human editor modifies a flagged block:
-1. The corrected text immediately updates the Document AST.
-2. The corrected pair (source text + editor translation) is committed to the Translation Memory with `provenance="human_editor"`.
-3. If new terms were defined, they are added to the project's local glossary.
+### Dimension 5: Literary Quality & Russian Register
+- **Definition**: The naturalness, fluency, rhythmic balance, and dignity of the translation in literary Russian prose, avoiding wooden machine-translation artifacts, Anglicisms, or anachronistic ecclesiastical jargon.
+- **Validation Method**:
+  - *Automated Diagnostic*: Stylistic heuristic scanning for repetitive syntax, excessive passive constructions ("это было сделано им"), unnatural prepositional chains, and lexical diversity.
+  - *Human Verification*: Senior literary editor evaluation for rhythm, emotional resonance (*rasa*), and solemnity fitting sacred scripture.
+- **Known Limitations**: Readability formulas (e.g., Flesch-Kincaid adapted for Russian) measure syllable lengths, not aesthetic beauty or devotional cadence.
+- **Remediation**: Dedicated Literary Polish stage with human editorial revision.
+
+---
+
+### Dimension 6: Human Approval Gate
+- **Definition**: The final, binding authorization required before any translation job can be compiled into distribution or publication formats.
+- **Validation Method**:
+  - A designated editor reviews the complete bilingual AST in a CLI diff or review UI.
+  - The editor signs off on individual chapters or the entire document, transitioning blocks to `APPROVED`.
+- **Rule**: No file marked solely by automated tools may be published as a final certified edition without human sign-off.
+
+---
+
+## 2. Engineering & Code Quality Standards
+
+Every software component in the platform must comply with strict engineering guidelines:
+
+- **Language Runtime**: Python 3.12+ with strict type annotations.
+- **Static Analysis**: Enforced via **Ruff** (line length: 100) and **Mypy in strict mode** (`disallow_untyped_defs = true`, `check_untyped_defs = true`).
+- **Data Validation**: Canonical domain models must inherit from `pydantic.BaseModel` (v2).
+- **Error Handling**: Dedicated domain exception hierarchy rooted in `VedicTranslatorError`.
+- **Zero Credential Hardcoding**: API keys and tokens must strictly be loaded from environment variables or local `.env` files via `pydantic-settings`.
+- **Non-Destructive Ingestion**: Input documents are read-only; original text is immutable in AST nodes.
+
+---
+
+## 3. Testing Requirements
+
+- **Unit Tests (`tests/unit/`)**: Target isolated parsers, segmenters, orthography mappers, and models. Execution must be instantaneous and have zero network dependencies.
+- **Integration Tests (`tests/integration/`)**: Test end-to-end AST transitions using mock AI provider adapters and recorded golden fixtures.
+- **Regression Tests (`tests/e2e/`)**: Validate pipeline behavior against canonical reference verses (*Bhagavad-gītā* 2.13, 9.22; *Śrīmad-Bhāgavatam* 1.1.1; *Caitanya-caritāmṛta* Ādi 1.1).

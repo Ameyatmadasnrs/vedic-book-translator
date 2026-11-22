@@ -132,15 +132,72 @@ This document records the architectural and technology choices made for the **Ve
 
 ---
 
-## ADR-008: Adoption of BBT Russian Orthography as Primary Standard
+## ADR-008: Configurable Orthography Profiles (BBT Russian as Profile)
+
+- **Status**: Amended (2026-11-22)
+- **Context**:
+  The Russian Vaishnava community has well-established transliteration conventions established by the Bhaktivedanta Book Trust (BBT), while academic institutions follow Cyrillic academic transliteration (e.g. *Кршна*, *Чаитанйа*). Hardcoding BBT conventions directly into application logic prevents the tool from being used for academic or non-BBT editions.
+- **Decision**:
+  Implement orthography as a pluggable `OrthographyProfile` interface. The BBT Russian Orthography is configured as the default profile, with alternative profiles (e.g., `AcademicRussianCyrillic`, `InternationalIAST`, `ModernPhonetic`) selectable via configuration or project settings without changing application code.
+- **Consequences**:
+  - *Positive*: Full flexibility for diverse publishing houses and academic audiences.
+  - *Positive*: Rules and mapping tables reside in external JSON/YAML configuration profiles rather than hardcoded logic.
+  - *Negative*: Requires profile abstraction and runtime loading logic.
+
+---
+
+## ADR-009: Dynamic Model ID Configuration & Provider Independence
 
 - **Status**: Accepted
 - **Date**: 2026-11-22
 - **Context**:
-  Over five decades, the Bhaktivedanta Book Trust (BBT) has established the definitive standard for translating Vedic and Vaishnava terminology into Russian. Russian readers expect familiar terms (*Кришна*, *Чайтанья*, *Вриндаван*, *бхакти*, *гуру*), while academic scholars often use alternative transliterations (e.g., *Кршна*, *Чаитанйа*, *Врндавана*).
+  AI providers (OpenAI, Anthropic, Google Gemini, Ollama, vLLM) frequently release new models, deprecate snapshot dates, or change pricing tiers. Hardcoding model names (e.g. `gemini-2.5-pro` or `claude-3-7-sonnet-20250219`) inside domain code or default schemas introduces immediate technical debt and fragility.
 - **Decision**:
-  Adopt the **BBT Russian Transliteration and Orthographic Standard** as the default system configuration, while supporting an optional configuration toggle for pure academic/scholarly Russian transliteration.
+  The Translation Engine, its adapters, and all configuration classes must treat `model_id` as an externalized, dynamic string passed via runtime configuration (`configs/`, `.env`, or CLI arguments).
+  The system must support independent model assignment for:
+  1. Primary Translation (Source -> Draft)
+  2. Philosophical & Doctrinal Review
+  3. Literary Russian Editing
+  4. Terminology & Diacritic Validation
+  No model string may be hardcoded into core translation or AST logic.
 - **Consequences**:
-  - *Positive*: High acceptance and immediate familiarity among the primary readership and publishing houses.
-  - *Positive*: Clear, unambiguous transliteration guidelines documented in `glossaries/`.
-  - *Negative*: Requires maintaining mapping tables between standard BBT Cyrillic and international academic IAST.
+  - *Positive*: Zero code changes required when adopting new models or custom fine-tuned weights.
+  - *Positive*: Independent optimization of costs, reasoning capability, and speed per stage.
+  - *Negative*: Configuration files must specify valid model IDs supported by the user's active API keys.
+
+---
+
+## ADR-010: Multi-Dimensional Quality Framework vs. Numerical Correctness
+
+- **Status**: Accepted
+- **Date**: 2026-11-22
+- **Context**:
+  In sacred philosophical translation, automated numerical metrics (such as BLEU, token ratios, or glossary matching percentages) are superficial heuristics. A translation that achieves a 99% glossary match can still be philosophically catastrophic or syntactically clumsy. Treating automated scores as "proof of correctness" creates false confidence.
+- **Decision**:
+  Decouple quality into six discrete dimensions with documented verification methodologies:
+  1. **Linguistic Accuracy**: Syntactic and semantic equivalence. Verified by structural alignment and grammatical parsers.
+  2. **Philosophical Accuracy**: Adherence to Gaudiya Siddhanta, personalist epistemology, commentary fidelity. Verified by targeted doctrinal prompts and human scholar review.
+  3. **Terminology Consistency**: Adherence to active orthography profiles. Verified by token-level glossary audit.
+  4. **Structural Completeness**: Zero missing verses, lines, or commentary paragraphs. Verified by deterministic AST schema invariants.
+  5. **Literary Quality**: Style, cadence, and dignity in Russian. Evaluated by readability heuristics and editorial review.
+  6. **Human Approval**: The ultimate quality gate. Automated systems provide diagnostic findings and anomaly flags; only authorized human editors can certify a translation as final.
+- **Consequences**:
+  - *Positive*: Protects the philosophical and spiritual integrity of translated literature.
+  - *Positive*: Clear separation between automated diagnostics and human authority.
+  - *Negative*: Requires human-in-the-loop editorial review for publishing certification.
+
+---
+
+## ADR-011: Prioritization of Digital Ingestion & Realignment of Sanskrit OCR
+
+- **Status**: Accepted
+- **Date**: 2026-11-22
+- **Context**:
+  Sanskrit OCR on historical, scanned documents is an extremely challenging problem due to complex conjunct consonants (*saṁyuktākṣaras*), ligatures, vowel signs (*mātrās*), accents, and broken diacritics. Standard Tesseract OCR exhibits high error rates on Sanskrit ligatures and Roman IAST dots. Coupling scanned OCR into Phase 1 creates massive project risk.
+- **Decision**:
+  Strictly prioritize digital document formats (`PDF` with vector text, `EPUB`, `DOCX`, `TXT`) for Phase 1.
+  Scanned physical document OCR is decoupled into a dedicated, subsequent subsystem (Phase 5/6). The future OCR subsystem must not rely solely on vanilla Tesseract, but incorporate specialized pre-processing, Devanagari ligature normalization, multimodal vision-LLM assistance, and mandatory human transcription review.
+- **Consequences**:
+  - *Positive*: Delivers a dependable, robust digital pipeline in Phase 1 without getting blocked by OCR accuracy hurdles.
+  - *Positive*: Realistic, specialized approach for Sanskrit historical manuscript digitizing.
+  - *Negative*: Processing scanned image-only PDFs is deferred to later milestones.
