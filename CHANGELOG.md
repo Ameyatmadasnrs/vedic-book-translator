@@ -10,12 +10,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- Phase 1: Core Document Ingestion & AST Modeling (PDF, DOCX, EPUB, TXT).
+- Phase 1.2: Semantic Verse & Commentary Segmentation (Devanagari, IAST, Anvaya, Anuvāda, Tātparya).
 - Phase 2: Translation Memory & Terminology Store with BBT Russian orthography.
 - Phase 3: AI Provider Adapters (Gemini, Claude, OpenAI) & 4-Stage Translation Pipeline.
-- Phase 4: Automated Quality Control & Diacritics Auditor.
-- Phase 5: Publishing Engine (DOCX, EPUB, PDF exporters).
+- Phase 4: Automated Quality Control & Multi-Dimensional Auditing.
+- Phase 5: Publishing Engine (DOCX, EPUB, PDF exporters) & Scanned OCR Subsystem.
 - Phase 6: CLI Runner & Job State Orchestrator.
+
+---
+
+## [0.1.1-alpha.0] - 2026-11-22
+
+### Added
+- **Digital Document Extraction (Phase 1.1)**:
+  - `BaseExtractor`: Formal abstract port for format-specific extractors with SHA-256 pre/post integrity hashing.
+  - `PDFExtractor`: High-performance digital vector PDF extraction using PyMuPDF, preserving reading order, TOC bookmark chapters, and page metadata.
+  - `EPUBExtractor`: EPUB 2 and EPUB 3 extractor using EbookLib and BeautifulSoup4, traversing spine items to guarantee reading order, extracting Dublin Core metadata and HTML headings.
+  - `DOCXExtractor`: Word document extractor using python-docx, preserving heading levels (Heading 1-3, Title), paragraphs, tables, and document properties.
+  - `TXTExtractor`: Plain text and Markdown extractor supporting UTF-8 and fallback encodings, regex-based chapter/section detection, and Unicode preservation.
+  - `DocumentExtractor`: Unified facade coordinating format dispatch, validation, and automated non-destructive file immutability verification.
+- **Test Suite Expansion**:
+  - Added unit test suites for `TXTExtractor`, `DOCXExtractor`, `EPUBExtractor`, and `PDFExtractor`.
+  - Added integration test suite verifying multi-format routing, corrupted file rejection, unsupported format detection, and source file immutability (26 tests total, 100% pass rate).
 
 ---
 

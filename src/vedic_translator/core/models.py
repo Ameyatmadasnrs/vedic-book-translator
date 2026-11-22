@@ -3,12 +3,17 @@
 Built with Pydantic v2 for strict type safety and high-performance serialization.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Dict, List, Optional
 from uuid import UUID, uuid4
 
 from pydantic import BaseModel, Field
+
+
+def utc_now() -> datetime:
+    """Return current timezone-aware UTC datetime."""
+    return datetime.now(timezone.utc)
 
 
 class BlockType(str, Enum):
@@ -44,7 +49,7 @@ class StageAudit(BaseModel):
     input_text: str
     output_text: str
     latency_ms: float
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=utc_now)
     notes: Optional[str] = None
 
 
@@ -63,7 +68,7 @@ class AuditResult(BaseModel):
     findings: List[AuditFinding] = Field(default_factory=list)
     terminology_fidelity_score: float = 100.0
     diacritics_completeness_score: float = 100.0
-    evaluated_at: datetime = Field(default_factory=datetime.utcnow)
+    evaluated_at: datetime = Field(default_factory=utc_now)
 
 
 class Block(BaseModel):
@@ -137,8 +142,8 @@ class Document(BaseModel):
     metadata: DocumentMetadata
     chapters: List[Chapter] = Field(default_factory=list)
     status: DocumentStatus = DocumentStatus.INGESTED
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=utc_now)
+    updated_at: datetime = Field(default_factory=utc_now)
 
     def total_blocks(self) -> int:
         """Calculate total number of semantic blocks in the document."""

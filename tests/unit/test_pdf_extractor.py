@@ -1,0 +1,98 @@
+"""Unit tests for PDFExtractor."""
+
+from pathlib import Path
+import pymupdf as fitz
+import pytest
+
+from vedic_translator.core.exceptions import (
+    CorruptedDocumentError,
+    UnsupportedFormatError,
+)
+from vedic_translator.document_processor.extractors.pdf import PDFExtractor
+
+
+def test_pdf_extractor_supports() -> None:
+    extractor = PDFExtractor()
+    assert extractor.supports(Path("gita.pdf"))
+    assert not extractor.supports(Path("gita.epub"))
+
+
+def test_pdf_extractor_valid_digital_pdf(tmp_path: Path) -> None:
+    pdf_path = tmp_path / "digital_gita.pdf"
+    doc = fitz.open()
+
+    nirmala_font = "C:/Windows/Fonts/Nirmala.ttc"
+    has_nirmala = Path(nirmala_font).exists()
+
+    # Page 1
+    page1 = doc.new_page()
+    if has_nirmala:
+        page1.insert_font(fontname="nirmala", fontfile=nirmala_font)
+        page1.insert_text((50, 72), "Chapter 1: The Battlefield of Kurukshetra", fontsize=16)
+        page1.insert_text((50, 100), "धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।", fontname="nirmala", fontsize=12)
+        page1.insert_text((50, 130), "dharma-kṣetre kuru-kṣetre samavetā yuyutsavaḥ", fontsize=12)
+        page1.insert_text((50, 160), "О Санджая, собравшись на священном поле...", fontsize=12)
+    else:
+        page1.insert_text((50, 72), "Chapter 1: The Battlefield of Kurukshetra", fontsize=16)
+        page1.insert_text((50, 100), "dharma-ksetre kuru-ksetre samaveta yuyutsavah", fontsize=12)
+
+    # Page 2
+    page2 = doc.new_page()
+    page2.insert_text((50, 72), "Chapter 2: Contents of the Gita", fontsize=16)
+    page2.insert_text((50, 100), "dehino 'smin yathā dehe kaumāraṁ yauvanaṁ jarā", fontsize=12)
+
+    # Set metadata and TOC
+    doc.set_metadata({"title": "Bhagavad-gita As It Is", "author": "Srila Prabhupada"})
+    doc.set_toc([
+        [1, "Chapter 1: The Battlefield of Kurukshetra", 1],
+        [1, "Chapter 2: Contents of the Gita", 2],
+    ])
+
+    doc.save(str(pdf_path))
+    doc.close()
+
+    extractor = PDFExtractor()
+    ast_doc = extractor.extract(pdf_path)
+
+    assert ast_doc.metadata.title == "Bhagavad-gita As It Is"
+    assert ast_doc.metadata.author == "Srila Prabhupada"
+    assert len(ast_doc.chapters) == 2
+
+    ch1 = ast_doc.chapters[0]
+    assert "Chapter 1" in ch1.title
+    all_text = " ".join(b.source_text for ch in ast_doc.chapters for s in ch.sections for b in s.blocks)
+    if has_nirmala:
+        assert "धर्मक्षेत्रे" in all_text
+    assert "dehino 'smin" in all_text
+
+
+def test_pdf_extractor_scanned_empty_pdf(tmp_path: Path) -> None:
+    # A PDF with a page but zero text blocks (simulating scanned/image-only PDF)
+    empty_pdf_path = tmp_path / "scanned_empty.pdf"
+    doc = fitz.open()
+    doc.new_page()  # Blank page with no text
+    doc.save(str(empty_pdf_path))
+    doc.close()
+
+    extractor = PDFExtractor()
+    with pytest.raises(CorruptedDocumentError) as exc_info:
+        extractor.extract(empty_pdf_path)
+    assert "no digital text layer" in str(exc_info.value)
+
+
+def test_pdf_extractor_corrupted_file(tmp_path: Path) -> None:
+    corrupt_pdf = tmp_path / "corrupt.pdf"
+    corrupt_pdf.write_bytes(b"%PDF-1.4 completely corrupt garbage")
+
+    extractor = PDFExtractor()
+    with pytest.raises(CorruptedDocumentError):
+        extractor.extract(corrupt_pdf)
+
+
+def test_pdf_extractor_unsupported_format(tmp_path: Path) -> None:
+    docx_file = tmp_path / "test.docx"
+    docx_file.write_bytes(b"dummy")
+
+    extractor = PDFExtractor()
+    with pytest.raises(UnsupportedFormatError):
+        extractor.extract(docx_file)
