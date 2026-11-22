@@ -1,6 +1,7 @@
 """Integration tests for DocumentExtractor facade and non-destructive ingestion."""
 
 from pathlib import Path
+
 import docx
 import pymupdf as fitz
 import pytest

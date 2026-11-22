@@ -1,8 +1,7 @@
 """Plain text and Markdown document extractor."""
 
-from pathlib import Path
 import re
-from typing import List, Set
+from pathlib import Path
 
 from loguru import logger
 
@@ -25,7 +24,7 @@ class TXTExtractor(BaseExtractor):
     """Extractor for plain text (.txt, .text) and Markdown (.md) documents."""
 
     @property
-    def supported_extensions(self) -> Set[str]:
+    def supported_extensions(self) -> set[str]:
         return {".txt", ".text", ".md"}
 
     def _read_content_with_encodings(self, file_path: Path) -> str:
@@ -33,7 +32,7 @@ class TXTExtractor(BaseExtractor):
         encodings = ["utf-8", "utf-8-sig", "utf-16", "cp1251", "latin-1"]
         for enc in encodings:
             try:
-                with open(file_path, "r", encoding=enc) as f:
+                with open(file_path, encoding=enc) as f:
                     return f.read()
             except (UnicodeDecodeError, UnicodeError):
                 continue
@@ -59,7 +58,7 @@ class TXTExtractor(BaseExtractor):
         # Split into raw paragraphs (delimited by two or more newlines)
         raw_paragraphs = [p.strip() for p in re.split(r"\n\s*\n", raw_text) if p.strip()]
 
-        chapters: List[Chapter] = []
+        chapters: list[Chapter] = []
         current_chapter: Chapter | None = None
         current_section: Section | None = None
         chapter_idx = 1
@@ -98,7 +97,9 @@ class TXTExtractor(BaseExtractor):
                     sequence_index=seq_idx,
                 )
                 seq_idx += 1
-                current_section = Section(section_index=section_idx, heading=title, blocks=[heading_block])
+                current_section = Section(
+                    section_index=section_idx, heading=title, blocks=[heading_block]
+                )
                 current_chapter.sections.append(current_section)
                 section_idx += 1
                 continue
@@ -121,7 +122,9 @@ class TXTExtractor(BaseExtractor):
                     sequence_index=seq_idx,
                 )
                 seq_idx += 1
-                current_section = Section(section_index=section_idx, heading=sec_title, blocks=[heading_block])
+                current_section = Section(
+                    section_index=section_idx, heading=sec_title, blocks=[heading_block]
+                )
                 current_chapter.sections.append(current_section)
                 section_idx += 1
                 continue

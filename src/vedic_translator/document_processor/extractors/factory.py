@@ -1,7 +1,6 @@
 """Unified document extractor factory and dispatcher."""
 
 from pathlib import Path
-from typing import List, Union
 
 from loguru import logger
 
@@ -23,12 +22,12 @@ from vedic_translator.document_processor.extractors.txt import TXTExtractor
 
 class DocumentExtractor:
     """Unified entry point for digital document extraction.
-    
+
     Coordinates format-specific extractors for PDF, EPUB, DOCX, and TXT.
     Guarantees that original source files remain completely untouched.
     """
 
-    def __init__(self, extractors: List[BaseExtractor] | None = None) -> None:
+    def __init__(self, extractors: list[BaseExtractor] | None = None) -> None:
         if extractors is not None:
             self._extractors = extractors
         else:
@@ -52,15 +51,15 @@ class DocumentExtractor:
             f"Unsupported document format '{file_path.suffix}' for file: {file_path.name}"
         )
 
-    def extract(self, file_path: Union[str, Path]) -> Document:
+    def extract(self, file_path: str | Path) -> Document:
         """Extract a digital document into a canonical Document AST.
-        
+
         Args:
             file_path: Path to the target document (PDF, EPUB, DOCX, or TXT).
-            
+
         Returns:
             Document: Validated Document AST.
-            
+
         Raises:
             FileNotFoundError: If the document does not exist.
             UnsupportedFormatError: If the file format is not supported.

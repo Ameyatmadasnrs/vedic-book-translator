@@ -1,13 +1,13 @@
 """Unit tests for TXTExtractor."""
 
 from pathlib import Path
+
 import pytest
 
 from vedic_translator.core.exceptions import (
     CorruptedDocumentError,
     UnsupportedFormatError,
 )
-from vedic_translator.core.models import BlockType
 from vedic_translator.document_processor.extractors.txt import TXTExtractor
 
 

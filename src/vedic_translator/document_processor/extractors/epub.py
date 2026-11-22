@@ -1,11 +1,10 @@
 """EPUB digital book extractor."""
 
-from pathlib import Path
-from typing import List, Set
 import zipfile
+from pathlib import Path
 
-from bs4 import BeautifulSoup
 import ebooklib
+from bs4 import BeautifulSoup
 from ebooklib import epub
 from loguru import logger
 
@@ -31,7 +30,7 @@ class EPUBExtractor(BaseExtractor):
     """Extractor for EPUB 2 and EPUB 3 digital books."""
 
     @property
-    def supported_extensions(self) -> Set[str]:
+    def supported_extensions(self) -> set[str]:
         return {".epub"}
 
     def extract(self, file_path: Path) -> Document:
@@ -71,7 +70,7 @@ class EPUBExtractor(BaseExtractor):
 
         logger.info(f"Extracting EPUB document: {file_path.name} (Title: '{metadata.title}')")
 
-        chapters: List[Chapter] = []
+        chapters: list[Chapter] = []
         current_chapter: Chapter | None = None
         current_section: Section | None = None
         chapter_idx = 1
@@ -98,7 +97,9 @@ class EPUBExtractor(BaseExtractor):
             body = soup.find("body") or soup
 
             # Process block elements in body preserving flow
-            for elem in body.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "p", "blockquote", "li"]):
+            for elem in body.find_all(
+                ["h1", "h2", "h3", "h4", "h5", "h6", "p", "blockquote", "li"]
+            ):
                 text = elem.get_text().strip()
                 if not text:
                     continue
@@ -109,9 +110,10 @@ class EPUBExtractor(BaseExtractor):
                 # Chapter Heading: <h1>
                 if tag_name == "h1":
                     # If an empty placeholder chapter was created, update its title
-                    has_content = (
-                        current_chapter is not None
-                        and any(b.type != BlockType.HEADING for s in current_chapter.sections for b in s.blocks)
+                    has_content = current_chapter is not None and any(
+                        b.type != BlockType.HEADING
+                        for s in current_chapter.sections
+                        for b in s.blocks
                     )
                     if current_chapter is not None and not has_content:
                         current_chapter.title = text
@@ -128,7 +130,9 @@ class EPUBExtractor(BaseExtractor):
                         sequence_index=seq_idx,
                     )
                     seq_idx += 1
-                    current_section = Section(section_index=section_idx, heading=text, blocks=[heading_block])
+                    current_section = Section(
+                        section_index=section_idx, heading=text, blocks=[heading_block]
+                    )
                     current_chapter.sections.append(current_section)
                     section_idx += 1
                     continue
@@ -147,7 +151,9 @@ class EPUBExtractor(BaseExtractor):
                         sequence_index=seq_idx,
                     )
                     seq_idx += 1
-                    current_section = Section(section_index=section_idx, heading=text, blocks=[subheading_block])
+                    current_section = Section(
+                        section_index=section_idx, heading=text, blocks=[subheading_block]
+                    )
                     current_chapter.sections.append(current_section)
                     section_idx += 1
                     continue

@@ -1,14 +1,12 @@
 """Application configuration loaded from environment variables and YAML files."""
 
-from pathlib import Path
-from typing import Dict, List, Optional
-
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class ModelStageConfig(BaseModel):
     """Configuration for a specific translation pipeline stage."""
+
     provider: str = "gemini"
     model: str = "gemini-2.5-pro"
     temperature: float = 0.2
@@ -16,17 +14,24 @@ class ModelStageConfig(BaseModel):
 
 class PipelineConfig(BaseModel):
     """Configuration for the 4-stage pipeline and concurrency."""
+
     literal_stage: ModelStageConfig = Field(
-        default_factory=lambda: ModelStageConfig(provider="gemini", model="gemini-2.5-pro", temperature=0.1)
+        default_factory=lambda: ModelStageConfig(
+            provider="gemini", model="gemini-2.5-pro", temperature=0.1
+        )
     )
     philosophical_stage: ModelStageConfig = Field(
-        default_factory=lambda: ModelStageConfig(provider="anthropic", model="claude-3-7-sonnet-20250219", temperature=0.2)
+        default_factory=lambda: ModelStageConfig(
+            provider="anthropic", model="claude-3-7-sonnet-20250219", temperature=0.2
+        )
     )
     literary_stage: ModelStageConfig = Field(
         default_factory=lambda: ModelStageConfig(provider="openai", model="gpt-4o", temperature=0.3)
     )
     terminology_stage: ModelStageConfig = Field(
-        default_factory=lambda: ModelStageConfig(provider="gemini", model="gemini-2.5-pro", temperature=0.0)
+        default_factory=lambda: ModelStageConfig(
+            provider="gemini", model="gemini-2.5-pro", temperature=0.0
+        )
     )
     max_parallel_blocks: int = 4
     rate_limit_rpm: int = 60
@@ -38,6 +43,7 @@ class PipelineConfig(BaseModel):
 
 class QualityControlConfig(BaseModel):
     """Thresholds for automated quality auditing."""
+
     min_terminology_fidelity_score: float = 99.0
     min_diacritics_completeness_score: float = 98.0
     enforce_verse_structural_invariance: bool = True
@@ -47,19 +53,16 @@ class QualityControlConfig(BaseModel):
 
 class AppSettings(BaseSettings):
     """Global settings for Vedic Book Translator."""
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        env_file_encoding="utf-8",
-        extra="ignore"
-    )
+
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
     app_env: str = "development"
     log_level: str = "INFO"
 
     # API Keys
-    openai_api_key: Optional[str] = None
-    anthropic_api_key: Optional[str] = None
-    gemini_api_key: Optional[str] = None
+    openai_api_key: str | None = None
+    anthropic_api_key: str | None = None
+    gemini_api_key: str | None = None
 
     # Local LLM Endpoint
     local_llm_base_url: str = "http://localhost:11434/v1"

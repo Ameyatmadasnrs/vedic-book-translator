@@ -1,9 +1,8 @@
 """Microsoft Word (.docx) document extractor."""
 
-from pathlib import Path
 import re
-from typing import List, Set
 import zipfile
+from pathlib import Path
 
 import docx
 from loguru import logger
@@ -30,7 +29,7 @@ class DOCXExtractor(BaseExtractor):
     """Extractor for Microsoft Word (.docx) documents."""
 
     @property
-    def supported_extensions(self) -> Set[str]:
+    def supported_extensions(self) -> set[str]:
         return {".docx"}
 
     def extract(self, file_path: Path) -> Document:
@@ -64,7 +63,7 @@ class DOCXExtractor(BaseExtractor):
 
         logger.info(f"Extracting DOCX document: {file_path.name}")
 
-        chapters: List[Chapter] = []
+        chapters: list[Chapter] = []
         current_chapter: Chapter | None = None
         current_section: Section | None = None
         chapter_idx = 1
@@ -86,10 +85,7 @@ class DOCXExtractor(BaseExtractor):
             style_name = p.style.name.lower() if p.style else ""
 
             # Check if this paragraph is a Chapter Heading
-            is_h1 = any(
-                h in style_name
-                for h in ["heading 1", "заголовок 1", "title", "титул"]
-            )
+            is_h1 = any(h in style_name for h in ["heading 1", "заголовок 1", "title", "титул"])
             is_ch_text = bool(chapter_regex.match(text))
 
             if is_h1 or is_ch_text:
@@ -105,7 +101,9 @@ class DOCXExtractor(BaseExtractor):
                     sequence_index=seq_idx,
                 )
                 seq_idx += 1
-                current_section = Section(section_index=section_idx, heading=text, blocks=[heading_block])
+                current_section = Section(
+                    section_index=section_idx, heading=text, blocks=[heading_block]
+                )
                 current_chapter.sections.append(current_section)
                 section_idx += 1
                 continue
@@ -128,7 +126,9 @@ class DOCXExtractor(BaseExtractor):
                     sequence_index=seq_idx,
                 )
                 seq_idx += 1
-                current_section = Section(section_index=section_idx, heading=text, blocks=[subheading_block])
+                current_section = Section(
+                    section_index=section_idx, heading=text, blocks=[subheading_block]
+                )
                 current_chapter.sections.append(current_section)
                 section_idx += 1
                 continue

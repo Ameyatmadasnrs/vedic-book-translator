@@ -1,16 +1,12 @@
 """Abstract base class and utilities for digital document extractors."""
 
-from abc import ABC, abstractmethod
 import hashlib
+from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Set
-
-from loguru import logger
 
 from vedic_translator.core.exceptions import (
     CorruptedDocumentError,
     IngestionError,
-    UnsupportedFormatError,
 )
 from vedic_translator.core.models import Document, DocumentMetadata
 
@@ -36,13 +32,13 @@ def validate_source_file(file_path: Path) -> None:
 
 class BaseExtractor(ABC):
     """Abstract base class for all format-specific digital document extractors.
-    
+
     All implementations must treat the source document as strictly read-only.
     """
 
     @property
     @abstractmethod
-    def supported_extensions(self) -> Set[str]:
+    def supported_extensions(self) -> set[str]:
         """Set of supported file extensions (lowercase, e.g. {'.txt', '.md'})."""
         pass
 
@@ -53,13 +49,13 @@ class BaseExtractor(ABC):
     @abstractmethod
     def extract(self, file_path: Path) -> Document:
         """Extract a digital document into a canonical Document AST.
-        
+
         Args:
             file_path: Absolute path to the source document.
-            
+
         Returns:
             Document: The canonical Document AST representation.
-            
+
         Raises:
             FileNotFoundError: If the source file does not exist.
             CorruptedDocumentError: If the file is unreadable or malformed.
@@ -67,7 +63,9 @@ class BaseExtractor(ABC):
         """
         pass
 
-    def _build_initial_metadata(self, file_path: Path, title: str | None = None) -> DocumentMetadata:
+    def _build_initial_metadata(
+        self, file_path: Path, title: str | None = None
+    ) -> DocumentMetadata:
         """Construct standard initial metadata for a document."""
         file_hash = compute_file_sha256(file_path)
         doc_title = title if title and title.strip() else file_path.stem

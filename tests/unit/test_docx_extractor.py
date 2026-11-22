@@ -1,6 +1,7 @@
 """Unit tests for DOCXExtractor."""
 
 from pathlib import Path
+
 import docx
 import pytest
 
@@ -8,7 +9,6 @@ from vedic_translator.core.exceptions import (
     CorruptedDocumentError,
     UnsupportedFormatError,
 )
-from vedic_translator.core.models import BlockType
 from vedic_translator.document_processor.extractors.docx import DOCXExtractor
 
 
@@ -50,7 +50,9 @@ def test_docx_extractor_valid_document(tmp_path: Path) -> None:
     assert ch2.chapter_index == 2
     assert "Chapter 2" in ch2.title
 
-    all_text = " ".join(b.source_text for ch in ast_doc.chapters for s in ch.sections for b in s.blocks)
+    all_text = " ".join(
+        b.source_text for ch in ast_doc.chapters for s in ch.sections for b in s.blocks
+    )
     assert "dehino 'smin" in all_text
     assert "Воплотившаяся душа" in all_text
     assert "न जायते" in all_text

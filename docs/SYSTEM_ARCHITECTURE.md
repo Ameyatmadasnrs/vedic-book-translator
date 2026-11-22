@@ -121,13 +121,15 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional
 from pydantic import BaseModel
 
+
 class ProviderCompletionRequest(BaseModel):
     system_prompt: str
     user_prompt: str
-    model_id: str                          # DYNAMIC: Configured per stage, never hardcoded
+    model_id: str  # DYNAMIC: Configured per stage, never hardcoded
     temperature: float = 0.2
     max_tokens: Optional[int] = None
     extra_params: Dict[str, Any] = {}
+
 
 class ProviderCompletionResponse(BaseModel):
     content: str
@@ -135,6 +137,7 @@ class ProviderCompletionResponse(BaseModel):
     input_tokens: int
     output_tokens: int
     latency_ms: float
+
 
 class ITranslationProvider(ABC):
     @property

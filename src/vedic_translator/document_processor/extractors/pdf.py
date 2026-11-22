@@ -1,8 +1,7 @@
 """Digital PDF document extractor using PyMuPDF (fitz)."""
 
-from pathlib import Path
 import re
-from typing import Dict, List, Set
+from pathlib import Path
 
 import pymupdf as fitz
 from loguru import logger
@@ -29,7 +28,7 @@ class PDFExtractor(BaseExtractor):
     """Extractor for text-based (digital) PDF documents."""
 
     @property
-    def supported_extensions(self) -> Set[str]:
+    def supported_extensions(self) -> set[str]:
         return {".pdf"}
 
     def extract(self, file_path: Path) -> Document:
@@ -69,19 +68,19 @@ class PDFExtractor(BaseExtractor):
         logger.info(f"Extracting digital PDF: {file_path.name} ({len(doc_obj)} pages)")
 
         # Build page-to-chapter mapping from Table of Contents (bookmarks) if present
-        toc_page_map: Dict[int, str] = {}
+        toc_page_map: dict[int, str] = {}
         try:
             toc = doc_obj.get_toc()
             for item in toc:
                 # toc item format: [level, title, page_number]
                 if len(item) >= 3 and item[0] in [1, 2]:
-                    lvl, title, pno = item[0], str(item[1]).strip(), int(item[2])
+                    _lvl, title, pno = item[0], str(item[1]).strip(), int(item[2])
                     if pno > 0 and pno not in toc_page_map:
                         toc_page_map[pno] = title
         except Exception as e:
             logger.debug(f"No Table of Contents extracted from {file_path.name}: {e}")
 
-        chapters: List[Chapter] = []
+        chapters: list[Chapter] = []
         current_chapter: Chapter | None = None
         current_section: Section | None = None
         chapter_idx = 1
@@ -115,7 +114,9 @@ class PDFExtractor(BaseExtractor):
                         metadata={"page": page_num, "from_toc": True},
                     )
                     seq_idx += 1
-                    current_section = Section(section_index=section_idx, heading=ch_title, blocks=[heading_block])
+                    current_section = Section(
+                        section_index=section_idx, heading=ch_title, blocks=[heading_block]
+                    )
                     current_chapter.sections.append(current_section)
                     section_idx += 1
 
@@ -128,17 +129,25 @@ class PDFExtractor(BaseExtractor):
                     if b[6] != 0:  # Skip image blocks
                         continue
 
+                    # Preserve exact source text including any non-breaking spaces (\xa0)
                     block_text = b[4].strip()
                     if not block_text:
                         continue
 
                     total_chars += len(block_text)
 
+                    # For chapter title comparisons and matching, compare normalized whitespace
+                    # so that variations in space characters (e.g., U+00A0 vs U+0020) do not prevent matching
+                    norm_text = block_text.replace("\xa0", " ")
+                    norm_title = (
+                        current_chapter.title.replace("\xa0", " ") if current_chapter else ""
+                    )
+
                     # If block text matches current chapter title, avoid creating duplicate chapter
                     if current_chapter and (
-                        block_text == current_chapter.title
-                        or block_text in current_chapter.title
-                        or current_chapter.title in block_text
+                        norm_text == norm_title
+                        or norm_text in norm_title
+                        or norm_title in norm_text
                     ):
                         # Ensure the heading block has bbox metadata
                         if current_section and current_section.blocks:
@@ -148,7 +157,7 @@ class PDFExtractor(BaseExtractor):
                         continue
 
                     # Fallback chapter detection: only when document has no TOC bookmarks
-                    ch_match = chapter_regex.match(block_text) if not toc_page_map else None
+                    ch_match = chapter_regex.match(norm_text) if not toc_page_map else None
                     if ch_match and len(block_text.splitlines()) <= 2:
                         current_chapter = Chapter(chapter_index=chapter_idx, title=block_text)
                         chapters.append(current_chapter)
@@ -160,10 +169,15 @@ class PDFExtractor(BaseExtractor):
                             source_text=block_text,
                             state=BlockState.INGESTED,
                             sequence_index=seq_idx,
-                            metadata={"page": page_num, "bbox": [round(coord, 2) for coord in b[:4]]},
+                            metadata={
+                                "page": page_num,
+                                "bbox": [round(coord, 2) for coord in b[:4]],
+                            },
                         )
                         seq_idx += 1
-                        current_section = Section(section_index=section_idx, heading=block_text, blocks=[heading_block])
+                        current_section = Section(
+                            section_index=section_idx, heading=block_text, blocks=[heading_block]
+                        )
                         current_chapter.sections.append(current_section)
                         section_idx += 1
                         continue

@@ -1,8 +1,9 @@
 """Unit tests for EPUBExtractor."""
 
 from pathlib import Path
-from ebooklib import epub
+
 import pytest
+from ebooklib import epub
 
 from vedic_translator.core.exceptions import (
     CorruptedDocumentError,
@@ -53,7 +54,7 @@ def test_epub_extractor_valid_book(tmp_path: Path) -> None:
 
     ch = ast_doc.chapters[0]
     assert ch.title == "Invocation"
-    
+
     all_text = " ".join(b.source_text for s in ch.sections for b in s.blocks)
     assert "ॐ पूर्णमदः" in all_text
     assert "pūrṇam adaḥ" in all_text
