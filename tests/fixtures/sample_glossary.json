@@ -1,0 +1,19 @@
+{
+  "test_terms": [
+    {
+      "iast": "brahman",
+      "expected_russian": "Брахман",
+      "category": "tattva"
+    },
+    {
+      "iast": "kṛṣṇa",
+      "expected_russian": "Кришна",
+      "category": "deity"
+    },
+    {
+      "iast": "bhakti",
+      "expected_russian": "бхакти",
+      "category": "sadhana"
+    }
+  ]
+}

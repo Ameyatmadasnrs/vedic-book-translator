@@ -1,0 +1,126 @@
+{
+  "version": "1.0.0",
+  "domain": "Gaudiya Vaishnava Theology & Philosophy",
+  "terms": [
+    {
+      "iast": "brahman",
+      "devanagari": "ब्रह्मन्",
+      "russian_bbt": "Брахман",
+      "russian_academic": "Брахман",
+      "category": "tattva",
+      "grammatical_gender": "neuter",
+      "definition": "The all-pervading, impersonal aspect of the Absolute Truth; the spiritual effulgence (brahmajyoti) emanating from the transcendental body of Lord Krishna.",
+      "authorized_translations": ["Брахман", "безличный Брахман", "сияние Брахмана"],
+      "forbidden_translations": ["Бог", "Господь", "Космический разум", "Абсолютная идея"],
+      "declension_pattern": "masculine_consonant"
+    },
+    {
+      "iast": "paramātman",
+      "devanagari": "परमात्मन्",
+      "russian_bbt": "Параматма",
+      "russian_academic": "Параматман",
+      "category": "tattva",
+      "grammatical_gender": "masculine",
+      "definition": "The localized expansion of the Supreme Lord residing in the hearts of all living entities and in every atom.",
+      "authorized_translations": ["Параматма", "Сверхдуша", "локализованный аспект Господа"],
+      "forbidden_translations": ["Высшее Я", "Мировая душа", "Интуиция"],
+      "declension_pattern": "feminine_a"
+    },
+    {
+      "iast": "bhagavān",
+      "devanagari": "भगवान्",
+      "russian_bbt": "Бхагаван",
+      "russian_academic": "Бхагават",
+      "category": "tattva",
+      "grammatical_gender": "masculine",
+      "definition": "The Supreme Personality of Godhead who possesses all six opulences (wealth, strength, fame, beauty, knowledge, and renunciation) in full.",
+      "authorized_translations": ["Бхагаван", "Верховная Личность Бога", "Господь"],
+      "forbidden_translations": ["Божество", "Святой человек", "Учитель"],
+      "declension_pattern": "masculine_consonant"
+    },
+    {
+      "iast": "bhakti",
+      "devanagari": "भक्ति",
+      "russian_bbt": "бхакти",
+      "russian_academic": "бхакти",
+      "category": "sadhana",
+      "grammatical_gender": "feminine",
+      "definition": "Pure, unalloyed devotional service to the Supreme Lord Sri Krishna, performed with transcendental senses.",
+      "authorized_translations": ["бхакти", "преданное служение", "чистая преданность"],
+      "forbidden_translations": ["культ", "обожание", "религиозный фанатизм", "слепая вера"],
+      "declension_pattern": "indeclinable"
+    },
+    {
+      "iast": "prema",
+      "devanagari": "प्रेमन्",
+      "russian_bbt": "према",
+      "russian_academic": "према",
+      "category": "rasa",
+      "grammatical_gender": "neuter",
+      "definition": "Spontaneous, unmotivated, pure ecstatic love of Godhead, the highest perfectional stage of bhakti.",
+      "authorized_translations": ["према", "чистая любовь к Богу", "божественная любовь"],
+      "forbidden_translations": ["страсть", "чувственная любовь", "привязанность"],
+      "declension_pattern": "feminine_a"
+    },
+    {
+      "iast": "kāma",
+      "devanagari": "काम",
+      "russian_bbt": "кама",
+      "russian_academic": "кама",
+      "category": "material",
+      "grammatical_gender": "masculine",
+      "definition": "Selfish material desire; lust; the inclination to gratify one's own senses in contrast to prema, which satisfies Krishna's senses.",
+      "authorized_translations": ["вожделение", "эгоистическое желание", "кама"],
+      "forbidden_translations": ["любовь", "чистое чувство"],
+      "declension_pattern": "masculine_consonant"
+    },
+    {
+      "iast": "jīva",
+      "devanagari": "जीव",
+      "russian_bbt": "джива",
+      "russian_academic": "джива",
+      "category": "tattva",
+      "grammatical_gender": "masculine",
+      "definition": "The eternal individual living entity, a minute fragmental part and parcel (vibhinnāṁśa) of the Supreme Lord.",
+      "authorized_translations": ["джива", "индивидуальная душа", "живое существо"],
+      "forbidden_translations": ["дух", "организм", "смертное существо"],
+      "declension_pattern": "feminine_a"
+    },
+    {
+      "iast": "māyā",
+      "devanagari": "माया",
+      "russian_bbt": "майя",
+      "russian_academic": "майя",
+      "category": "energy",
+      "grammatical_gender": "feminine",
+      "definition": "The external, illusory energy of the Supreme Lord that covers the constitutional position of the conditioned souls; also refers to Yogamāyā, the Lord's internal energy.",
+      "authorized_translations": ["майя", "иллюзорная энергия", "материальная природа"],
+      "forbidden_translations": ["небытие", "обман", "галлюцинация", "мираж"],
+      "declension_pattern": "feminine_a"
+    },
+    {
+      "iast": "kṛṣṇa",
+      "devanagari": "कृष्ण",
+      "russian_bbt": "Кришна",
+      "russian_academic": "Кршна",
+      "category": "deity",
+      "grammatical_gender": "masculine",
+      "definition": "The original Supreme Personality of Godhead, the all-attractive source of all incarnations (kṛṣṇas tu bhagavān svayam).",
+      "authorized_translations": ["Кришна"],
+      "forbidden_translations": ["Кршна", "Кришта"],
+      "declension_pattern": "masculine_a_pattern"
+    },
+    {
+      "iast": "caitanya",
+      "devanagari": "चैतन्य",
+      "russian_bbt": "Чайтанья",
+      "russian_academic": "Чаитанйа",
+      "category": "avatar",
+      "grammatical_gender": "masculine",
+      "definition": "Lord Sri Chaitanya Mahaprabhu, the combined form of Sri Radha and Sri Krishna who appeared to inaugurate the Sankirtana movement.",
+      "authorized_translations": ["Чайтанья", "Шри Чайтанья Махапрабху"],
+      "forbidden_translations": ["Чаитанйа", "Четанья"],
+      "declension_pattern": "masculine_soft"
+    }
+  ]
+}

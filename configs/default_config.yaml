@@ -1,0 +1,66 @@
+# ==============================================================================
+# Vedic Book Translator - Default Configuration
+# ==============================================================================
+
+app:
+  name: "Vedic Book Translator"
+  version: "0.1.0"
+  environment: "development"
+
+pipeline:
+  # Provider routing: assign specific models to pipeline stages
+  providers:
+    literal_stage:
+      provider: "gemini"
+      model: "gemini-2.5-pro"
+      temperature: 0.1
+    philosophical_stage:
+      provider: "anthropic"
+      model: "claude-3-7-sonnet-20250219"
+      temperature: 0.2
+    literary_stage:
+      provider: "openai"
+      model: "gpt-4o"
+      temperature: 0.3
+    terminology_stage:
+      provider: "gemini"
+      model: "gemini-2.5-pro"
+      temperature: 0.0
+
+  concurrency:
+    max_parallel_blocks: 4
+    rate_limit_rpm: 60
+    rate_limit_tpm: 100000
+
+  resilience:
+    max_retries: 5
+    base_backoff_seconds: 2.0
+    max_backoff_seconds: 60.0
+
+translation_memory:
+  enabled: true
+  db_path: "./data/vedic_translator.db"
+  similarity_threshold: 0.95
+  auto_commit: true
+
+glossary:
+  primary_standard: "bbt_russian" # Options: "bbt_russian", "academic_cyrillic"
+  enforce_diacritics: true
+  seed_files:
+    - "./glossaries/gaudiya_vaishnava_terms.json"
+    - "./glossaries/sanskrit_diacritics_map.json"
+    - "./glossaries/bbt_russian_orthography_rules.json"
+
+quality_control:
+  min_terminology_fidelity_score: 99.0
+  min_diacritics_completeness_score: 98.0
+  enforce_verse_structural_invariance: true
+  min_length_ratio: 0.90
+  max_length_ratio: 1.55
+
+publishing:
+  default_format: "docx"
+  embed_fonts: true
+  devanagari_font: "Siddhanta"
+  cyrillic_font: "Times New Roman"
+  generate_parallel_bilingual: false

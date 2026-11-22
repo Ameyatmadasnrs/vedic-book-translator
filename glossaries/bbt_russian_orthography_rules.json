@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "domain": "BBT Russian Transliteration & Orthography Conventions",
+  "capitalization_rules": [
+    {
+      "rule": "Sacred Names & Personal Deities",
+      "description": "Always capitalize names of Vishnu-tattva avatars and their eternal associates.",
+      "examples": ["Кришна", "Радхарани", "Чайтанья Махапрабху", "Нитьянанда", "Вишну", "Нараяна", "Баларама"]
+    },
+    {
+      "rule": "Sacred Scriptures",
+      "description": "Capitalize full book titles; italicize in running prose with angle quotes («...»).",
+      "examples": ["«Бхагавад-гита»", "«Шримад-Бхагаватам»", "«Чайтанья-чаритамрита»", "«Ишопанишад»", "«Бхакти-расамрита-синдху»"]
+    },
+    {
+      "rule": "Sacred Places & Dhams",
+      "description": "Capitalize holy abodes and pilgrimage sites.",
+      "examples": ["Вриндаван", "Мадхура", "Навадвипа", "Джаганнатха-Пури", "Маяпур", "Говардхан"]
+    },
+    {
+      "rule": "Generic Metaphysical Terms",
+      "description": "Keep in lower-case in running text unless beginning a sentence.",
+      "examples": ["гуна", "карма", "дхарма", "бхакти", "джива", "самсара", "мокша", "прасад", "ашрам"]
+    }
+  ],
+  "honorific_titles": [
+    { "iast": "Śrī", "russian": "Шри", "usage": "prefix without hyphen: Шри Кришна" },
+    { "iast": "Śrīla", "russian": "Шрила", "usage": "prefix without hyphen: Шрила Прабхупада" },
+    { "iast": "Śrīmad", "russian": "Шримад", "usage": "prefix with hyphen: Шримад-Бхагаватам" },
+    { "iast": "Gosvāmī", "russian": "Госвами", "usage": "capitalized suffix: Рупа Госвами" },
+    { "iast": "Ṭhākura", "russian": "Тхакур", "usage": "capitalized suffix: Бхактивинода Тхакур" }
+  ],
+  "compound_word_rules": [
+    {
+      "rule": "Bhakti compounds",
+      "russian_form": "бхакти-йога",
+      "description": "Hyphenate combinations with yoga: карма-йога, гьяна-йога, бхакти-йога, аштанга-йога."
+    },
+    {
+      "rule": "Varna-ashrama compounds",
+      "russian_form": "варнашрама-дхарма",
+      "description": "Single compound word with hyphenated qualifier."
+    }
+  ]
+}
