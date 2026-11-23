@@ -8,6 +8,12 @@ from vedic_translator.document_processor.extractors.base import (
 from vedic_translator.document_processor.extractors.docx import DOCXExtractor
 from vedic_translator.document_processor.extractors.epub import EPUBExtractor
 from vedic_translator.document_processor.extractors.factory import DocumentExtractor
+from vedic_translator.document_processor.extractors.font_normalizer import (
+    BaseFontConverter,
+    ChanakyaConverter,
+    LegacyFontNormalizer,
+    NalandaConverter,
+)
 from vedic_translator.document_processor.extractors.pdf import PDFExtractor
 from vedic_translator.document_processor.extractors.txt import TXTExtractor
 
@@ -20,4 +26,8 @@ __all__ = [
     "EPUBExtractor",
     "DOCXExtractor",
     "TXTExtractor",
+    "BaseFontConverter",
+    "ChanakyaConverter",
+    "NalandaConverter",
+    "LegacyFontNormalizer",
 ]

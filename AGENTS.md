@@ -98,3 +98,11 @@ Before reporting a task as complete:
 - [ ] Is original source text preserved without mutation?
 - [ ] Was `CHANGELOG.md` updated with human-readable notes?
 - [ ] If architectural assumptions changed, was an ADR added to `docs/DECISIONS.md`?
+
+---
+
+## 7. Workspace Hygiene & Execution Isolation
+
+1. **Working Directory Integrity**: Always execute commands, pytest sessions, formatters, and scripts from the project root (`C:\Users\Ameya\Desktop\vedic-book-translator`). Never invoke commands from the parent desktop directory.
+2. **Cache Isolation**: Ensure `.pytest_cache/`, `.coverage`, `.mypy_cache/`, and `.ruff_cache/` are stored strictly within the project repository and are excluded by `.gitignore`. Never allow cache files to be emitted onto the Windows Desktop.
+3. **External File Safety**: Never delete, move, or modify files outside the project root without explicit user instruction.

@@ -98,5 +98,14 @@ minversion = "8.0"
 addopts = "-ra -q --cov=src/vedic_translator"
 testpaths = ["tests"]
 pythonpath = ["src"]
+cache_dir = ".pytest_cache"
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
+
+[tool.coverage.run]
+data_file = ".coverage"
+source = ["src/vedic_translator"]
+branch = false
+
+[tool.coverage.report]
+show_missing = true

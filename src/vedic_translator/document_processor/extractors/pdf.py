@@ -23,10 +23,16 @@ from vedic_translator.document_processor.extractors.base import (
     BaseExtractor,
     validate_source_file,
 )
+from vedic_translator.document_processor.extractors.font_normalizer import (
+    LegacyFontNormalizer,
+)
 
 
 class PDFExtractor(BaseExtractor):
-    """Extractor for text-based (digital) PDF documents."""
+    """Extractor for text-based (digital) PDF documents with span-level legacy font normalization."""
+
+    def __init__(self, font_normalizer: LegacyFontNormalizer | None = None) -> None:
+        self.font_normalizer = font_normalizer or LegacyFontNormalizer()
 
     @property
     def supported_extensions(self) -> set[str]:
@@ -121,10 +127,7 @@ class PDFExtractor(BaseExtractor):
                     current_chapter.sections.append(current_section)
                     section_idx += 1
 
-                # Extract text blocks in reading order
-                # block tuple: (x0, y0, x1, y1, text, block_no, block_type)
-                # block_type == 0 indicates text
-                blocks = page.get_text("blocks")
+                # Extract text blocks in reading order from structured dictionary
                 p_dict = page.get_text("dict") or {}
                 dict_blocks = [
                     db
@@ -132,59 +135,105 @@ class PDFExtractor(BaseExtractor):
                     if isinstance(db, dict) and db.get("type", 0) == 0
                 ]
 
-                for b in blocks:
-                    if b[6] != 0:  # Skip image blocks
-                        continue
+                for db in dict_blocks:
+                    bbox_coords = [
+                        round(coord, 2) for coord in db.get("bbox", (0.0, 0.0, 0.0, 0.0))
+                    ]
 
-                    # Preserve exact source text including any non-breaking spaces (\xa0)
-                    block_text = b[4].strip()
+                    line_norm_texts: list[str] = []
+                    line_raw_texts: list[str] = []
+                    pdf_spans: list[dict[str, Any]] = []
+                    font_names: set[str] = set()
+                    font_sizes: list[float] = []
+                    has_bold = False
+                    has_italic = False
+                    block_has_legacy_fonts = False
+
+                    for line in db.get("lines", []):
+                        spans = line.get("spans", [])
+                        line_has_nalanda = any(
+                            self.font_normalizer.get_font_family(s.get("font", "")) == "nalanda"
+                            for s in spans
+                        )
+                        span_norm_texts: list[str] = []
+                        span_raw_texts: list[str] = []
+                        prev_span_was_translit = False
+                        for s in spans:
+                            raw_text = s.get("text", "")
+                            font_name = s.get("font", "")
+                            size = round(s.get("size", 0.0), 2)
+                            flags = s.get("flags", 0)
+                            span_bbox = [round(c, 2) for c in s.get("bbox", (0.0, 0.0, 0.0, 0.0))]
+
+                            # Normalize span using LegacyFontNormalizer
+                            is_translit = line_has_nalanda or prev_span_was_translit
+                            norm_text, was_converted, family = self.font_normalizer.normalize_span(
+                                raw_text, font_name, is_transliteration=is_translit
+                            )
+                            if family == "nalanda" or "nalanda" in font_name.lower():
+                                prev_span_was_translit = True
+                            elif raw_text.strip():
+                                prev_span_was_translit = False
+
+                            if was_converted:
+                                block_has_legacy_fonts = True
+
+                            if raw_text.strip():
+                                font_names.add(font_name)
+                                font_sizes.append(size)
+                                if bool(flags & 2) or "bold" in font_name.lower():
+                                    has_bold = True
+                                if (
+                                    bool(flags & 1)
+                                    or "italic" in font_name.lower()
+                                    or "oblique" in font_name.lower()
+                                ):
+                                    has_italic = True
+
+                            span_record: dict[str, Any] = {
+                                "font": font_name,
+                                "font_family": family,
+                                "size": size,
+                                "flags": flags,
+                                "bbox": span_bbox,
+                                "raw_text": raw_text,
+                                "normalized_text": norm_text,
+                                "converted": was_converted,
+                            }
+                            pdf_spans.append(span_record)
+                            span_norm_texts.append(norm_text)
+                            span_raw_texts.append(raw_text)
+
+                        line_norm_texts.append("".join(span_norm_texts))
+                        line_raw_texts.append("".join(span_raw_texts))
+
+                    block_text = "\n".join(line_norm_texts).strip()
+                    # Canonicalize split matras across span boundaries
+                    block_text = block_text.replace("\u093e\u0947", "\u094b").replace(
+                        "\u093e\u0948", "\u094c"
+                    )
+                    raw_block_text = "\n".join(line_raw_texts).strip()
                     if not block_text:
                         continue
 
                     total_chars += len(block_text)
-                    bbox_coords = [round(coord, 2) for coord in b[:4]]
 
-                    # Extract font properties by matching with dict spans
                     font_info: dict[str, Any] = {}
-                    if dict_blocks:
-                        best_db = min(
-                            dict_blocks,
-                            key=lambda db: (
-                                abs(db.get("bbox", (0, 0, 0, 0))[0] - b[0])
-                                + abs(db.get("bbox", (0, 0, 0, 0))[1] - b[1])
-                            ),
-                        )
-                        spans = [
-                            s
-                            for line in best_db.get("lines", [])
-                            for s in line.get("spans", [])
-                            if s.get("text", "").strip()
-                        ]
-                        if spans:
-                            sizes = [s["size"] for s in spans if "size" in s]
-                            fonts = list({s["font"] for s in spans if "font" in s})
-                            is_bold = any(
-                                bool(s.get("flags", 0) & 2) or "bold" in s.get("font", "").lower()
-                                for s in spans
-                            )
-                            is_italic = any(
-                                bool(s.get("flags", 0) & 1)
-                                or "italic" in s.get("font", "").lower()
-                                or "oblique" in s.get("font", "").lower()
-                                for s in spans
-                            )
-                            if sizes:
-                                font_info["font_size"] = round(max(sizes), 2)
-                            if fonts:
-                                font_info["fonts"] = fonts
-                            if is_bold:
-                                font_info["is_bold"] = True
-                            if is_italic:
-                                font_info["is_italic"] = True
+                    if font_sizes:
+                        font_info["font_size"] = round(max(font_sizes), 2)
+                    if font_names:
+                        font_info["fonts"] = sorted(font_names)
+                    if has_bold:
+                        font_info["is_bold"] = True
+                    if has_italic:
+                        font_info["is_italic"] = True
 
                     block_meta: dict[str, Any] = {
                         "page": page_num,
                         "bbox": bbox_coords,
+                        "raw_source_text": raw_block_text,
+                        "has_legacy_fonts": block_has_legacy_fonts,
+                        "pdf_spans": pdf_spans,
                         **font_info,
                     }
 
@@ -201,13 +250,11 @@ class PDFExtractor(BaseExtractor):
                         or norm_text in norm_title
                         or norm_title in norm_text
                     ):
-                        # Ensure the heading block has bbox and font metadata
+                        # Ensure the heading block has bbox, font and span metadata
                         if current_section and current_section.blocks:
                             first_b = current_section.blocks[0]
                             if first_b.type == BlockType.HEADING:
-                                first_b.metadata["bbox"] = bbox_coords
-                                for k, v in font_info.items():
-                                    first_b.metadata[k] = v
+                                first_b.metadata.update(block_meta)
                         continue
 
                     # Fallback chapter detection: only when document has no TOC bookmarks

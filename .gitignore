@@ -45,6 +45,7 @@ data/cache/
 data/temp/
 data/input/
 data/output/
+data/test_books/
 *.log
 logs/
 
