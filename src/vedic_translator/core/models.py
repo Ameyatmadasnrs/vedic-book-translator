@@ -19,16 +19,25 @@ def utc_now() -> datetime:
 class BlockType(StrEnum):
     """Categorization of semantic text blocks."""
 
+    # Universal structural & content blocks
+    HEADING = "HEADING"
+    SUBHEADING = "SUBHEADING"
+    PARAGRAPH = "PARAGRAPH"
+    BLOCKQUOTE = "BLOCKQUOTE"
+    QUOTE = "QUOTE"  # Backward compatibility alias for BLOCKQUOTE
+    EPIGRAPH = "EPIGRAPH"
+    LIST_ITEM = "LIST_ITEM"
+    TABLE = "TABLE"
+    FOOTNOTE = "FOOTNOTE"
+    THEMATIC_BREAK = "THEMATIC_BREAK"
+    CAPTION = "CAPTION"
+
+    # Specialized commentary & scripture content elements (Phase 1.1 + future stages)
     VERSE_DEVANAGARI = "VERSE_DEVANAGARI"
     VERSE_IAST = "VERSE_IAST"
     SYNONYMS = "SYNONYMS"
     TRANSLATION = "TRANSLATION"
     PURPORT = "PURPORT"
-    HEADING = "HEADING"
-    SUBHEADING = "SUBHEADING"
-    PARAGRAPH = "PARAGRAPH"
-    FOOTNOTE = "FOOTNOTE"
-    QUOTE = "QUOTE"
 
 
 class BlockState(StrEnum):
@@ -76,6 +85,25 @@ class AuditResult(BaseModel):
     evaluated_at: datetime = Field(default_factory=utc_now)
 
 
+class AlternativeClassification(BaseModel):
+    """Alternative classification candidate with confidence and rationale."""
+
+    suggested_type: BlockType
+    confidence: float  # Bounded in [0.0, 1.0]
+    rule_name: str
+    reason: str
+
+
+class ClassificationProvenance(BaseModel):
+    """Audit provenance for how a block was classified."""
+
+    method: str  # e.g., "format_native", "heuristic_rule", "ai_fallback", "manual"
+    rule_name: str  # e.g., "docx_heading_style", "markdown_blockquote"
+    confidence: float  # Bounded in [0.0, 1.0]
+    alternatives: list[AlternativeClassification] = Field(default_factory=list)
+    applied_at: datetime = Field(default_factory=utc_now)
+
+
 class Block(BaseModel):
     """Atomic unit of document structure and translation."""
 
@@ -89,6 +117,9 @@ class Block(BaseModel):
     history: list[StageAudit] = Field(default_factory=list)
     audit_result: AuditResult | None = None
     metadata: dict[str, Any] = Field(default_factory=dict)
+    provenance: ClassificationProvenance | None = None
+    alternative_classifications: list[AlternativeClassification] = Field(default_factory=list)
+    verse_unit_ids: list[UUID] = Field(default_factory=list)
 
     @property
     def normalized_text(self) -> str:

@@ -2,6 +2,7 @@
 
 import re
 from pathlib import Path
+from typing import Any
 
 import pymupdf as fitz
 from loguru import logger
@@ -124,6 +125,12 @@ class PDFExtractor(BaseExtractor):
                 # block tuple: (x0, y0, x1, y1, text, block_no, block_type)
                 # block_type == 0 indicates text
                 blocks = page.get_text("blocks")
+                p_dict = page.get_text("dict") or {}
+                dict_blocks = [
+                    db
+                    for db in p_dict.get("blocks", [])
+                    if isinstance(db, dict) and db.get("type", 0) == 0
+                ]
 
                 for b in blocks:
                     if b[6] != 0:  # Skip image blocks
@@ -135,6 +142,51 @@ class PDFExtractor(BaseExtractor):
                         continue
 
                     total_chars += len(block_text)
+                    bbox_coords = [round(coord, 2) for coord in b[:4]]
+
+                    # Extract font properties by matching with dict spans
+                    font_info: dict[str, Any] = {}
+                    if dict_blocks:
+                        best_db = min(
+                            dict_blocks,
+                            key=lambda db: (
+                                abs(db.get("bbox", (0, 0, 0, 0))[0] - b[0])
+                                + abs(db.get("bbox", (0, 0, 0, 0))[1] - b[1])
+                            ),
+                        )
+                        spans = [
+                            s
+                            for line in best_db.get("lines", [])
+                            for s in line.get("spans", [])
+                            if s.get("text", "").strip()
+                        ]
+                        if spans:
+                            sizes = [s["size"] for s in spans if "size" in s]
+                            fonts = list({s["font"] for s in spans if "font" in s})
+                            is_bold = any(
+                                bool(s.get("flags", 0) & 2) or "bold" in s.get("font", "").lower()
+                                for s in spans
+                            )
+                            is_italic = any(
+                                bool(s.get("flags", 0) & 1)
+                                or "italic" in s.get("font", "").lower()
+                                or "oblique" in s.get("font", "").lower()
+                                for s in spans
+                            )
+                            if sizes:
+                                font_info["font_size"] = round(max(sizes), 2)
+                            if fonts:
+                                font_info["fonts"] = fonts
+                            if is_bold:
+                                font_info["is_bold"] = True
+                            if is_italic:
+                                font_info["is_italic"] = True
+
+                    block_meta: dict[str, Any] = {
+                        "page": page_num,
+                        "bbox": bbox_coords,
+                        **font_info,
+                    }
 
                     # For chapter title comparisons and matching, compare normalized whitespace
                     # so that variations in space characters (e.g., U+00A0 vs U+0020) do not prevent matching
@@ -149,11 +201,13 @@ class PDFExtractor(BaseExtractor):
                         or norm_text in norm_title
                         or norm_title in norm_text
                     ):
-                        # Ensure the heading block has bbox metadata
+                        # Ensure the heading block has bbox and font metadata
                         if current_section and current_section.blocks:
                             first_b = current_section.blocks[0]
                             if first_b.type == BlockType.HEADING:
-                                first_b.metadata["bbox"] = [round(coord, 2) for coord in b[:4]]
+                                first_b.metadata["bbox"] = bbox_coords
+                                for k, v in font_info.items():
+                                    first_b.metadata[k] = v
                         continue
 
                     # Fallback chapter detection: only when document has no TOC bookmarks
@@ -169,10 +223,7 @@ class PDFExtractor(BaseExtractor):
                             source_text=block_text,
                             state=BlockState.INGESTED,
                             sequence_index=seq_idx,
-                            metadata={
-                                "page": page_num,
-                                "bbox": [round(coord, 2) for coord in b[:4]],
-                            },
+                            metadata=dict(block_meta),
                         )
                         seq_idx += 1
                         current_section = Section(
@@ -198,7 +249,7 @@ class PDFExtractor(BaseExtractor):
                         source_text=block_text,
                         state=BlockState.INGESTED,
                         sequence_index=seq_idx,
-                        metadata={"page": page_num, "bbox": [round(coord, 2) for coord in b[:4]]},
+                        metadata=dict(block_meta),
                     )
                     seq_idx += 1
                     current_section.blocks.append(block)

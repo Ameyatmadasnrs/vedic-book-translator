@@ -59,6 +59,12 @@ class InconsistentVerseNumberingError(SegmentationError):
     pass
 
 
+class ReferentialIntegrityError(SegmentationError):
+    """Raised when document relationship references are invalid or broken."""
+
+    pass
+
+
 # AI Providers & Network
 class ProviderError(VedicTranslatorError):
     """Raised when an external AI provider fails."""

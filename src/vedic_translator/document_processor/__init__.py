@@ -8,6 +8,12 @@ from vedic_translator.document_processor.extractors import (
     PDFExtractor,
     TXTExtractor,
 )
+from vedic_translator.document_processor.segmenter import (
+    ContentClassifier,
+    DocumentIntegrityValidator,
+    ISegmenter,
+    SegmenterPipeline,
+)
 
 __all__ = [
     "BaseExtractor",
@@ -16,4 +22,8 @@ __all__ = [
     "EPUBExtractor",
     "PDFExtractor",
     "TXTExtractor",
+    "ISegmenter",
+    "ContentClassifier",
+    "DocumentIntegrityValidator",
+    "SegmenterPipeline",
 ]
