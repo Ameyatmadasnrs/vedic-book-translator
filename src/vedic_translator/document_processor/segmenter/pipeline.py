@@ -21,6 +21,11 @@ from vedic_translator.document_processor.segmenter.classifier import (
     BlockContext,
     ContentClassifier,
 )
+from vedic_translator.document_processor.segmenter.relationships import (
+    IRelationshipResolver,
+    RelationshipProfile,
+    RuleBasedRelationshipResolver,
+)
 from vedic_translator.document_processor.segmenter.validator import (
     DocumentIntegrityValidator,
 )
@@ -32,10 +37,20 @@ class SegmenterPipeline(ISegmenter):
     def __init__(
         self,
         profile: SegmentationProfile | None = None,
+        relationship_profile: RelationshipProfile | None = None,
+        relationship_resolver: IRelationshipResolver | None = None,
+        enable_relationship_resolution: bool = True,
         clock: Callable[[], datetime] | None = None,
         raise_on_integrity_error: bool = True,
     ) -> None:
         self.profile = profile or SegmentationProfile()
+        self.relationship_profile = relationship_profile
+        self.enable_relationship_resolution = enable_relationship_resolution
+        self.relationship_resolver = (
+            relationship_resolver
+            if relationship_resolver is not None
+            else RuleBasedRelationshipResolver()
+        )
         self.clock = clock or utc_now
         self.classifier = ContentClassifier(profile=self.profile, clock=self.clock)
         self.validator = DocumentIntegrityValidator(raise_on_error=raise_on_integrity_error)
@@ -103,8 +118,18 @@ class SegmenterPipeline(ISegmenter):
                     heading=raw_section.heading,
                     verse_range=raw_section.verse_range,
                     blocks=enriched_blocks,
+                    verse_units=[],
                     metadata=copy.deepcopy(raw_section.metadata),
                 )
+
+                # Stage B: Relationship Resolution (if enabled)
+                if self.enable_relationship_resolution and self.relationship_resolver is not None:
+                    verse_units = self.relationship_resolver.resolve_relationships(
+                        section=enriched_section,
+                        profile=self.relationship_profile,
+                    )
+                    enriched_section.verse_units = verse_units
+
                 enriched_sections.append(enriched_section)
 
             enriched_chapter = Chapter(

@@ -19,8 +19,12 @@ from vedic_translator.core.models import (
     ClassificationProvenance,
     Document,
     DocumentMetadata,
+    RelationshipConfidence,
+    RoutingAction,
     Section,
     StageAudit,
+    VerseUnit,
+    VerseUnitType,
 )
 
 __all__ = [
@@ -40,6 +44,10 @@ __all__ = [
     "ClassificationProvenance",
     "Document",
     "DocumentMetadata",
+    "RelationshipConfidence",
+    "RoutingAction",
     "Section",
     "StageAudit",
+    "VerseUnit",
+    "VerseUnitType",
 ]

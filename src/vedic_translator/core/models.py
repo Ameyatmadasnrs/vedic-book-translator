@@ -131,6 +131,75 @@ class Block(BaseModel):
         return self.source_text.replace("\xa0", " ")
 
 
+class VerseUnitType(StrEnum):
+    """Metrical or functional classification of scripture unit."""
+
+    SLOKA = "SLOKA"  # Classical Sanskrit verse (Anushtubh, etc.)
+    DOHA = "DOHA"  # Awadhi / Hindi rhyming couplet
+    CHAUPAI = "CHAUPAI"  # Awadhi / Hindi 4-line stanza (16 matras)
+    SORATHA = "SORATHA"  # Inverted doha meter
+    CHHANDA = "CHHANDA"  # Metrical hymn / stotra
+    MANTRA = "MANTRA"  # Vedic Samhita / Upanishadic prose-verse
+    PROSE_SECTION = "PROSE_SECTION"  # Pure narrative / introductory prose
+    GENERIC_VERSE = "GENERIC_VERSE"  # Universal metrical / poetic unit
+
+
+class RoutingAction(StrEnum):
+    """Provisional editorial routing decision."""
+
+    AUTO_ACCEPTED = "AUTO_ACCEPTED"  # High confidence; ready for translation
+    AMBIGUOUS = "AMBIGUOUS"  # Medium confidence; candidate linked, flagged for QA
+    FLAGGED_FOR_REVIEW = "FLAGGED_FOR_REVIEW"  # Low confidence; unforced, requires human sign-off
+
+
+class RelationshipConfidence(BaseModel):
+    """Provisional structural heuristic confidence score and diagnostic audit trail."""
+
+    overall_score: float = Field(ge=0.0, le=1.0)
+    component_scores: dict[str, float] = Field(default_factory=dict)
+    routing_action: RoutingAction = RoutingAction.AUTO_ACCEPTED
+    provenance_rules: list[str] = Field(default_factory=list)
+    evidence: list[str] = Field(default_factory=list)
+    reasoning: str | None = None
+    diagnostics: list[str] = Field(default_factory=list)
+
+
+class VerseUnit(BaseModel):
+    """Optional logical grouping of blocks representing a verse and its commentary apparatus."""
+
+    id: UUID = Field(default_factory=uuid4)
+    unit_type: VerseUnitType = VerseUnitType.GENERIC_VERSE
+    canonical_id: str | None = None  # e.g., "1.188", "Cau. 1.188.1", "Do. 2 (A)"
+    verse_range: str | None = None  # e.g., "1.21-1.22" for composite multi-verse units
+
+    # List-based references to constituent blocks (strictly in reading order)
+    original_script_block_ids: list[UUID] = Field(default_factory=list)
+    transliteration_block_ids: list[UUID] = Field(default_factory=list)
+    synonyms_block_ids: list[UUID] = Field(default_factory=list)
+    translation_block_ids: list[UUID] = Field(default_factory=list)
+    commentary_block_ids: list[UUID] = Field(default_factory=list)
+    footnote_block_ids: list[UUID] = Field(default_factory=list)
+
+    # Incompleteness tracking
+    is_complete: bool = True
+    missing_components: list[str] = Field(default_factory=list)
+
+    # Confidence and audit routing
+    confidence: RelationshipConfidence
+    metadata: dict[str, Any] = Field(default_factory=dict)
+
+    def all_block_ids(self) -> list[UUID]:
+        """Return all referenced block UUIDs in logical reading sequence."""
+        return (
+            self.original_script_block_ids
+            + self.transliteration_block_ids
+            + self.synonyms_block_ids
+            + self.translation_block_ids
+            + self.commentary_block_ids
+            + self.footnote_block_ids
+        )
+
+
 class Section(BaseModel):
     """A logical section within a chapter (e.g., a single verse with commentary)."""
 
@@ -139,6 +208,7 @@ class Section(BaseModel):
     heading: str | None = None
     verse_range: str | None = None
     blocks: list[Block] = Field(default_factory=list)
+    verse_units: list[VerseUnit] = Field(default_factory=list)
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 
