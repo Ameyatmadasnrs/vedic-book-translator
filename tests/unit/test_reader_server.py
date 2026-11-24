@@ -36,7 +36,7 @@ def test_get_translation_stats(tmp_path: Path) -> None:
 
 
 def test_reader_handler_endpoints(tmp_path: Path) -> None:
-    """Verify handler responds to GET /, /api/status, and /api/book."""
+    """Verify handler responds to GET /, /status.json, /sri_ramcharitmanas_russian_edition.md, and legacy /api/*."""
     from unittest.mock import MagicMock
 
     translations_dir = tmp_path / "translations"
@@ -58,7 +58,26 @@ def test_reader_handler_endpoints(tmp_path: Path) -> None:
     handler.do_GET()
     handler.send_response.assert_called_with(200)
 
-    # Test GET /api/status
+    # Test GET /status.json with query parameter
+    handler.send_response.reset_mock()
+    handler.wfile.reset_mock()
+    handler.path = "/status.json?_t=1700000000"
+    handler.do_GET()
+    handler.send_response.assert_called_with(200)
+    written_status = b"".join(call.args[0] for call in handler.wfile.write.call_args_list)
+    status_json = json.loads(written_status.decode("utf-8"))
+    assert status_json["last_completed_page"] == 15
+
+    # Test GET /sri_ramcharitmanas_russian_edition.md with query parameter
+    handler.send_response.reset_mock()
+    handler.wfile.reset_mock()
+    handler.path = "/sri_ramcharitmanas_russian_edition.md?_t=1700000000"
+    handler.do_GET()
+    handler.send_response.assert_called_with(200)
+    written_md = b"".join(call.args[0] for call in handler.wfile.write.call_args_list)
+    assert "# Chapter 1" in written_md.decode("utf-8")
+
+    # Test legacy GET /api/status
     handler.send_response.reset_mock()
     handler.wfile.reset_mock()
     handler.path = "/api/status"
@@ -68,7 +87,7 @@ def test_reader_handler_endpoints(tmp_path: Path) -> None:
     status_data = json.loads(written.decode("utf-8"))
     assert status_data["last_completed_page"] == 15
 
-    # Test GET /api/book
+    # Test legacy GET /api/book
     handler.send_response.reset_mock()
     handler.wfile.reset_mock()
     handler.path = "/api/book"
@@ -83,3 +102,24 @@ def test_reader_handler_endpoints(tmp_path: Path) -> None:
     handler.path = "/nonexistent"
     handler.do_GET()
     handler.send_response.assert_called_with(404)
+
+
+def test_reader_html_static_compatibility() -> None:
+    """Verify READER_HTML uses relative static files and handles errors gracefully."""
+    from vedic_translator.direct_translation.reader_server import READER_HTML
+
+    # Must use relative paths for GitHub Pages compatibility
+    assert "./status.json" in READER_HTML
+    assert "./sri_ramcharitmanas_russian_edition.md" in READER_HTML
+
+    # Must NOT rely on server-only /api/ endpoints
+    assert "fetch('/api/book')" not in READER_HTML
+    assert "fetch('/api/status')" not in READER_HTML
+
+    # Must read markdown via .text() and parse it
+    assert ".text()" in READER_HTML
+    assert "parseMarkdown" in READER_HTML
+
+    # Must include Russian error handling message and retry button
+    assert "Не удалось загрузить книгу" in READER_HTML
+    assert "Повторить попытку" in READER_HTML

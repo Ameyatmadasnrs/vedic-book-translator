@@ -607,6 +607,7 @@ READER_HTML = """<!DOCTYPE html>
   <script>
     let currentFontSize = 1.15;
     let lastMtime = 0;
+    let cachedMarkdown = '';
     let isInitialLoad = true;
     let activeSelection = null;
     let editingHighlightId = null;
@@ -1019,36 +1020,66 @@ READER_HTML = """<!DOCTYPE html>
     // Load & Live Sync with Server
     async function loadBook(forceRender = false) {
       try {
-        const [bookRes, statusRes] = await Promise.all([
-          fetch('/api/book'),
-          fetch('/api/status')
-        ]);
-        const bookData = await bookRes.json();
+        // 1. Check status first via relative URL (with cache-busting timestamp)
+        const statusRes = await fetch('./status.json?_t=' + Date.now());
+        if (!statusRes.ok) {
+          throw new Error('HTTP ' + statusRes.status + ' (' + statusRes.statusText + ')');
+        }
         const status = await statusRes.json();
 
-        // Update progress bar
+        // 2. Update progress bar
         const pct = status.percentage || 0;
         document.getElementById('pfill').style.width = pct + '%';
         document.getElementById('ptext').textContent = pct + '%';
-        document.getElementById('ppage').textContent = `Стр. ${status.last_completed_page} / ${status.total_source_pages}`;
+        document.getElementById('ppage').textContent = `Стр. ${status.last_completed_page || 0} / ${status.total_source_pages || 1200}`;
 
-        if (status.modified_time !== lastMtime || forceRender) {
-          lastMtime = status.modified_time;
-          const contentEl = document.getElementById('content');
-          contentEl.innerHTML = parseMarkdown(bookData.markdown);
-          buildTOC();
-          renderContentHighlights();
-
-          if (isInitialLoad) {
-            isInitialLoad = false;
-            const savedY = localStorage.getItem(KEY_SCROLL);
-            if (savedY) {
-              window.scrollTo({ top: parseFloat(savedY), behavior: 'instant' });
-            }
+        // 3. Fetch book markdown ONLY if modified_time changed or not yet loaded
+        const isModified = status.modified_time !== lastMtime;
+        if (isModified || !cachedMarkdown) {
+          const bookRes = await fetch('./sri_ramcharitmanas_russian_edition.md?_t=' + (status.modified_time || Date.now()));
+          if (!bookRes.ok) {
+            throw new Error('HTTP ' + bookRes.status + ' (' + bookRes.statusText + ')');
           }
+          cachedMarkdown = await bookRes.text();
+          lastMtime = status.modified_time;
+          renderBookContent(cachedMarkdown);
+        } else if (forceRender && cachedMarkdown) {
+          // Re-render from cache (e.g. after highlight deletion)
+          renderBookContent(cachedMarkdown);
         }
       } catch (err) {
         console.error('Ошибка загрузки книги:', err);
+        if (isInitialLoad || !cachedMarkdown) {
+          const contentEl = document.getElementById('content');
+          contentEl.innerHTML = `
+            <div style="text-align: center; padding: 48px 20px; color: var(--text-muted);">
+              <div style="font-size: 2.2rem; margin-bottom: 12px; color: var(--accent);">⚠️</div>
+              <h3 style="color: var(--accent); margin-bottom: 12px; font-size: 1.25rem;">Не удалось загрузить книгу</h3>
+              <p style="margin-bottom: 20px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+                Произошла ошибка при загрузке данных: ${err.message || 'Ошибка сети'}.<br>
+                Пожалуйста, проверьте интернет-соединение или попробуйте снова.
+              </p>
+              <button onclick="loadBook(true)" style="padding: 10px 24px; border-radius: 6px; border: 1px solid var(--accent); background: var(--accent); color: white; cursor: pointer; font-size: 1rem; font-weight: 500;">
+                Повторить попытку
+              </button>
+            </div>
+          `;
+        }
+      }
+    }
+
+    function renderBookContent(markdownText) {
+      const contentEl = document.getElementById('content');
+      contentEl.innerHTML = parseMarkdown(markdownText);
+      buildTOC();
+      renderContentHighlights();
+
+      if (isInitialLoad) {
+        isInitialLoad = false;
+        const savedY = localStorage.getItem(KEY_SCROLL);
+        if (savedY) {
+          window.scrollTo({ top: parseFloat(savedY), behavior: 'instant' });
+        }
       }
     }
 
@@ -1082,31 +1113,39 @@ class BookReaderHandler(BaseHTTPRequestHandler):
         super().__init__(*args, **kwargs)
 
     def do_GET(self) -> None:  # noqa: N802
-        if self.path in ("/", "/index.html"):
+        clean_path = self.path.split("?")[0]
+
+        if clean_path in ("/", "/index.html"):
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
             self.wfile.write(READER_HTML.encode("utf-8"))
 
-        elif self.path == "/api/status":
+        elif clean_path in ("/status.json", "/api/status"):
             stats = get_translation_stats(self.translations_dir)
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.end_headers()
             self.wfile.write(json.dumps(stats).encode("utf-8"))
 
-        elif self.path == "/api/book":
+        elif clean_path in ("/sri_ramcharitmanas_russian_edition.md", "/api/book"):
             combined_file = self.translations_dir / "sri_ramcharitmanas_russian_edition.md"
             markdown = combined_file.read_text(encoding="utf-8") if combined_file.exists() else ""
-            stats = get_translation_stats(self.translations_dir)
-            data = {
-                "markdown": markdown,
-                **stats,
-            }
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
-            self.end_headers()
-            self.wfile.write(json.dumps(data).encode("utf-8"))
+            if "api/book" in clean_path:
+                stats = get_translation_stats(self.translations_dir)
+                data = {
+                    "markdown": markdown,
+                    **stats,
+                }
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.end_headers()
+                self.wfile.write(json.dumps(data).encode("utf-8"))
+            else:
+                self.send_response(200)
+                self.send_header("Content-Type", "text/markdown; charset=utf-8")
+                self.end_headers()
+                self.wfile.write(markdown.encode("utf-8"))
 
         else:
             self.send_response(404)
