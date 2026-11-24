@@ -30,7 +30,7 @@ def test_get_translation_stats(tmp_path: Path) -> None:
     assert stats["total_source_pages"] == 1200
     assert stats["last_completed_page"] == 45
     assert stats["translated_pages_count"] == 45
-    assert stats["percentage"] == 3.8
+    assert stats["percentage"] == 3.75
     assert stats["chunks_count"] == 3
     assert stats["file_size"] > 0
 

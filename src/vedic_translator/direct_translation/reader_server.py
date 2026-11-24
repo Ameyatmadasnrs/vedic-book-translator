@@ -41,7 +41,7 @@ def get_translation_stats(translations_dir: Path) -> dict[str, Any]:
         else:
             break
 
-    percentage = round((last_completed_page / TOTAL_SOURCE_PAGES) * 100, 1)
+    percentage = round((last_completed_page / TOTAL_SOURCE_PAGES) * 100, 2)
 
     return {
         "total_source_pages": TOTAL_SOURCE_PAGES,

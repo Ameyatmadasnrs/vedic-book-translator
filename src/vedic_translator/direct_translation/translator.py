@@ -158,18 +158,41 @@ def translate_pdf_chunk(
         logger.info(
             f"Requesting direct translation from model {model_name} for pages {start_page}–{end_page}..."
         )
-        response = client.models.generate_content(
-            model=model_name,
-            contents=[uploaded_file, working_prompt],
-            config=types.GenerateContentConfig(
-                system_instruction=master_prompt,
-                temperature=temperature,
-            ),
-        )
-        translation_text = response.text or ""
+        backoffs = [5, 10, 20, 30]
+        max_attempts = len(backoffs) + 1
+        response = None
+        for attempt in range(1, max_attempts + 1):
+            try:
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=[uploaded_file, working_prompt],
+                    config=types.GenerateContentConfig(
+                        system_instruction=master_prompt,
+                        temperature=temperature,
+                    ),
+                )
+                break
+            except Exception as e:
+                err_str = str(e)
+                if (
+                    "503" in err_str
+                    or "UNAVAILABLE" in err_str
+                    or "429" in err_str
+                    or "RESOURCE_EXHAUSTED" in err_str
+                ) and attempt < max_attempts:
+                    wait_time = backoffs[attempt - 1]
+                    logger.warning(
+                        f"Gemini API transient error (attempt {attempt}/{max_attempts}): {e}. "
+                        f"Retrying in {wait_time}s..."
+                    )
+                    time.sleep(wait_time)
+                else:
+                    raise
+
+        translation_text = response.text if response and response.text else ""
         duration = time.perf_counter() - start_time
 
-        if hasattr(response, "usage_metadata") and response.usage_metadata:
+        if response and hasattr(response, "usage_metadata") and response.usage_metadata:
             input_tokens = getattr(response.usage_metadata, "prompt_token_count", None)
             output_tokens = getattr(response.usage_metadata, "candidates_token_count", None)
 
