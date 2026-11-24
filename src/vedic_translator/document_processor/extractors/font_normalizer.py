@@ -15,6 +15,12 @@ from collections.abc import Callable
 
 # Multi-glyph structural ligatures and stem combinations
 CHANAKYA_PRE_REPLACEMENTS: list[tuple[str, str]] = [
+    # Metrical prefix abbreviation combinations (Doha, Chaupai, Chhanda, Soratha)
+    ("ŒÙ0", "दो०"),
+    ("øı0", "चौ०"),
+    ("¿¢U0", "छं०"),
+    ("¿¢0", "छं०"),
+    ("‚Ù0", "सो०"),
     # Two-part split matras (Ê +  -> ो, Ê + \uf8ff -> ो, Ê + Ò -> ौ)
     ("Ê\uf8ff", "ो"),
     ("Ê", "ो"),
@@ -38,7 +44,7 @@ CHANAKYA_PRE_REPLACEMENTS: list[tuple[str, str]] = [
     ("ûÊ", "त्त"),
     ("û", "त्त"),
     # Sra
-    ("dﬂ", "स्र्व"),
+    ("dﬂ", "स्रव"),
     ("d", "स्र"),
     # Shva
     ("EÊ", "श्वा"),
@@ -331,6 +337,7 @@ CHANAKYA_GLYPH_MAP: dict[str, str] = {
     "H": "॥",
     "˘": "ऽ",
     "˜": "्",
+    "ó": "—",
     "Ô": "",
     "U": "",
     "§": "",
@@ -359,6 +366,8 @@ _MATRAS = "[\u093e-\u094c\u0901\u0902]"
 
 _CLUSTER = f"(?:{_BASE_CONS}{_VIRAMA})*{_BASE_CONS}{_RAKAR}?"
 _CHHOTI_I_PAT = re.compile(f"Á({_CLUSTER})")
+_CHHOTI_I_NASAL_PAT = re.compile(f"®({_CLUSTER})")
+_REPH_CHHOTI_I_PAT = re.compile(f"Ì({_CLUSTER})")
 _REPH_PAT = re.compile(f"({_CLUSTER})({_MATRAS}*)[¸Z]")
 
 
@@ -460,7 +469,7 @@ class ChanakyaConverter(BaseFontConverter):
         # Phase 2: Convert single glyphs first
         out: list[str] = []
         for c in s:
-            if c in ("Á", "¸", "Z"):
+            if c in ("Á", "®", "Ì", "¸", "Z"):
                 out.append(c)
             elif c in CHANAKYA_GLYPH_MAP:
                 out.append(CHANAKYA_GLYPH_MAP[c])
@@ -470,8 +479,13 @@ class ChanakyaConverter(BaseFontConverter):
                 out.append(c)
         s = "".join(out)
 
-        # Phase 3: Pre-base Matra 'Á' (Chhoti-I) Reordering
+        # Phase 3: Pre-base Matra Reordering
+        # 3a: Standard Chhoti-I ('Á')
         s = _CHHOTI_I_PAT.sub(r"\1ि", s)
+        # 3b: Chhoti-I with Anusvara ('®') -> e.g. तब®ह -> तबहिं, ®स -> सिं
+        s = _CHHOTI_I_NASAL_PAT.sub(r"\1िं", s)
+        # 3c: Combined Reph + Chhoti-I ('Ì') -> e.g. निÌमत -> निर्मित, समर्पि
+        s = _REPH_CHHOTI_I_PAT.sub(r"र्\1ि", s)
 
         # Phase 4: Post-base Reph ('¸' or 'Z') Reordering
         s = _REPH_PAT.sub(r"र्\1\2", s)

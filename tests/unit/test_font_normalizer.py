@@ -95,6 +95,38 @@ class TestChanakyaConverter:
         assert converter.convert("∑§Ê\uf8ff") == "को"
         assert converter.convert("∑§ÊÒ") == "कौ"
 
+    def test_metrical_marker_ligatures(self, converter: ChanakyaConverter) -> None:
+        # Chanakya 8-bit meter prefixes must resolve to Devanagari abbreviation + em-dash
+        assert converter.convert("ŒÙ0ó") == "दो०—"
+        assert converter.convert("øı0ó") == "चौ०—"
+        assert converter.convert("¿¢U0ó") == "छं०—"
+        assert converter.convert("‚Ù0ó") == "सो०—"
+
+    def test_pre_base_chhoti_i_with_anusvara(self, converter: ChanakyaConverter) -> None:
+        # Glyph '®' (0xAE) represents pre-base Chhoti-I with Anusvara (िं)
+        assert converter.convert("Ã’®„U") == "तबहिं"
+        assert converter.convert("¬ÈL§·®‚„U") == "पुरुषसिंह"
+        assert converter.convert("∑Î§¬Ê®‚œÈ") == "कृपासिंधु"
+        assert converter.convert("ÁøÃﬂ®„U") == "चितवहिं"
+        assert converter.convert("’Ëø®„U") == "बीचहिं"
+        assert converter.convert("Ÿ®„U") == "नहिं"
+        assert converter.convert("∞∑§®„U") == "एकहिं"
+        assert converter.convert("‚⁄UŸ®„U") == "सरनहिं"
+
+    def test_pre_base_reph_with_chhoti_i(self, converter: ChanakyaConverter) -> None:
+        # Glyph 'Ì' (0xCC) represents combined pre-base Reph + Chhoti-I (र्...ि)
+        assert converter.convert("Á’Áœ ÁŸÌ◊Ã") == "बिधि निर्मित"
+        assert converter.convert("•ÊÿÈœ ‚’¸ ‚◊Ì¬") == "आयुध सर्ब समर्पि"
+        assert (
+            converter.convert("’˝rÊÔÊ¢«U ÁŸ∑§ÊÿÊ ÁŸÌ◊Ã ◊ÊÿÊ ⁄UÙ◊ ⁄UÙ◊ ¬˝ÁÃ ’\uf8ffŒ ∑§„ÒU–")
+            == "ब्रह्मांड निकाया निर्मित माया रोम रोम प्रति बेद कहै।"
+        )
+
+    def test_sravahi_regression(self, converter: ChanakyaConverter) -> None:
+        # Raw Chanakya sequence 'dﬂÁ„U¢U' on page 217 must produce 'स्रवहिं', not 'स्र्वहिं'
+        assert converter.convert("dﬂÁ„U¢U") == "स्रवहिं"
+        assert converter.convert("dﬂ") == "स्रव"
+
 
 class TestNalandaConverter:
     """Tests for Nalanda IAST Roman transliteration converter."""

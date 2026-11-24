@@ -23,10 +23,26 @@ from vedic_translator.document_processor.segmenter.relationships.profiles import
 )
 
 DEV_METRICAL_PREFIXES = (
+    "दो०—",
+    "चौ०—",
+    "सो०—",
+    "छं०—",
+    "दो०-",
+    "चौ०-",
+    "सो०-",
+    "छं०-",
+    "दो0—",
+    "चौ0—",
+    "सो0—",
+    "छं0—",
     "दो0ó",
     "चौ0ó",
     "सो0ó",
     "छं0ó",
+    "दो०",
+    "चौ०",
+    "सो०",
+    "छं०",
     "श्लोक",
     "सोरठा",
     "छन्द",
@@ -145,8 +161,16 @@ class RuleBasedRelationshipResolver(IRelationshipResolver):
                             current_vu
                             and current_vu.unit_type == VerseUnitType.CHAUPAI
                             and verse_num
+                            and (verse_num.isdigit() and int(verse_num) <= 20)
                         ):
                             unit_type = VerseUnitType.CHAUPAI
+                        elif (
+                            current_vu
+                            and current_vu.unit_type == VerseUnitType.CHHANDA
+                            and verse_num
+                            and (verse_num.isdigit() and int(verse_num) <= 20)
+                        ):
+                            unit_type = VerseUnitType.CHHANDA
                         elif any(
                             kw in b_text for kw in ("नमः", "स्वाहा", "वषट्", "हुम्", "वौषट्", "फट्")
                         ):
@@ -155,7 +179,10 @@ class RuleBasedRelationshipResolver(IRelationshipResolver):
                             unit_type = VerseUnitType.GENERIC_VERSE
 
                     canonical_id = self._build_canonical_id(
-                        section, verse_num, unit_type, len(verse_units) + 1
+                        section,
+                        verse_num,
+                        unit_type,
+                        len(verse_units) + 1,
                     )
 
                     evidence: list[str] = []
@@ -182,7 +209,10 @@ class RuleBasedRelationshipResolver(IRelationshipResolver):
                             evidence=evidence,
                             reasoning="New verse initiated by Devanagari verse block.",
                         ),
-                        metadata={"section_index": section.section_index},
+                        metadata={
+                            "section_index": section.section_index,
+                            "detected_verse_num": verse_num,
+                        },
                     )
                     verse_units.append(current_vu)
                     pending_units.append(current_vu)
@@ -197,24 +227,29 @@ class RuleBasedRelationshipResolver(IRelationshipResolver):
                         )
                         self._link_block_to_vu(block, current_vu)
                         # If continuation line contains the danda verse anchor (e.g. ॥ 188 ॥), update canonical ID
-                        if verse_num and (
-                            not current_vu.canonical_id
-                            or not current_vu.canonical_id.endswith(verse_num)
-                        ):
-                            current_vu.canonical_id = self._build_canonical_id(
-                                section, verse_num, current_vu.unit_type, len(verse_units)
-                            )
-                            if num_token:
-                                current_vu.confidence.evidence.append(
-                                    f"Verse anchor '{num_token}' detected"
+                        if verse_num:
+                            current_vu.metadata["detected_verse_num"] = verse_num
+                            if (
+                                not current_vu.canonical_id
+                                or not current_vu.canonical_id.endswith(verse_num)
+                            ):
+                                current_vu.canonical_id = self._build_canonical_id(
+                                    section,
+                                    verse_num,
+                                    current_vu.unit_type,
+                                    len(verse_units),
                                 )
-                                if (
-                                    "exact_numeric_anchor"
-                                    not in current_vu.confidence.provenance_rules
-                                ):
-                                    current_vu.confidence.provenance_rules.append(
-                                        "exact_numeric_anchor"
+                                if num_token:
+                                    current_vu.confidence.evidence.append(
+                                        f"Verse anchor '{num_token}' detected"
                                     )
+                                    if (
+                                        "exact_numeric_anchor"
+                                        not in current_vu.confidence.provenance_rules
+                                    ):
+                                        current_vu.confidence.provenance_rules.append(
+                                            "exact_numeric_anchor"
+                                        )
 
                 last_verse_block = block
                 continue
@@ -398,8 +433,10 @@ class RuleBasedRelationshipResolver(IRelationshipResolver):
                 continue
 
         # ---------------------------------------------------------------------
-        # Final Pass: Score Calibration & Incompleteness Invariants
+        # Final Pass: Target Doha Convention & Score Calibration
         # ---------------------------------------------------------------------
+        self._apply_target_doha_convention(verse_units, section)
+
         for vu in verse_units:
             self._finalize_verse_unit(vu, blocks_by_id, active_profile)
 
@@ -586,6 +623,7 @@ class RuleBasedRelationshipResolver(IRelationshipResolver):
         verse_num: str | None,
         unit_type: VerseUnitType,
         sequence_num: int,
+        target_doha_num: str | None = None,
     ) -> str:
         """Construct a deterministic canonical identifier for the verse unit."""
         sec_idx = section.section_index
@@ -599,8 +637,95 @@ class RuleBasedRelationshipResolver(IRelationshipResolver):
         }.get(unit_type, "V.")
 
         if verse_num:
+            if target_doha_num:
+                if unit_type == VerseUnitType.CHAUPAI:
+                    return f"{sec_idx}.{target_doha_num}.{verse_num}"
+                if unit_type == VerseUnitType.CHHANDA:
+                    return f"{sec_idx}.{target_doha_num}.chhanda.{verse_num}"
+                if unit_type == VerseUnitType.SORATHA:
+                    return f"{sec_idx}.{target_doha_num}.soratha.{verse_num}"
+                if unit_type == VerseUnitType.SLOKA:
+                    return f"{sec_idx}.{target_doha_num}.sloka.{verse_num}"
+                return f"{sec_idx}.{target_doha_num}.{verse_num}"
             return f"{sec_idx}.{verse_num}"
         return f"{prefix} {sec_idx}.{sequence_num}"
+
+    def _apply_target_doha_convention(
+        self,
+        verse_units: list[VerseUnit],
+        section: Section,
+    ) -> None:
+        """Apply Convention A (Target Doha anchoring) to all verse units in section.
+
+        In Ramcharita Manas:
+        - Dohas carry the primary structural numbering of the cadence (e.g. 188, 189, 190, 191...).
+        - Chaupais, Chhandas, and other stanzas between Doha N and Doha N+1 lead up to
+          and belong to the target Doha N+1.
+        - If a subsequent Doha is present in the section, units anchor to that upcoming Doha number.
+        - If the section or slice ends before the upcoming Doha (e.g. Chhandas following Doha 191
+          where Doha 192 is on the next page), units anchor to (last_doha_num + 1).
+        - If no Doha exists in the section, canonical IDs remain unchanged.
+        """
+        sec_idx = section.section_index
+
+        # Pass 1: Identify all Doha / Soratha anchor units and their numbers
+        doha_indices: dict[int, str] = {}
+        for idx, vu in enumerate(verse_units):
+            if vu.unit_type in (VerseUnitType.DOHA, VerseUnitType.SORATHA):
+                vnum = vu.metadata.get("detected_verse_num")
+                if not vnum and vu.canonical_id:
+                    parts = vu.canonical_id.split(".")
+                    if len(parts) >= 2 and parts[-1].isdigit():
+                        vnum = parts[-1]
+                if vnum:
+                    doha_indices[idx] = vnum
+
+        if not doha_indices:
+            return
+
+        # Pass 2: Re-anchor each verse unit according to Target Doha convention
+        for idx, vu in enumerate(verse_units):
+            if vu.unit_type in (VerseUnitType.DOHA, VerseUnitType.SORATHA):
+                d_num = doha_indices.get(idx)
+                if d_num:
+                    vu.canonical_id = f"{sec_idx}.{d_num}"
+                continue
+
+            # Look forward for the next Doha anchor in this section
+            target_doha: str | None = None
+            for j in range(idx + 1, len(verse_units)):
+                if j in doha_indices:
+                    target_doha = doha_indices[j]
+                    break
+
+            # If not found forward, look backward for the last preceding Doha
+            # and project target_doha = preceding + 1
+            if not target_doha:
+                for k in range(idx - 1, -1, -1):
+                    if k in doha_indices:
+                        prev_d = doha_indices[k]
+                        if prev_d.isdigit():
+                            target_doha = str(int(prev_d) + 1)
+                        else:
+                            target_doha = prev_d
+                        break
+
+            # Determine local verse number
+            vnum = vu.metadata.get("detected_verse_num")
+            if not vnum and vu.canonical_id:
+                parts = vu.canonical_id.split(".")
+                if parts[-1].isdigit():
+                    vnum = parts[-1]
+            if not vnum:
+                vnum = str(idx + 1)
+
+            vu.canonical_id = self._build_canonical_id(
+                section=section,
+                verse_num=vnum,
+                unit_type=vu.unit_type,
+                sequence_num=idx + 1,
+                target_doha_num=target_doha,
+            )
 
     def _link_block_to_vu(self, block: Block, vu: VerseUnit) -> None:
         """Establish bidirectional relationship pointer from block to verse unit."""

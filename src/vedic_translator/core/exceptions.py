@@ -90,6 +90,25 @@ class ProviderTimeoutError(ProviderError):
     pass
 
 
+# Storage & State Machine
+class StorageError(VedicTranslatorError):
+    """Raised when SQLite storage or database operations fail."""
+
+    pass
+
+
+class InvalidStateTransitionError(StorageError):
+    """Raised when an illegal job or unit state transition is attempted."""
+
+    pass
+
+
+class RecordNotFoundError(StorageError):
+    """Raised when a requested database entity does not exist."""
+
+    pass
+
+
 # Pipeline Execution
 class PipelineError(VedicTranslatorError):
     """Raised when a translation pipeline stage fails."""

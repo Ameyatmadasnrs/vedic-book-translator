@@ -1,0 +1,25 @@
+Translate the attached PDF fragment completely into Russian for a published Russian book edition, strictly adhering to the Master Translation Instructions.
+
+Execution requirements:
+
+1. POETIC AND PROSE TEXT:
+   - Translate all content sequentially from the first page to the very last page of the fragment without omitting, truncating, or summarizing any section.
+   - For narrative/poetic verses: translate into elevated literary Russian. Do NOT reproduce original verse lines in Devanagari/Awadhi/Hindi, and do NOT include IAST transliteration or phonetic transcriptions. Do NOT display verse numbers or names of poetic forms (no Doha, Chaupai, Chhand, Soratha, Shloka; no numbers like (1), (2), (188)).
+   - For introductory/preliminary materials (Publisher's Note, Table of Contents, Ritual Rules/Procedure of Reciting, Karanyāsa, Aṅganyāsa, Dhyāna): translate all sections completely and faithfully into Russian.
+
+2. COMMENTARY AND FOOTNOTES:
+   - Translate commentary and footnotes faithfully into Russian, set apart as blockquotes (> **Примечание:** ...).
+   - Preserve Sanskrit words, expressions, quotations, and technical terms genuinely present in the original commentary or footnotes, retaining their original script or transliteration where appropriate.
+   - Do NOT remove Sanskrit terminology merely because it is Sanskrit.
+   - Do NOT introduce Sanskrit words absent from the source.
+   - Do NOT invent or expand commentary if none is printed on the page.
+
+3. STRUCTURE & FORMAT:
+   - Chapter and section headings in Russian (# for Book/Canto title, ## for major sections/subdivisions).
+   - Natural paragraph and stanza separation with blank lines.
+   - Clean reading flow: no technical labels, no poetic meter names, no verse numbering in the narrative.
+   - Clear visual distinction between the main text and genuine commentary/footnotes.
+
+4. ABSOLUTE COMPLETENESS:
+   - Process EVERY single page in the PDF fragment from page 1 to the last page. Do not stop halfway.
+   - Mark any physically illegible text as [неразборчивый фрагмент].

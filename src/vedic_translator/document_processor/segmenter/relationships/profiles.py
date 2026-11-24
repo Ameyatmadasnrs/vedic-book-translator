@@ -20,20 +20,43 @@ def create_ramcharita_manas_profile() -> RelationshipProfile:
             r"\b(?:Do\.|So\.|Cau\.|Chh\.|Sloka:)\s*(\d+)",
         ],
         metrical_marker_patterns={
+            # Standard normalized Gita Press forms (Devanagari abbreviation + em-dash)
+            "दो०—": VerseUnitType.DOHA.value,
+            "चौ०—": VerseUnitType.CHAUPAI.value,
+            "सो०—": VerseUnitType.SORATHA.value,
+            "छं०—": VerseUnitType.CHHANDA.value,
+            # Hyphen and alternate dash variants
+            "दो०-": VerseUnitType.DOHA.value,
+            "चौ०-": VerseUnitType.CHAUPAI.value,
+            "सो०-": VerseUnitType.SORATHA.value,
+            "छं०-": VerseUnitType.CHHANDA.value,
+            "दो0—": VerseUnitType.DOHA.value,
+            "चौ0—": VerseUnitType.CHAUPAI.value,
+            "सो0—": VerseUnitType.SORATHA.value,
+            "छं0—": VerseUnitType.CHHANDA.value,
+            # Legacy font conversion artifacts (preserved for backward compatibility)
             "दो0ó": VerseUnitType.DOHA.value,
             "चौ0ó": VerseUnitType.CHAUPAI.value,
             "सो0ó": VerseUnitType.SORATHA.value,
             "छं0ó": VerseUnitType.CHHANDA.value,
+            # Bare abbreviations without trailing dash
+            "दो०": VerseUnitType.DOHA.value,
+            "चौ०": VerseUnitType.CHAUPAI.value,
+            "सो०": VerseUnitType.SORATHA.value,
+            "छं०": VerseUnitType.CHHANDA.value,
+            # Traditional full name headings
             "श्लोक": VerseUnitType.SLOKA.value,
             "दोहा": VerseUnitType.DOHA.value,
             "चौपाई": VerseUnitType.CHAUPAI.value,
             "सोरठा": VerseUnitType.SORATHA.value,
             "छन्द": VerseUnitType.CHHANDA.value,
+            # IAST metrical markers
             "Do.:": VerseUnitType.DOHA.value,
             "Cau.:": VerseUnitType.CHAUPAI.value,
             "So.:": VerseUnitType.SORATHA.value,
             "Chh.:": VerseUnitType.CHHANDA.value,
             "Sloka:": VerseUnitType.SLOKA.value,
+            "Chaṁ.:": VerseUnitType.CHHANDA.value,
         },
         translation_anchor_patterns=[
             r"^\(([0-9]+(?:\s*[A-Z])?)\)",

@@ -15,6 +15,11 @@ from vedic_translator.document_processor.extractors.font_normalizer import (
     NalandaConverter,
 )
 from vedic_translator.document_processor.extractors.pdf import PDFExtractor
+from vedic_translator.document_processor.extractors.text_cleaner import (
+    sanitize_translation,
+    sanitize_transliteration,
+    sanitize_verse_text,
+)
 from vedic_translator.document_processor.extractors.txt import TXTExtractor
 
 __all__ = [
@@ -30,4 +35,7 @@ __all__ = [
     "ChanakyaConverter",
     "NalandaConverter",
     "LegacyFontNormalizer",
+    "sanitize_verse_text",
+    "sanitize_transliteration",
+    "sanitize_translation",
 ]

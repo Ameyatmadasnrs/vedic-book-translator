@@ -594,3 +594,250 @@ def test_defect_6_legitimate_composite_translation_local_proximity() -> None:
         assert "composite_translation_anchor" in u.confidence.provenance_rules
         assert u.is_complete is True
         assert u.confidence.routing_action == RoutingAction.AUTO_ACCEPTED
+
+
+def test_chhanda_stanzas_meter_inheritance() -> None:
+    """Verify that subsequent Chhanda stanzas inherit CHHANDA from the opening stanza."""
+    chh1 = make_block(
+        BlockType.VERSE_DEVANAGARI,
+        "छं०—भए प्रगट कृपाला दीनदयाला कौसल्या हितकारी। अद्भुत रूप बिचारी॥ 1॥",
+        seq=1,
+    )
+    t1 = make_block(
+        BlockType.TRANSLATION,
+        "(1) The gracious Lord appeared, compassionate to the lowly...",
+        seq=2,
+    )
+    chh2 = make_block(
+        BlockType.VERSE_DEVANAGARI,
+        "कह दुइ कर जोरी अस्तुति तोरी केहि बिधि करौं अनंता। भयउ प्रगट श्रीकंता॥ 2॥",
+        seq=3,
+    )
+    t2 = make_block(
+        BlockType.TRANSLATION,
+        "(2) Folding her hands the mother said, How would I adore You...",
+        seq=4,
+    )
+    chh3 = make_block(
+        BlockType.VERSE_DEVANAGARI,
+        "ब्रह्मांड निकाया निर्मित माया रोम रोम प्रति बेद कहै। जेहि प्रकार सुत प्रेम लहै॥ 3॥",
+        seq=5,
+    )
+    t3 = make_block(
+        BlockType.TRANSLATION,
+        "(3) Innumerable universes are created by Your delusion...",
+        seq=6,
+    )
+    doha192 = make_block(
+        BlockType.VERSE_DEVANAGARI,
+        "दो०—निज इच्छा निर्मित तनु माया गुन गो पार॥ 192॥",
+        seq=7,
+    )
+    t_doha = make_block(
+        BlockType.TRANSLATION,
+        "(192) The Lord whose body is assumed by His own will...",
+        seq=8,
+    )
+
+    section = Section(section_index=1, blocks=[chh1, t1, chh2, t2, chh3, t3, doha192, t_doha])
+    resolver = RuleBasedRelationshipResolver(default_profile=RAMCHARITA_MANAS_PROFILE)
+    units = resolver.resolve_relationships(section)
+
+    assert len(units) == 4
+    assert units[0].unit_type == VerseUnitType.CHHANDA
+    assert units[1].unit_type == VerseUnitType.CHHANDA  # Inherited
+    assert units[2].unit_type == VerseUnitType.CHHANDA  # Inherited
+    assert units[3].unit_type == VerseUnitType.DOHA  # Not inherited, has explicit doha marker
+
+
+def test_unique_canonical_ids_with_governing_doha() -> None:
+    """Verify that Chaupais and Chhandas receive unique IDs scoped by their governing Doha."""
+    doha189 = make_block(
+        BlockType.VERSE_DEVANAGARI,
+        "दो०—तब अदृस्य भए पावक सकल सभहि समुझाइ॥ 189॥",
+        seq=1,
+    )
+    c1 = make_block(
+        BlockType.VERSE_DEVANAGARI,
+        "चौ०—तबहिं रायँ प्रिय नारि बोलाईं॥ 1॥",
+        seq=2,
+    )
+    doha190 = make_block(
+        BlockType.VERSE_DEVANAGARI,
+        "दो०—जोग लगन ग्रह बार तिथि सकल भए अनुकूल॥ 190॥",
+        seq=3,
+    )
+    c2 = make_block(
+        BlockType.VERSE_DEVANAGARI,
+        "चौ०—नौमी तिथि मधु मास पुनीता॥ 1॥",
+        seq=4,
+    )
+    doha191 = make_block(
+        BlockType.VERSE_DEVANAGARI,
+        "दो०—सुर समूह बिनती करि पहुँचे निज निज धाम॥ 191॥",
+        seq=5,
+    )
+    chh1 = make_block(
+        BlockType.VERSE_DEVANAGARI,
+        "छं०—भए प्रगट कृपाला दीनदयाला कौसल्या हितकारी॥ 1॥",
+        seq=6,
+    )
+
+    section = Section(section_index=1, blocks=[doha189, c1, doha190, c2, doha191, chh1])
+    resolver = RuleBasedRelationshipResolver(default_profile=RAMCHARITA_MANAS_PROFILE)
+    units = resolver.resolve_relationships(section)
+
+    assert len(units) == 6
+    assert units[0].canonical_id == "1.189"
+    assert units[1].canonical_id == "1.190.1"  # Chaupai 1 belongs to target Doha 190
+    assert units[2].canonical_id == "1.190"
+    assert units[3].canonical_id == "1.191.1"  # Chaupai 1 belongs to target Doha 191
+    assert units[4].canonical_id == "1.191"
+    assert units[5].canonical_id == "1.192.chhanda.1"  # Chhanda 1 belongs to target Doha 192
+
+
+def test_convention_a_target_doha_anchoring_synthetic() -> None:
+    """Verify Convention A anchoring for Chaupais and Chhandas:
+    - Chaupais between Doha N and Doha N+1 belong to target Doha N+1.
+    - Chhandas following Doha 191 and preceding Doha 192 belong to target Doha 192.
+    - Full 19-unit sequence is unique and continuous across page boundaries.
+    """
+    blocks = [
+        # Doha 188
+        make_block(BlockType.VERSE_DEVANAGARI, "दो०—कौसल्यादि नारि प्रिय सब आचरन पुनीत॥ 188॥", seq=1),
+        # Chaupais leading up to Doha 189
+        make_block(BlockType.VERSE_DEVANAGARI, "चौ०—एक बार भूपति मन माहीं॥ 1॥", seq=2),
+        make_block(BlockType.VERSE_DEVANAGARI, "निज दुख सुख सब गुरहि सुनायउ॥ 2॥", seq=3),
+        make_block(BlockType.VERSE_DEVANAGARI, "सृंगी रिषिहि बसिष्ठ बोलावा॥ 3॥", seq=4),
+        make_block(BlockType.VERSE_DEVANAGARI, "जो बसिष्ठ कछु हृदयँ बिचारा॥ 4॥", seq=5),
+        # Doha 189
+        make_block(BlockType.VERSE_DEVANAGARI, "दो०—तब अदृस्य भए पावक सकल सभहि समुझाइ॥ 189॥", seq=6),
+        # Chaupais leading up to Doha 190
+        make_block(BlockType.VERSE_DEVANAGARI, "चौ०—तबहिं रायँ प्रिय नारि बोलाईं॥ 1॥", seq=7),
+        make_block(BlockType.VERSE_DEVANAGARI, "कैकेई कहँ नृप सो दयऊ॥ 2॥", seq=8),
+        make_block(BlockType.VERSE_DEVANAGARI, "एहि बिधि गर्भसहित सब नारी॥ 3॥", seq=9),
+        make_block(BlockType.VERSE_DEVANAGARI, "मंदिर महँ सब राजहिं रानीं॥ 4॥", seq=10),
+        # Doha 190
+        make_block(BlockType.VERSE_DEVANAGARI, "दो०—जोग लगन ग्रह बार तिथि सकल भए अनुकूल॥ 190॥", seq=11),
+        # Chaupais leading up to Doha 191
+        make_block(BlockType.VERSE_DEVANAGARI, "चौ०—नौमी तिथि मधु मास पुनीता॥ 1॥", seq=12),
+        make_block(BlockType.VERSE_DEVANAGARI, "सीतल मंद सुरभि बह बाऊ॥ 2॥", seq=13),
+        make_block(BlockType.VERSE_DEVANAGARI, "सो अवसर बिरंचि जब जाना॥ 3॥", seq=14),
+        make_block(BlockType.VERSE_DEVANAGARI, "बरषहिं सुमन सुअंजुलि साजी॥ 4॥", seq=15),
+        # Doha 191
+        make_block(BlockType.VERSE_DEVANAGARI, "दो०—सुर समूह बिनती करि पहुँचे निज निज धाम॥ 191॥", seq=16),
+        # Chhandas leading up to Doha 192
+        make_block(BlockType.VERSE_DEVANAGARI, "छं०—भए प्रगट कृपाला दीनदयाला कौसल्या हितकारी॥ 1॥", seq=17),
+        make_block(BlockType.VERSE_DEVANAGARI, "कह दुइ कर जोरी अस्तुति तोरी केहि बिधि करौं अनंता॥ 2॥", seq=18),
+        make_block(BlockType.VERSE_DEVANAGARI, "ब्रह्मांड निकाया निर्मित माया रोम रोम प्रति बेद कहै॥ 3॥", seq=19),
+    ]
+    # Set page metadata across page boundaries 215 -> 216 -> 217 -> 218
+    for b in blocks[0:5]:
+        b.metadata["page"] = 215
+    for b in blocks[5:11]:
+        b.metadata["page"] = 216
+    for b in blocks[11:16]:
+        b.metadata["page"] = 217
+    for b in blocks[16:19]:
+        b.metadata["page"] = 218
+
+    section = Section(section_index=1, blocks=blocks)
+    resolver = RuleBasedRelationshipResolver(default_profile=RAMCHARITA_MANAS_PROFILE)
+    units = resolver.resolve_relationships(section)
+
+    assert len(units) == 19
+
+    expected_ids = [
+        "1.188",
+        "1.189.1",
+        "1.189.2",
+        "1.189.3",
+        "1.189.4",
+        "1.189",
+        "1.190.1",
+        "1.190.2",
+        "1.190.3",
+        "1.190.4",
+        "1.190",
+        "1.191.1",
+        "1.191.2",
+        "1.191.3",
+        "1.191.4",
+        "1.191",
+        "1.192.chhanda.1",
+        "1.192.chhanda.2",
+        "1.192.chhanda.3",
+    ]
+
+    actual_ids = [u.canonical_id for u in units]
+    assert actual_ids == expected_ids
+    assert len(set(actual_ids)) == 19
+
+    # Unit types check
+    assert units[0].unit_type == VerseUnitType.DOHA
+    for u in units[1:5]:
+        assert u.unit_type == VerseUnitType.CHAUPAI
+    assert units[5].unit_type == VerseUnitType.DOHA
+    for u in units[6:10]:
+        assert u.unit_type == VerseUnitType.CHAUPAI
+    assert units[10].unit_type == VerseUnitType.DOHA
+    for u in units[11:15]:
+        assert u.unit_type == VerseUnitType.CHAUPAI
+    assert units[15].unit_type == VerseUnitType.DOHA
+    for u in units[16:19]:
+        assert u.unit_type == VerseUnitType.CHHANDA
+
+
+def test_convention_a_pages_215_218_complete_sequence_and_uniqueness() -> None:
+    """Verify Convention A across pages 215-218 of Ramcharita_Manas_Gita_Press.pdf:
+    - 19 VerseUnits in exact continuous sequence across page boundaries (215->216->217->218).
+    - Uniqueness of every canonical ID.
+    - Correct target-Doha anchoring for Chaupai and Chhanda.
+    """
+    from pathlib import Path
+
+    from vedic_translator.document_processor.extractors.pdf import PDFExtractor
+
+    pdf_path = Path("data/test_books/Ramcharita_Manas_Gita_Press.pdf")
+    if not pdf_path.exists():
+        pytest.skip("Test book PDF not available in workspace")
+
+    doc = PDFExtractor().extract(pdf_path)
+    blocks_215_218 = [
+        b
+        for ch in doc.chapters
+        for s in ch.sections
+        for b in s.blocks
+        if b.metadata.get("page") in {215, 216, 217, 218}
+    ]
+
+    section = Section(section_index=1, blocks=blocks_215_218)
+    resolver = RuleBasedRelationshipResolver(default_profile=RAMCHARITA_MANAS_PROFILE)
+    units = resolver.resolve_relationships(section)
+
+    assert len(units) == 19
+    actual_ids = [u.canonical_id for u in units]
+
+    expected_ids = [
+        "1.188",
+        "1.189.1",
+        "1.189.2",
+        "1.189.3",
+        "1.189.4",
+        "1.189",
+        "1.190.1",
+        "1.190.2",
+        "1.190.3",
+        "1.190.4",
+        "1.190",
+        "1.191.1",
+        "1.191.2",
+        "1.191.3",
+        "1.191.4",
+        "1.191",
+        "1.192.chhanda.1",
+        "1.192.chhanda.2",
+        "1.192.chhanda.3",
+    ]
+    assert actual_ids == expected_ids
+    assert len(set(actual_ids)) == 19
