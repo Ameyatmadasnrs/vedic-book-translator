@@ -278,17 +278,20 @@ READER_HTML = """<!DOCTYPE html>
     /* TOC items */
     .toc-item {
       display: block;
-      padding: 8px 10px;
+      padding: 7px 10px;
       color: var(--text);
       text-decoration: none;
       font-size: 0.88rem;
-      border-radius: 5px;
-      margin-bottom: 3px;
-      line-height: 1.4;
+      border-radius: 6px;
+      margin-bottom: 2px;
+      line-height: 1.35;
+      transition: background 0.15s, color 0.15s;
     }
     .toc-item:hover { background: var(--quote-bg); color: var(--accent); }
-    .toc-item.level-1 { font-weight: 600; margin-top: 10px; }
-    .toc-item.level-2 { padding-left: 18px; color: var(--text-muted); }
+    .toc-item.level-1 { font-weight: 700; margin-top: 12px; font-size: 0.95rem; color: var(--text); }
+    .toc-item.level-2 { font-weight: 600; padding-left: 14px; margin-top: 6px; color: var(--accent); font-size: 0.88rem; }
+    .toc-item.level-3 { padding-left: 28px; color: var(--text-muted); font-size: 0.82rem; }
+    .toc-item.level-3:hover { color: var(--text); }
 
     /* Bookmarks & Highlights list */
     .lib-card {
@@ -370,6 +373,7 @@ READER_HTML = """<!DOCTYPE html>
       line-height: 1.35;
       border-bottom: 1.5px solid var(--border);
       padding-bottom: 14px;
+      scroll-margin-top: 80px;
     }
 
     #content h2 {
@@ -377,6 +381,7 @@ READER_HTML = """<!DOCTYPE html>
       color: var(--accent);
       margin: 34px 0 16px;
       line-height: 1.35;
+      scroll-margin-top: 80px;
     }
 
     #content h3 {
@@ -384,6 +389,7 @@ READER_HTML = """<!DOCTYPE html>
       color: var(--text);
       margin: 26px 0 12px;
       line-height: 1.4;
+      scroll-margin-top: 80px;
     }
 
     #content p {
@@ -742,8 +748,11 @@ READER_HTML = """<!DOCTYPE html>
 
       let tocHtml = '';
       headings.forEach((h) => {
+        const text = h.textContent.trim();
+        if (!text) return;
+        if (text.startsWith('[') && text.endsWith(']')) return;
         const level = h.tagName.toLowerCase() === 'h1' ? '1' : (h.tagName.toLowerCase() === 'h2' ? '2' : '3');
-        tocHtml += `<a class="toc-item level-${level}" href="#${h.id}" onclick="onTocItemClick(event, '${h.id}')">${h.textContent}</a>`;
+        tocHtml += `<a class="toc-item level-${level}" href="#${h.id}" onclick="onTocItemClick(event, '${h.id}')">${text}</a>`;
       });
       tocList.innerHTML = tocHtml;
     }
@@ -753,7 +762,7 @@ READER_HTML = """<!DOCTYPE html>
       closeDrawer();
       const el = document.getElementById(id);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         setTimeout(saveReadingPosition, 500);
       }
     }
