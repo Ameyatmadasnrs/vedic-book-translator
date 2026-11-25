@@ -47,6 +47,7 @@ data/input/
 data/output/
 data/test_books/
 data/direct_translation/input_chunks/
+data/direct_translation/backups/
 *.log
 logs/
 

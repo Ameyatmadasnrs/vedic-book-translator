@@ -158,7 +158,7 @@ def translate_pdf_chunk(
         logger.info(
             f"Requesting direct translation from model {model_name} for pages {start_page}–{end_page}..."
         )
-        backoffs = [10, 15, 25, 35, 45, 60]
+        backoffs = [15, 30, 45, 60, 90, 120, 180, 240]
         max_attempts = len(backoffs) + 1
         response = None
         for attempt in range(1, max_attempts + 1):
