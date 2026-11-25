@@ -2,1105 +2,1758 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Шри Рамачаритаманаса</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Шри Рамачаритаманаса — Госвами Тулсидас | Полное русское издание</title>
+  <meta name="description" content="Полное русское издание поэмы «Шри Рамачаритаманаса» Госвами Тулсидаса. 7 канд, 218 глав, 39 остановок для молитвенного чтения, примечания и комментарии.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,500&family=Marcellus&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fbf9f5;
-      --card-bg: #ffffff;
-      --text: #2c2523;
-      --text-muted: #6b635c;
-      --accent: #8e3a10;
-      --accent-hover: #a84818;
-      --border: #e6dfd5;
-      --quote-bg: #f4ede3;
-      --quote-border: #b87333;
-      --sidebar-width: 330px;
-      --font-body: 'Literata', 'Merriweather', 'PT Serif', 'Georgia', serif;
-      --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      --hl-yellow: rgba(254, 240, 138, 0.7);
-      --hl-orange: rgba(254, 215, 170, 0.7);
-      --hl-green: rgba(187, 247, 208, 0.7);
-      --hl-blue: rgba(186, 230, 253, 0.7);
-    }
-
-    [data-theme="sepia"] {
-      --bg: #f4ebd9;
-      --card-bg: #ede1cb;
-      --text: #382c22;
-      --text-muted: #736353;
-      --accent: #823600;
-      --accent-hover: #9c4100;
-      --border: #d8c7ab;
-      --quote-bg: #e2d3b9;
-      --quote-border: #823600;
-      --hl-yellow: rgba(250, 204, 21, 0.55);
-      --hl-orange: rgba(251, 146, 60, 0.55);
-      --hl-green: rgba(134, 239, 172, 0.55);
-      --hl-blue: rgba(147, 197, 253, 0.55);
+      --bg-body: #f7f4ed;
+      --bg-surface: #ffffff;
+      --bg-surface-trans: rgba(255, 255, 255, 0.94);
+      --bg-card: #fdfbf7;
+      --bg-sidebar: #f2ece1;
+      --text-main: #24201d;
+      --text-muted: #6b635b;
+      --text-soft: #8f857b;
+      --border-color: #e2d9cb;
+      --border-soft: #ede6da;
+      --accent-sacred: #9e3223;
+      --accent-sacred-hover: #b53b2a;
+      --accent-gold: #c29033;
+      --accent-gold-soft: rgba(194, 144, 51, 0.15);
+      --accent-stop: #b84a28;
+      --accent-stop-bg: #faeee7;
+      --accent-stop-border: #f0c3b2;
+      --shadow-sm: 0 2px 6px rgba(40, 30, 20, 0.05);
+      --shadow-md: 0 4px 16px rgba(40, 30, 20, 0.08);
+      --shadow-lg: 0 10px 30px rgba(40, 30, 20, 0.12);
+      --font-body: 'Literata', Georgia, serif;
+      --font-header: 'Marcellus', 'Cinzel', serif;
+      --font-display: 'Cinzel', serif;
+      --content-max-width: 960px;
+      --content-font-size: 19px;
+      --content-line-height: 1.85;
+      --sidebar-width: 380px;
     }
 
     [data-theme="dark"] {
-      --bg: #181514;
-      --card-bg: #221f1d;
-      --text: #e6dfdb;
-      --text-muted: #a39891;
-      --accent: #e57c46;
-      --accent-hover: #f0905e;
-      --border: #38312e;
-      --quote-bg: #2b2522;
-      --quote-border: #e57c46;
-      --hl-yellow: rgba(161, 98, 7, 0.6);
-      --hl-orange: rgba(194, 65, 12, 0.6);
-      --hl-green: rgba(21, 128, 61, 0.6);
-      --hl-blue: rgba(29, 78, 216, 0.6);
+      --bg-body: #131518;
+      --bg-surface: #1b1e23;
+      --bg-surface-trans: rgba(27, 30, 35, 0.94);
+      --bg-card: #21252c;
+      --bg-sidebar: #17191d;
+      --text-main: #e2e1db;
+      --text-muted: #9e9ea3;
+      --text-soft: #70737a;
+      --border-color: #2c313a;
+      --border-soft: #23272e;
+      --accent-sacred: #df6451;
+      --accent-sacred-hover: #eb7765;
+      --accent-gold: #e2b467;
+      --accent-gold-soft: rgba(226, 180, 103, 0.15);
+      --accent-stop: #e6734c;
+      --accent-stop-bg: #2a1f1b;
+      --accent-stop-border: #523126;
+      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    [data-theme="sepia"] {
+      --bg-body: #f4ebd8;
+      --bg-surface: #faefe0;
+      --bg-surface-trans: rgba(250, 239, 224, 0.95);
+      --bg-card: #fef7ec;
+      --bg-sidebar: #ede1cb;
+      --text-main: #342820;
+      --text-muted: #726253;
+      --text-soft: #918172;
+      --border-color: #d8c9b2;
+      --border-soft: #e3d7c3;
+      --accent-sacred: #8e2b1b;
+      --accent-sacred-hover: #a83523;
+      --accent-gold: #b37f22;
+      --accent-gold-soft: rgba(179, 127, 34, 0.15);
+      --accent-stop: #a83e20;
+      --accent-stop-bg: #f5e4d7;
+      --accent-stop-border: #e6c1ad;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      background: var(--bg);
-      color: var(--text);
+      background-color: var(--bg-body);
+      color: var(--text-main);
       font-family: var(--font-body);
-      line-height: 1.8;
+      font-size: var(--content-font-size);
+      line-height: var(--content-line-height);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      transition: background 0.2s, color 0.2s;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* Top Bar */
-    #topbar {
+    /* Reading Progress Bar */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-sacred));
+      z-index: 1000;
+      transition: width 0.1s linear;
+    }
+
+    /* Top Navigation Bar */
+    header.top-bar {
       position: sticky;
       top: 0;
-      background: var(--card-bg);
-      border-bottom: 1px solid var(--border);
-      height: 56px;
-      padding: 0 16px;
+      z-index: 500;
+      background: var(--bg-surface-trans);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      height: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      z-index: 100;
-      font-family: var(--font-ui);
+      padding: 0 16px;
+      box-shadow: var(--shadow-sm);
     }
 
-    .bar-left, .bar-center, .bar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .book-title {
-      font-weight: 600;
-      font-size: 1rem;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 220px;
-    }
-
-    .btn {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      height: 36px;
-      padding: 0 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.88rem;
-      font-family: var(--font-ui);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: border-color 0.15s, color 0.15s, background 0.15s;
-    }
-    .btn:hover { border-color: var(--accent); color: var(--accent); }
-    .btn.active { background: var(--quote-bg); border-color: var(--accent); color: var(--accent); }
-
-    .btn-resume {
-      background: var(--accent);
-      color: #ffffff;
-      border: 1px solid var(--accent);
-      font-weight: 500;
-    }
-    .btn-resume:hover {
-      background: var(--accent-hover);
-      color: #ffffff;
-    }
-
-    /* Progress Widget */
-    .progress-widget {
+    .nav-left, .nav-right {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-    .progress-track {
-      width: 110px;
-      height: 6px;
-      background: var(--border);
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .progress-fill {
-      height: 100%;
-      background: var(--accent);
-      width: 0%;
-      transition: width 0.3s;
     }
 
-    /* Sidebar Drawer */
-    #drawer {
-      position: fixed;
-      top: 0; bottom: 0; left: 0;
-      width: var(--sidebar-width);
-      max-width: 88vw;
-      background: var(--card-bg);
-      border-right: 1px solid var(--border);
-      z-index: 200;
-      transform: translateX(-100%);
-      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    .btn-icon {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-main);
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-icon:hover {
+      background: var(--border-soft);
+      border-color: var(--border-color);
+    }
+
+    .book-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .book-brand:hover {
+      background: var(--border-soft);
+    }
+
+    .book-brand .symbol {
+      font-size: 24px;
+      color: var(--accent-gold);
+    }
+
+    .book-brand .title-wrap {
       display: flex;
       flex-direction: column;
-      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
-      font-family: var(--font-ui);
     }
-    #drawer.open {
+
+    .book-brand .main-title {
+      font-family: var(--font-header);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      color: var(--accent-sacred);
+      line-height: 1.1;
+    }
+
+    .book-brand .sub-title {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+    }
+
+    .header-active-kanda {
+      font-family: var(--font-header);
+      font-size: 14px;
+      color: var(--text-main);
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: var(--accent-gold-soft);
+      border: 1px solid var(--accent-gold);
+      display: none;
+      white-space: nowrap;
+      max-width: 320px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @media (min-width: 900px) {
+      .header-active-kanda {
+        display: inline-block;
+      }
+    }
+
+    /* Controls Group */
+    .controls-pill {
+      display: flex;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 2px;
+    }
+
+    .controls-pill button {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      padding: 6px 10px;
+      font-size: 13px;
+      cursor: pointer;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      transition: background 0.2s;
+    }
+
+    .controls-pill button:hover, .controls-pill button.active {
+      background: var(--border-color);
+    }
+
+    /* Main Container & Layout */
+    .layout-wrapper {
+      display: flex;
+      min-height: calc(100vh - 60px);
+      position: relative;
+    }
+
+    /* Sidebar Table of Contents */
+    aside.toc-sidebar {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-width);
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      z-index: 450;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow-lg);
+    }
+
+    aside.toc-sidebar.open {
       transform: translateX(0);
     }
 
-    #drawer-overlay {
+    .toc-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .toc-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toc-title-row h2 {
+      font-family: var(--font-header);
+      font-size: 17px;
+      letter-spacing: 0.5px;
+      color: var(--accent-sacred);
+    }
+
+    .toc-tabs {
+      display: flex;
+      background: var(--border-soft);
+      border-radius: 8px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .toc-tab-btn {
+      flex: 1;
+      padding: 7px 4px;
+      font-size: 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .toc-tab-btn.active {
+      background: var(--bg-surface);
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .toc-search-input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 13px;
+    }
+
+    .toc-search-input:focus {
+      outline: 2px solid var(--accent-gold);
+    }
+
+    .toc-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 8px;
+    }
+
+    /* Accordion in TOC */
+    .toc-kanda-group {
+      margin-bottom: 8px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      overflow: hidden;
+    }
+
+    .toc-kanda-header {
+      padding: 12px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .toc-kanda-header:hover {
+      background: var(--border-soft);
+    }
+
+    .toc-kanda-header.active {
+      border-left: 4px solid var(--accent-sacred);
+      background: var(--accent-gold-soft);
+    }
+
+    .toc-kanda-header .kanda-name {
+      font-family: var(--font-header);
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .toc-kanda-header .kanda-meta {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .toc-kanda-header .arrow {
+      font-size: 11px;
+      color: var(--text-soft);
+      transition: transform 0.2s;
+    }
+
+    .toc-kanda-group.expanded .toc-kanda-header .arrow {
+      transform: rotate(90deg);
+    }
+
+    .toc-chapter-list {
+      display: none;
+      padding: 4px 0;
+      border-top: 1px solid var(--border-soft);
+      background: var(--bg-card);
+    }
+
+    .toc-kanda-group.expanded .toc-chapter-list {
+      display: block;
+    }
+
+    .toc-chapter-item {
+      padding: 9px 14px 9px 20px;
+      font-size: 13.5px;
+      cursor: pointer;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-left: 3px solid transparent;
+      color: var(--text-main);
+      transition: all 0.15s;
+      line-height: 1.4;
+    }
+
+    .toc-chapter-item:hover {
+      background: var(--border-soft);
+      color: var(--accent-sacred);
+    }
+
+    .toc-chapter-item.active {
+      border-left-color: var(--accent-gold);
+      background: var(--accent-gold-soft);
+      color: var(--accent-sacred);
+      font-weight: 600;
+    }
+
+    .toc-chapter-item .ch-num {
+      font-family: var(--font-header);
+      font-size: 12px;
+      color: var(--accent-gold);
+      min-width: 24px;
+      font-weight: 700;
+    }
+
+    .toc-chapter-item .ch-title {
+      flex: 1;
+      padding-right: 8px;
+    }
+
+    .toc-chapter-item .ch-page {
+      font-size: 11px;
+      color: var(--text-soft);
+      white-space: nowrap;
+    }
+
+    /* Recitation Stops Tab in TOC */
+    .stop-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-left: 4px solid var(--accent-stop);
+    }
+
+    .stop-card:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+      border-color: var(--accent-stop);
+    }
+
+    .stop-card .stop-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-stop);
+      margin-bottom: 4px;
+    }
+
+    .stop-card .stop-text {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    .stop-card .stop-meta {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Backdrop for sidebar */
+    .sidebar-backdrop {
       position: fixed;
-      top: 0; bottom: 0; left: 0; right: 0;
-      background: rgba(0, 0, 0, 0.35);
-      z-index: 199;
+      top: 60px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 400;
+      display: none;
+      backdrop-filter: blur(2px);
+    }
+
+    .sidebar-backdrop.active {
+      display: block;
+    }
+
+    /* Main Reader Area */
+    main.reader-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 16px 80px;
+      width: 100%;
+    }
+
+    .reader-content-box {
+      width: 100%;
+      max-width: var(--content-max-width);
+      transition: max-width 0.25s ease;
+    }
+
+    /* Kanda Title Banner */
+    .kanda-hero {
+      text-align: center;
+      padding: 40px 20px 30px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .kanda-hero .hero-om {
+      font-size: 38px;
+      color: var(--accent-gold);
+      margin-bottom: 8px;
+    }
+
+    .kanda-hero .hero-kanda-num {
+      font-family: var(--font-header);
+      font-size: 16px;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .kanda-hero .hero-title {
+      font-family: var(--font-header);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent-sacred);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .kanda-hero .hero-subtitle {
+      font-size: 16px;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    .kanda-hero .hero-divider {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--accent-gold);
+      font-size: 14px;
+    }
+
+    .kanda-hero .hero-divider::before, .kanda-hero .hero-divider::after {
+      content: "";
+      width: 60px;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    /* Chapter Section */
+    .chapter-section {
+      margin-bottom: 60px;
+      scroll-margin-top: 80px;
+    }
+
+    .chapter-header {
+      padding: 16px 0 12px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border-soft);
+      position: relative;
+    }
+
+    .chapter-header .ch-number-badge {
+      font-family: var(--font-header);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .chapter-header .ch-heading-title {
+      font-family: var(--font-header);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent-sacred);
+      line-height: 1.3;
+    }
+
+    .chapter-header .ch-page-meta {
+      font-size: 12.5px;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    /* Recitation Stop Banner */
+    .recitation-stop-banner {
+      background: var(--accent-stop-bg);
+      border: 1px solid var(--accent-stop-border);
+      border-left: 5px solid var(--accent-stop);
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin: 28px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .recitation-stop-banner .stop-icon {
+      font-size: 24px;
+    }
+
+    .recitation-stop-banner .stop-body {
+      flex: 1;
+    }
+
+    .recitation-stop-banner .stop-title {
+      font-family: var(--font-header);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent-stop);
+    }
+
+    .recitation-stop-banner .stop-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Stanzas & Verses */
+    .verse-stanza {
+      margin-bottom: 22px;
+      padding: 6px 0;
+    }
+
+    .verse-line {
+      margin-bottom: 2px;
+      letter-spacing: 0.1px;
+    }
+
+    /* Footnotes section at chapter end */
+    .chapter-footnotes-card {
+      margin-top: 30px;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    .chapter-footnotes-card h4 {
+      font-family: var(--font-header);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .footnote-item {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .footnote-item:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Chapter Navigation Buttons */
+    .chapter-nav-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .btn-ch-nav {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: var(--font-header);
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      flex: 1;
+      max-width: 280px;
+    }
+
+    .btn-ch-nav:hover {
+      background: var(--accent-gold-soft);
+      border-color: var(--accent-gold);
+      color: var(--accent-sacred);
+    }
+
+    .btn-ch-nav.next {
+      justify-content: flex-end;
+      margin-left: auto;
+    }
+
+    /* Full-text Search Modal */
+    .search-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 900;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 60px 16px;
+      backdrop-filter: blur(4px);
+    }
+
+    .search-modal.active {
+      display: flex;
+    }
+
+    .search-dialog {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 720px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    .search-dialog-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search-dialog-input {
+      flex: 1;
+      padding: 10px 14px;
+      font-size: 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-family: var(--font-body);
+    }
+
+    .search-dialog-input:focus {
+      outline: 2px solid var(--accent-gold);
+    }
+
+    .search-dialog-results {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    .search-result-card {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .search-result-card:hover {
+      border-color: var(--accent-gold);
+      background: var(--accent-gold-soft);
+    }
+
+    .search-result-title {
+      font-family: var(--font-header);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent-sacred);
+      margin-bottom: 4px;
+    }
+
+    .search-result-kanda {
+      font-size: 11.5px;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .search-result-snippet {
+      font-size: 13.5px;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    mark {
+      background: rgba(226, 180, 103, 0.4);
+      color: inherit;
+      padding: 1px 3px;
+      border-radius: 2px;
+      font-weight: 600;
+    }
+
+    /* Floating Back-to-Top Button */
+    .btn-back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 46px;
+      height: 46px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--accent-sacred);
+      border-radius: 50%;
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      z-index: 300;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.25s ease;
+      transition: opacity 0.3s, transform 0.2s;
     }
-    #drawer-overlay.visible {
+
+    .btn-back-to-top.visible {
       opacity: 1;
       pointer-events: auto;
     }
 
-    .drawer-header {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--border);
+    .btn-back-to-top:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-gold);
+    }
+
+    /* Loading Spinner */
+    .loader-box {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-    }
-    .drawer-tabs {
-      display: flex;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg);
-    }
-    .drawer-tab {
-      flex: 1;
-      padding: 10px;
-      text-align: center;
-      font-size: 0.88rem;
-      cursor: pointer;
-      color: var(--text-muted);
-      border-bottom: 2px solid transparent;
-      font-weight: 500;
-    }
-    .drawer-tab.active {
-      color: var(--accent);
-      border-bottom-color: var(--accent);
-      background: var(--card-bg);
-    }
-    .drawer-content {
-      flex: 1;
-      overflow-y: auto;
-      padding: 14px;
-    }
-
-    /* TOC items */
-    .toc-item {
-      display: flex;
-      align-items: baseline;
-      padding: 5px 8px;
-      color: var(--text);
-      text-decoration: none;
-      font-size: 0.82rem;
-      border-radius: 5px;
-      margin-bottom: 2px;
-      line-height: 1.35;
-      transition: background 0.15s, color 0.15s;
-      word-break: break-word;
-    }
-    .toc-item:hover { background: var(--quote-bg); color: var(--accent); }
-    .toc-item.level-1 {
-      font-weight: 700;
-      margin-top: 10px;
-      margin-bottom: 4px;
-      font-size: 0.88rem;
-      color: var(--text);
-      letter-spacing: 0.02em;
-    }
-    .toc-item.level-2 {
-      font-weight: 600;
-      padding-left: 10px;
-      margin-top: 8px;
-      margin-bottom: 3px;
-      color: var(--accent);
-      font-size: 0.84rem;
-    }
-    .toc-item.level-3 {
-      padding-left: 20px;
-      color: var(--text-muted);
-      font-size: 0.79rem;
-      line-height: 1.3;
-    }
-    .toc-item.level-3:hover { color: var(--text); }
-
-    .toc-num {
-      display: inline-block;
-      min-width: 1.6em;
-      font-weight: 600;
-      color: var(--accent);
-      font-feature-settings: "tnum";
-      flex-shrink: 0;
-      margin-right: 4px;
-      font-size: 0.80rem;
-    }
-    .toc-text {
-      flex: 1;
-    }
-
-    /* Bookmarks & Highlights list */
-    .lib-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 10px 12px;
-      margin-bottom: 10px;
-      font-size: 0.88rem;
-    }
-    .lib-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 6px;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-    .lib-badge {
-      display: inline-block;
-      padding: 1px 6px;
-      border-radius: 3px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-    .lib-text {
-      font-family: var(--font-body);
-      font-style: italic;
-      line-height: 1.5;
-      margin-bottom: 6px;
-      cursor: pointer;
-    }
-    .lib-text:hover { color: var(--accent); }
-    .lib-note {
-      background: var(--card-bg);
-      border-left: 2px solid var(--accent);
-      padding: 4px 8px;
-      font-size: 0.82rem;
-      margin-top: 6px;
-      border-radius: 0 4px 4px 0;
-    }
-    .lib-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: 8px;
-    }
-    .btn-xs {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 0.78rem;
-      padding: 2px 4px;
-    }
-    .btn-xs:hover { color: var(--accent); }
-
-    /* Reading Content Area */
-    #reader-wrap {
-      flex: 1;
-      width: 100%;
-      display: flex;
       justify-content: center;
+      padding: 60px 20px;
+      gap: 16px;
     }
 
-    #content {
-      width: 100%;
-      max-width: 1060px;
-      padding: 40px 36px 120px;
-      font-size: var(--book-font-size, 1.15rem);
-      line-height: 1.8;
-      box-sizing: border-box;
-    }
-
-    #content h1 {
-      font-size: 1.85rem;
-      color: var(--accent);
-      margin: 44px 0 20px;
-      text-align: center;
-      line-height: 1.35;
-      border-bottom: 1.5px solid var(--border);
-      padding-bottom: 14px;
-      scroll-margin-top: 80px;
-    }
-
-    #content h2 {
-      font-size: 1.45rem;
-      color: var(--accent);
-      margin: 36px 0 16px;
-      line-height: 1.35;
-      scroll-margin-top: 80px;
-    }
-
-    #content h3 {
-      font-size: 1.25rem;
-      color: var(--text);
-      margin: 28px 0 14px;
-      line-height: 1.4;
-      scroll-margin-top: 80px;
-    }
-
-    #content p {
-      margin-bottom: 1.45em;
-      text-align: justify;
-      text-indent: 1.6em;
-      word-break: break-word;
-      line-height: 1.8;
-    }
-
-    #content blockquote {
-      background: var(--quote-bg);
-      border-left: 4px solid var(--quote-border);
-      padding: 16px 22px;
-      margin: 26px 0;
-      border-radius: 0 6px 6px 0;
-      font-size: 0.95em;
-      line-height: 1.65;
-      font-style: normal;
-    }
-    #content blockquote p {
-      text-indent: 0;
-      margin-bottom: 0.7em;
-      line-height: 1.65;
-    }
-    #content blockquote p:last-child { margin-bottom: 0; }
-
-    #content hr {
-      border: 0;
-      height: 1px;
-      background: var(--border);
-      margin: 40px 0;
-    }
-
-    mark.hl {
-      border-radius: 2px;
-      padding: 0 1px;
-      cursor: pointer;
-    }
-    mark.hl-yellow { background-color: var(--hl-yellow); color: inherit; }
-    mark.hl-orange { background-color: var(--hl-orange); color: inherit; }
-    mark.hl-green  { background-color: var(--hl-green);  color: inherit; }
-    mark.hl-blue   { background-color: var(--hl-blue);   color: inherit; }
-
-    /* Selection Floating Toolbar */
-    #selection-bar {
-      position: absolute;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-      border-radius: 8px;
-      padding: 6px 8px;
-      display: none;
-      align-items: center;
-      gap: 6px;
-      z-index: 300;
-      font-family: var(--font-ui);
-    }
-    .color-dot {
-      width: 22px;
-      height: 22px;
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid var(--border-color);
+      border-top-color: var(--accent-gold);
       border-radius: 50%;
-      cursor: pointer;
-      border: 2px solid #fff;
-      box-shadow: 0 0 2px rgba(0,0,0,0.3);
-      transition: transform 0.15s;
-    }
-    .color-dot:hover { transform: scale(1.15); }
-    .dot-yellow { background: #fde047; }
-    .dot-orange { background: #fb923c; }
-    .dot-green  { background: #4ade80; }
-    .dot-blue   { background: #38bdf8; }
-
-    /* Modal for Bookmark/Note */
-    #modal-overlay {
-      position: fixed;
-      top: 0; bottom: 0; left: 0; right: 0;
-      background: rgba(0, 0, 0, 0.45);
-      z-index: 400;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    .modal-box {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      width: 100%;
-      max-width: 420px;
-      padding: 20px;
-      font-family: var(--font-ui);
-    }
-    .modal-box h4 {
-      margin-bottom: 12px;
-      color: var(--accent);
-      font-size: 1.05rem;
-    }
-    .modal-box input, .modal-box textarea {
-      width: 100%;
-      padding: 8px 10px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
-      border-radius: 5px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      margin-bottom: 14px;
-    }
-    .modal-box textarea { height: 75px; resize: vertical; }
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
+      animation: spin 0.8s linear infinite;
     }
 
-    /* Mobile Adaptations */
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive Adjustments */
     @media (max-width: 768px) {
-      .book-title { max-width: 130px; font-size: 0.9rem; }
-      .progress-widget .progress-track { width: 70px; }
-      #content { padding: 24px 16px 100px; max-width: 100%; font-size: calc(var(--book-font-size, 1.15rem) * 0.94); line-height: 1.65; text-align: left; }
-      #content p { text-align: left; text-indent: 1.2em; line-height: 1.65; }
-      #content blockquote { padding: 12px 14px; margin: 18px 0; font-size: 0.92em; }
-      .bar-center { display: none; }
+      header.top-bar {
+        padding: 0 10px;
+      }
+      .book-brand .title-wrap {
+        display: none;
+      }
+      .btn-ch-nav {
+        max-width: 100%;
+        font-size: 13px;
+        padding: 10px 12px;
+      }
+      main.reader-container {
+        padding: 16px 10px 60px;
+      }
+      .chapter-header .ch-heading-title {
+        font-size: 20px;
+      }
+      .kanda-hero .hero-title {
+        font-size: 26px;
+      }
     }
   </style>
 </head>
-<body>
+<body data-theme="light">
 
-  <!-- Top Bar -->
-  <header id="topbar">
-    <div class="bar-left">
-      <button class="btn" onclick="toggleDrawer()" title="Меню книги">☰ Меню</button>
-      <span class="book-title">Шри Рамачаритаманаса</span>
-    </div>
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar"></div>
 
-    <div class="bar-center">
-      <div class="progress-widget" title="Прогресс перевода оригинала">
-        <div class="progress-track"><div class="progress-fill" id="pfill"></div></div>
-        <span id="ptext">0%</span>
-        <span style="font-weight:600;" id="ppage">Стр. 0 / 1200</span>
+  <!-- Top Navigation Bar -->
+  <header class="top-bar">
+    <div class="nav-left">
+      <button class="btn-icon" id="btn-toggle-toc" title="Оглавление (TOC)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+      <div class="book-brand" id="btn-go-home">
+        <span class="symbol">ॐ</span>
+        <div class="title-wrap">
+          <span class="main-title">Шри Рамачаритаманаса</span>
+          <span class="sub-title">Госвами Тулсидас • Полное русское издание</span>
+        </div>
       </div>
+      <span class="header-active-kanda" id="header-kanda-pill">Ступень I: Бала-канда</span>
     </div>
 
-    <div class="bar-right">
-      <button class="btn btn-resume" id="btn-resume" onclick="resumeReading()" title="Продолжить чтение с последнего места" style="display:none;">
-        ▶ Продолжить
+    <div class="nav-right">
+      <!-- Search Button -->
+      <button class="btn-icon" id="btn-open-search" title="Поиск по всей книге">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       </button>
-      <button class="btn" onclick="openAddBookmarkModal()" title="Добавить закладку на текущем месте">
-        🔖 <span class="hide-mobile">Закладка</span>
-      </button>
-      <select class="btn" id="theme-select" onchange="changeTheme(this.value)">
-        <option value="light">Светлая</option>
-        <option value="sepia">Сепия</option>
-        <option value="dark">Тёмная</option>
-      </select>
-      <button class="btn" onclick="changeFontSize(-1)" title="Уменьшить шрифт">A-</button>
-      <button class="btn" onclick="changeFontSize(1)" title="Увеличить шрифт">A+</button>
+
+      <!-- Font Size Controls -->
+      <div class="controls-pill" title="Размер шрифта">
+        <button id="btn-font-dec" title="Уменьшить шрифт">A−</button>
+        <button id="btn-font-inc" title="Увеличить шрифт">A+</button>
+      </div>
+
+      <!-- Column Width Controls -->
+      <div class="controls-pill" title="Ширина текста">
+        <button id="btn-width-std" class="active" title="Стандартная">850</button>
+        <button id="btn-width-comf" title="Комфортная">980</button>
+        <button id="btn-width-wide" title="Широкая">1120</button>
+      </div>
+
+      <!-- Theme Controls -->
+      <div class="controls-pill" title="Цветовая тема">
+        <button id="btn-theme-light" class="active" title="Светлая">☀️</button>
+        <button id="btn-theme-sepia" title="Сепия">📜</button>
+        <button id="btn-theme-dark" title="Тёмная">🌙</button>
+      </div>
     </div>
   </header>
 
-  <!-- Navigation Drawer (TOC + Bookmarks/Highlights) -->
-  <div id="drawer-overlay" onclick="closeDrawer()"></div>
-  <aside id="drawer">
-    <div class="drawer-header">
-      <strong style="color:var(--accent);">Навигация и библиотека</strong>
-      <button class="btn-xs" style="font-size:1.1rem;" onclick="closeDrawer()">✕</button>
-    </div>
-    <div class="drawer-tabs">
-      <div class="drawer-tab active" id="tab-toc-btn" onclick="switchDrawerTab('toc')">Оглавление</div>
-      <div class="drawer-tab" id="tab-lib-btn" onclick="switchDrawerTab('lib')">Закладки и заметки (<span id="lib-count">0</span>)</div>
-    </div>
-    <div class="drawer-content" id="tab-toc">
-      <div id="toc-list">Загрузка оглавления...</div>
-    </div>
-    <div class="drawer-content" id="tab-lib" style="display:none;">
-      <div style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
-        <span style="font-size:0.8rem; color:var(--text-muted);">Ваша личная библиотека:</span>
-        <button class="btn btn-xs" onclick="openAddBookmarkModal()">+ Закладка</button>
+  <!-- Layout Wrapper -->
+  <div class="layout-wrapper">
+
+    <!-- Sidebar Backdrop for Mobile -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+    <!-- Table of Contents Sidebar -->
+    <aside class="toc-sidebar" id="toc-sidebar">
+      <div class="toc-header">
+        <div class="toc-title-row">
+          <h2>Оглавление</h2>
+          <button class="btn-icon" id="btn-close-toc" title="Закрыть оглавление">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+        <div class="toc-tabs">
+          <button class="toc-tab-btn active" data-tab="chapters">📖 Главы (218)</button>
+          <button class="toc-tab-btn" data-tab="stops">🛑 Остановки (39)</button>
+          <button class="toc-tab-btn" data-tab="about">ℹ️ Об издании</button>
+        </div>
+        <input type="text" class="toc-search-input" id="toc-filter-input" placeholder="Фильтр по названию главы...">
       </div>
-      <div id="lib-list">Пока нет закладок или сохранённых цитат.</div>
-    </div>
-  </aside>
 
-  <!-- Main Reading Area -->
-  <main id="reader-wrap">
-    <article id="content">Загрузка книги...</article>
-  </main>
+      <!-- Tab 1: Chapters Accordion -->
+      <div class="toc-content" id="toc-content-chapters">
+        <!-- Rendered by JS -->
+      </div>
 
-  <!-- Selection Popup Toolbar -->
-  <div id="selection-bar">
-    <span style="font-size:0.75rem; color:var(--text-muted); margin-right:2px;">Выделить:</span>
-    <div class="color-dot dot-yellow" title="Жёлтый" onclick="applyHighlight('yellow')"></div>
-    <div class="color-dot dot-orange" title="Шафрановый" onclick="applyHighlight('orange')"></div>
-    <div class="color-dot dot-green"  title="Зелёный" onclick="applyHighlight('green')"></div>
-    <div class="color-dot dot-blue"   title="Голубой" onclick="applyHighlight('blue')"></div>
-    <button class="btn btn-xs" onclick="openHighlightNoteModal()" style="margin-left:4px;">💬 Заметка</button>
-    <button class="btn-xs" onclick="hideSelectionBar()" style="margin-left:2px;">✕</button>
+      <!-- Tab 2: Recitation Stops -->
+      <div class="toc-content" id="toc-content-stops" style="display: none;">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Tab 3: About Edition -->
+      <div class="toc-content" id="toc-content-about" style="display: none; padding: 16px;">
+        <h3 style="font-family: var(--font-header); color: var(--accent-sacred); margin-bottom: 8px;">Шри Рамачаритаманаса</h3>
+        <p style="font-size: 13.5px; line-height: 1.6; margin-bottom: 12px;">«Озеро Манаса деяний Шри Рамы» — величайшая эпическая и бхакти-поэма индийской духовной литературы, сложенная Госвами Тулсидасом в XVI веке на языке авадхи.</p>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; font-size: 12.5px; line-height: 1.6; margin-bottom: 14px;">
+          <div><strong>Издатель оригинала:</strong> Гита Пресс, Горакхпур (Индия)</div>
+          <div><strong>Объём издания:</strong> 858 страниц PDF</div>
+          <div><strong>Канд:</strong> 7 священных ступеней</div>
+          <div><strong>Всего глав:</strong> 218 глав со стихами и дохами</div>
+          <div><strong>Остановок чтений:</strong> 39 (30-дневное и 9-дневное)</div>
+          <div><strong>Примечания и сноски:</strong> 1090 разъяснений</div>
+        </div>
+        <button class="btn-ch-nav" id="btn-download-md" style="width: 100%; max-width: 100%; justify-content: center;">
+          📄 Скачать полный текст (MD)
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Reader Area -->
+    <main class="reader-container">
+      <div class="reader-content-box" id="reader-content-box">
+        <!-- Loader / Content rendered dynamically -->
+        <div class="loader-box" id="reader-loader">
+          <div class="spinner"></div>
+          <div style="font-family: var(--font-header); color: var(--text-muted);">Загрузка священной поэмы...</div>
+        </div>
+      </div>
+    </main>
   </div>
 
-  <!-- Bookmark Modal -->
-  <div id="modal-overlay">
-    <div class="modal-box" id="bm-modal" style="display:none;">
-      <h4>Добавить закладку</h4>
-      <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:8px;" id="bm-chapter-label">Глава: ...</p>
-      <input type="text" id="bm-title-input" placeholder="Название закладки (необязательно)">
-      <div class="modal-actions">
-        <button class="btn" onclick="closeModal()">Отмена</button>
-        <button class="btn btn-resume" onclick="saveBookmarkFromModal()">Сохранить</button>
+  <!-- Search Modal -->
+  <div class="search-modal" id="search-modal">
+    <div class="search-dialog">
+      <div class="search-dialog-header">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" class="search-dialog-input" id="search-main-input" placeholder="Поиск по всем 218 главам и разделам..." autocomplete="off">
+        <button class="btn-icon" id="btn-close-search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
-    </div>
-
-    <!-- Highlight Note Modal -->
-    <div class="modal-box" id="note-modal" style="display:none;">
-      <h4>Заметка к цитате</h4>
-      <p style="font-size:0.82rem; font-style:italic; color:var(--text-muted); margin-bottom:8px;" id="note-quote-preview">...</p>
-      <textarea id="note-input" placeholder="Ваш личный комментарий или мысль..."></textarea>
-      <div class="modal-actions">
-        <button class="btn" onclick="closeModal()">Отмена</button>
-        <button class="btn btn-resume" onclick="saveHighlightNoteFromModal()">Сохранить</button>
+      <div class="search-dialog-results" id="search-dialog-results">
+        <div style="text-align: center; color: var(--text-soft); padding: 40px 20px; font-size: 14px;">
+          Введите слово или имя (например: «Хануман», «Ситу», «Джанака», «молитва», «Айодхья») для мгновенного поиска по всей книге.
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Floating Back to Top Button -->
+  <button class="btn-back-to-top" id="btn-back-to-top" title="Наверх">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+  </button>
+
+  <!-- Application Logic -->
   <script>
-    let currentFontSize = 1.15;
-    let lastMtime = 0;
-    let cachedMarkdown = '';
-    let isInitialLoad = true;
-    let activeSelection = null;
-    let editingHighlightId = null;
+    (function() {
+      'use strict';
 
-    // Storage Keys
-    const KEY_SCROLL = 'manas_scroll_y';
-    const KEY_HEADING = 'manas_last_heading';
-    const KEY_THEME = 'manas_theme';
-    const KEY_FONTSIZE = 'manas_fontsize';
-    const KEY_BOOKMARKS = 'manas_bookmarks';
-    const KEY_HIGHLIGHTS = 'manas_highlights';
-
-    function getBookmarks() {
-      try { return JSON.parse(localStorage.getItem(KEY_BOOKMARKS) || '[]'); } catch { return []; }
-    }
-    function saveBookmarks(bms) {
-      localStorage.setItem(KEY_BOOKMARKS, JSON.stringify(bms));
-      renderLibrary();
-    }
-
-    function getHighlights() {
-      try { return JSON.parse(localStorage.getItem(KEY_HIGHLIGHTS) || '[]'); } catch { return []; }
-    }
-    function saveHighlights(hls) {
-      localStorage.setItem(KEY_HIGHLIGHTS, JSON.stringify(hls));
-      renderLibrary();
-    }
-
-    // Drawer Controls
-    function toggleDrawer() {
-      const d = document.getElementById('drawer');
-      const o = document.getElementById('drawer-overlay');
-      if (d.classList.contains('open')) {
-        closeDrawer();
-      } else {
-        d.classList.add('open');
-        o.classList.add('visible');
-      }
-    }
-    function closeDrawer() {
-      document.getElementById('drawer').classList.remove('open');
-      document.getElementById('drawer-overlay').classList.remove('visible');
-    }
-
-    function switchDrawerTab(tab) {
-      document.getElementById('tab-toc-btn').classList.toggle('active', tab === 'toc');
-      document.getElementById('tab-lib-btn').classList.toggle('active', tab === 'lib');
-      document.getElementById('tab-toc').style.display = tab === 'toc' ? 'block' : 'none';
-      document.getElementById('tab-lib').style.display = tab === 'lib' ? 'block' : 'none';
-    }
-
-    // Theme & Font
-    function changeTheme(theme) {
-      if (theme === 'light') {
-        document.body.removeAttribute('data-theme');
-      } else {
-        document.body.setAttribute('data-theme', theme);
-      }
-      localStorage.setItem(KEY_THEME, theme);
-    }
-
-    function changeFontSize(delta) {
-      currentFontSize = Math.max(0.9, Math.min(1.55, currentFontSize + delta * 0.06));
-      document.getElementById('content').style.setProperty('--book-font-size', currentFontSize + 'rem');
-      localStorage.setItem(KEY_FONTSIZE, currentFontSize);
-    }
-
-    // Markdown Parser (Pure JS, offline)
-    function parseMarkdown(md) {
-      const lines = md.split('\n');
-      let html = '';
-      let inBlockquote = false;
-      let blockquoteContent = [];
-
-      for (let i = 0; i < lines.length; i++) {
-        let line = lines[i];
-
-        if (line.startsWith('>')) {
-          inBlockquote = true;
-          blockquoteContent.push(line.replace(/^>\s?/, ''));
-          continue;
-        } else if (inBlockquote) {
-          html += '<blockquote>' + parseMarkdown(blockquoteContent.join('\n')) + '</blockquote>';
-          blockquoteContent = [];
-          inBlockquote = false;
-        }
-
-        if (/^---+\s*$/.test(line)) {
-          html += '<hr>';
-          continue;
-        }
-
-        const hMatch = line.match(/^(#{1,3})\s+(.+)$/);
-        if (hMatch) {
-          const level = hMatch[1].length;
-          const text = hMatch[2];
-          const slug = 'heading-' + i;
-          html += `<h${level} id="${slug}">${formatInline(text)}</h${level}>`;
-          continue;
-        }
-
-        if (line.trim() === '') continue;
-
-        html += `<p>${formatInline(line.trim())}</p>`;
-      }
-
-      if (inBlockquote) {
-        html += '<blockquote>' + parseMarkdown(blockquoteContent.join('\n')) + '</blockquote>';
-      }
-
-      return html;
-    }
-
-    function formatInline(str) {
-      return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\*(.+?)\*/g, '<em>$1</em>')
-        .replace(/\[неразборчивый фрагмент\]/g, '<span style="color:var(--text-muted);font-style:italic;">[неразборчивый фрагмент]</span>');
-    }
-
-    // Build Table of Contents
-    function buildTOC() {
-      const headings = document.querySelectorAll('#content h1, #content h2, #content h3');
-      const tocList = document.getElementById('toc-list');
-      if (headings.length === 0) {
-        tocList.innerHTML = '<div style="color:var(--text-muted); font-size:0.85rem; padding:12px 8px;">Разделы формируются...</div>';
-        return;
-      }
-
-      let chapterCount = 0;
-      let tocHtml = '';
-      headings.forEach((h) => {
-        const text = h.textContent.trim();
-        if (!text) return;
-        if (text.startsWith('[') && text.endsWith(']')) return;
-        const tag = h.tagName.toLowerCase();
-        const level = tag === 'h1' ? '1' : (tag === 'h2' ? '2' : '3');
-
-        if (level === '3') {
-          chapterCount++;
-          tocHtml += `<a class="toc-item level-${level}" href="#${h.id}" onclick="onTocItemClick(event, '${h.id}')"><span class="toc-num">${chapterCount}.</span><span class="toc-text">${text}</span></a>`;
-        } else {
-          tocHtml += `<a class="toc-item level-${level}" href="#${h.id}" onclick="onTocItemClick(event, '${h.id}')"><span class="toc-text">${text}</span></a>`;
-        }
-      });
-      tocList.innerHTML = tocHtml;
-    }
-
-    function onTocItemClick(e, id) {
-      e.preventDefault();
-      closeDrawer();
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        setTimeout(saveReadingPosition, 500);
-      }
-    }
-
-    // Continuous Reading Position Saving
-    function getCurrentChapter() {
-      const headings = Array.from(document.querySelectorAll('#content h1, #content h2, #content h3'));
-      let current = 'Начало книги';
-      const scrollY = window.scrollY;
-      for (let h of headings) {
-        if (h.offsetTop <= scrollY + 120) {
-          current = h.textContent;
-        } else {
-          break;
-        }
-      }
-      return current;
-    }
-
-    function saveReadingPosition() {
-      const scrollY = window.scrollY;
-      if (scrollY > 50) {
-        localStorage.setItem(KEY_SCROLL, scrollY);
-        localStorage.setItem(KEY_HEADING, getCurrentChapter());
-        updateResumeButton();
-      }
-    }
-
-    window.addEventListener('scroll', () => {
-      clearTimeout(window._scrollDebounce);
-      window._scrollDebounce = setTimeout(saveReadingPosition, 350);
-    });
-
-    function updateResumeButton() {
-      const savedY = localStorage.getItem(KEY_SCROLL);
-      const btn = document.getElementById('btn-resume');
-      if (savedY && parseFloat(savedY) > 80 && Math.abs(window.scrollY - parseFloat(savedY)) > 400) {
-        btn.style.display = 'inline-flex';
-      } else {
-        btn.style.display = 'none';
-      }
-    }
-
-    function resumeReading() {
-      const savedY = localStorage.getItem(KEY_SCROLL);
-      if (savedY) {
-        window.scrollTo({ top: parseFloat(savedY), behavior: 'smooth' });
-      }
-    }
-
-    // Bookmarks & Highlights UI
-    function openAddBookmarkModal() {
-      const currentChapter = getCurrentChapter();
-      document.getElementById('bm-chapter-label').textContent = 'Глава: ' + currentChapter;
-      document.getElementById('bm-title-input').value = 'Закладка: ' + currentChapter;
-      document.getElementById('modal-overlay').style.display = 'flex';
-      document.getElementById('bm-modal').style.display = 'block';
-      document.getElementById('note-modal').style.display = 'none';
-    }
-
-    function saveBookmarkFromModal() {
-      const title = document.getElementById('bm-title-input').value.trim() || getCurrentChapter();
-      const bms = getBookmarks();
-      bms.push({
-        id: 'bm_' + Date.now(),
-        title: title,
-        chapter: getCurrentChapter(),
-        scrollY: window.scrollY,
-        timestamp: Date.now()
-      });
-      saveBookmarks(bms);
-      closeModal();
-    }
-
-    function closeModal() {
-      document.getElementById('modal-overlay').style.display = 'none';
-      document.getElementById('bm-modal').style.display = 'none';
-      document.getElementById('note-modal').style.display = 'none';
-      editingHighlightId = null;
-    }
-
-    // Selection & Highlighting
-    document.addEventListener('selectionchange', () => {
-      const sel = window.getSelection();
-      if (!sel || sel.isCollapsed || !sel.toString().trim()) {
-        return;
-      }
-      activeSelection = {
-        text: sel.toString().trim(),
-        range: sel.getRangeAt(0).cloneRange()
+      // State Management
+      const state = {
+        toc: null,
+        searchIndex: null,
+        kandaCache: {},
+        currentKandaId: 'intro',
+        currentChapterId: null,
+        activeTab: 'chapters',
+        theme: localStorage.getItem('srm_theme') || 'light',
+        fontSize: parseInt(localStorage.getItem('srm_font_size') || '19', 10),
+        contentWidth: localStorage.getItem('srm_content_width') || '980'
       };
-      showSelectionBar(activeSelection.range);
-    });
 
-    function showSelectionBar(range) {
-      const rect = range.getBoundingClientRect();
-      const bar = document.getElementById('selection-bar');
-      bar.style.display = 'flex';
-      const top = window.scrollY + rect.top - 46;
-      const left = Math.max(10, Math.min(window.innerWidth - 220, window.scrollX + rect.left));
-      bar.style.top = top + 'px';
-      bar.style.left = left + 'px';
-    }
+      // DOM Elements
+      const els = {
+        progressBar: document.getElementById('progress-bar'),
+        tocSidebar: document.getElementById('toc-sidebar'),
+        sidebarBackdrop: document.getElementById('sidebar-backdrop'),
+        btnToggleToc: document.getElementById('btn-toggle-toc'),
+        btnCloseToc: document.getElementById('btn-close-toc'),
+        btnGoHome: document.getElementById('btn-go-home'),
+        headerKandaPill: document.getElementById('header-kanda-pill'),
+        readerBox: document.getElementById('reader-content-box'),
+        readerLoader: document.getElementById('reader-loader'),
+        searchModal: document.getElementById('search-modal'),
+        btnOpenSearch: document.getElementById('btn-open-search'),
+        btnCloseSearch: document.getElementById('btn-close-search'),
+        searchMainInput: document.getElementById('search-main-input'),
+        searchResultsBox: document.getElementById('search-dialog-results'),
+        btnBackToTop: document.getElementById('btn-back-to-top'),
+        tocContentChapters: document.getElementById('toc-content-chapters'),
+        tocContentStops: document.getElementById('toc-content-stops'),
+        tocContentAbout: document.getElementById('toc-content-about'),
+        tocFilterInput: document.getElementById('toc-filter-input'),
+        btnDownloadMd: document.getElementById('btn-download-md')
+      };
 
-    function hideSelectionBar() {
-      document.getElementById('selection-bar').style.display = 'none';
-    }
+      // Initialize App
+      async function init() {
+        applyTheme(state.theme);
+        applyFontSize(state.fontSize);
+        applyContentWidth(state.contentWidth);
 
-    function applyHighlight(color) {
-      if (!activeSelection) return;
-      const text = activeSelection.text;
-      const hls = getHighlights();
-      hls.push({
-        id: 'hl_' + Date.now(),
-        text: text,
-        color: color,
-        chapter: getCurrentChapter(),
-        note: '',
-        scrollY: window.scrollY,
-        timestamp: Date.now()
-      });
-      saveHighlights(hls);
-      hideSelectionBar();
-      window.getSelection()?.removeAllRanges();
-      renderContentHighlights();
-    }
+        setupEventListeners();
 
-    function openHighlightNoteModal() {
-      if (!activeSelection) return;
-      hideSelectionBar();
-      document.getElementById('note-quote-preview').textContent = '«' + activeSelection.text.substring(0, 100) + '...»';
-      document.getElementById('note-input').value = '';
-      document.getElementById('modal-overlay').style.display = 'flex';
-      document.getElementById('bm-modal').style.display = 'none';
-      document.getElementById('note-modal').style.display = 'block';
-    }
+        try {
+          const res = await fetch('./data/toc.json');
+          if (!res.ok) throw new Error('Failed to load TOC: ' + res.status);
+          state.toc = await res.json();
+          renderTOCChapters();
+          renderTOCStops();
 
-    function saveHighlightNoteFromModal() {
-      const note = document.getElementById('note-input').value.trim();
-      if (editingHighlightId) {
-        const hls = getHighlights();
-        const item = hls.find(h => h.id === editingHighlightId);
-        if (item) item.note = note;
-        saveHighlights(hls);
-      } else if (activeSelection) {
-        const hls = getHighlights();
-        hls.push({
-          id: 'hl_' + Date.now(),
-          text: activeSelection.text,
-          color: 'yellow',
-          chapter: getCurrentChapter(),
-          note: note,
-          scrollY: window.scrollY,
-          timestamp: Date.now()
-        });
-        saveHighlights(hls);
-        renderContentHighlights();
-      }
-      closeModal();
-    }
+          // Restore saved position or URL hash
+          const hash = window.location.hash.replace('#', '');
+          const savedKanda = localStorage.getItem('srm_last_kanda');
+          const savedCh = localStorage.getItem('srm_last_chapter');
 
-    function renderContentHighlights() {
-      // Re-apply highlight tags visually inside content
-      const hls = getHighlights();
-      const contentEl = document.getElementById('content');
-      // For each highlight, wrap the text if found
-      hls.forEach(h => {
-        if (!h.text || h.text.length < 4) return;
-        // Escape special chars for regex
-        const safe = h.text.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-        const re = new RegExp(`(${safe})`, 'gi');
-        // Simple text replacement inside paragraphs
-        contentEl.querySelectorAll('p, blockquote p').forEach(p => {
-          if (p.textContent.includes(h.text) && !p.innerHTML.includes(`id="${h.id}"`)) {
-            p.innerHTML = p.innerHTML.replace(re, `<mark class="hl hl-${h.color}" id="${h.id}" title="${h.note || 'Сохранено в избранное'}">$1</mark>`);
+          if (hash.startsWith('ch-')) {
+            const chNum = parseInt(hash.replace('ch-', ''), 10);
+            const targetKanda = findKandaForChapter(chNum);
+            if (targetKanda) {
+              await loadKanda(targetKanda.id, hash);
+              return;
+            }
           }
-        });
-      });
-    }
 
-    function renderLibrary() {
-      const bms = getBookmarks();
-      const hls = getHighlights();
-      const total = bms.length + hls.length;
-      document.getElementById('lib-count').textContent = total;
-
-      const container = document.getElementById('lib-list');
-      if (total === 0) {
-        container.innerHTML = '<div style="color:var(--text-muted); font-size:0.85rem; padding:10px 0;">Пока нет закладок или заметок. Выделите любой текст в книге или нажмите «Закладка».</div>';
-        return;
+          if (savedKanda && (savedKanda === 'intro' || savedKanda === 'outro' || savedKanda.startsWith('kanda_'))) {
+            await loadKanda(savedKanda, savedCh);
+          } else {
+            // Default to Intro or Kanda 1
+            await loadKanda('intro');
+          }
+        } catch (err) {
+          console.error(err);
+          els.readerBox.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: var(--accent-sacred);">
+              <h2>Ошибка загрузки данных книги</h2>
+              <p>${err.message}</p>
+              <button onclick="location.reload()" style="margin-top: 16px; padding: 8px 16px;">Повторить попытку</button>
+            </div>
+          `;
+        }
       }
 
-      // Combine and sort by scrollY (book order)
-      const allItems = [
-        ...bms.map(b => ({ ...b, type: 'bookmark' })),
-        ...hls.map(h => ({ ...h, type: 'highlight' }))
-      ].sort((a, b) => (a.scrollY || 0) - (b.scrollY || 0));
+      function findKandaForChapter(chNum) {
+        if (!state.toc || !state.toc.kandas) return null;
+        for (const k of state.toc.kandas) {
+          for (const ch of k.chapters) {
+            if (ch.number === chNum) return k;
+          }
+        }
+        return null;
+      }
 
-      let html = '';
-      allItems.forEach(item => {
-        if (item.type === 'bookmark') {
-          html += `
-            <div class="lib-card">
-              <div class="lib-card-header">
-                <span class="lib-badge" style="background:var(--accent); color:#fff;">Закладка</span>
-                <span>${item.chapter}</span>
+      // Render TOC Chapters
+      function renderTOCChapters() {
+        let html = `
+          <!-- Intro section item -->
+          <div class="toc-kanda-group expanded">
+            <div class="toc-kanda-header ${state.currentKandaId === 'intro' ? 'active' : ''}" onclick="window.srmApp.loadKanda('intro')">
+              <div>
+                <div class="kanda-name">Вступление и порядок чтения</div>
+                <div class="kanda-meta">Титул, от издателя, мантры, ньясы, дхьяна</div>
               </div>
-              <div class="lib-text" onclick="jumpToPosition(${item.scrollY})">🔖 ${item.title}</div>
-              <div class="lib-actions">
-                <button class="btn-xs" onclick="jumpToPosition(${item.scrollY})">Перейти</button>
-                <button class="btn-xs" onclick="deleteBookmark('${item.id}')">Удалить</button>
+            </div>
+          </div>
+        `;
+
+        state.toc.kandas.forEach(k => {
+          const isCurrentKanda = state.currentKandaId === k.id;
+          html += `
+            <div class="toc-kanda-group ${isCurrentKanda ? 'expanded' : ''}" id="toc-group-${k.id}">
+              <div class="toc-kanda-header ${isCurrentKanda ? 'active' : ''}" onclick="window.srmApp.toggleKandaGroup('${k.id}')">
+                <div>
+                  <div class="kanda-name">${k.roman}. ${k.name}</div>
+                  <div class="kanda-meta">Главы ${k.chapters_range} (${k.total_chapters}) • Стр. ${k.page_range}</div>
+                </div>
+                <div class="arrow">▶</div>
+              </div>
+              <div class="toc-chapter-list">
+                ${k.chapters.map(ch => `
+                  <div class="toc-chapter-item ${state.currentChapterId === ch.id ? 'active' : ''}" 
+                       id="toc-item-${ch.id}" 
+                       data-title="${ch.title.toLowerCase()}"
+                       onclick="window.srmApp.loadKanda('${k.id}', '${ch.id}')">
+                    <span class="ch-num">${ch.number}.</span>
+                    <span class="ch-title">${ch.title}</span>
+                    <span class="ch-page">стр. ${ch.gp_page}</span>
+                  </div>
+                `).join('')}
               </div>
             </div>
           `;
+        });
+
+        // Outro item
+        html += `
+          <div class="toc-kanda-group expanded">
+            <div class="toc-kanda-header ${state.currentKandaId === 'outro' ? 'active' : ''}" onclick="window.srmApp.loadKanda('outro')">
+              <div>
+                <div class="kanda-name">Окончание: Арати Шри Рамаяне</div>
+                <div class="kanda-meta">Гимн поклонения • Стр. 858</div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        els.tocContentChapters.innerHTML = html;
+      }
+
+      // Render TOC Recitation Stops
+      function renderTOCStops() {
+        if (!state.toc || !state.toc.recitation_stops) return;
+        const html = state.toc.recitation_stops.map(st => `
+          <div class="stop-card" onclick="window.srmApp.loadKanda('${st.kanda_id}', '${st.chapter_id}')">
+            <span class="stop-badge">🛑 ${st.chapter_id ? 'Глава ' + st.chapter_num : ''} • PDF стр. ${st.page}</span>
+            <div class="stop-text">${st.text}</div>
+            <div class="stop-meta">Нажмите для перехода к месту остановки чтения</div>
+          </div>
+        `).join('');
+        els.tocContentStops.innerHTML = html;
+      }
+
+      // Load Kanda Content
+      async function loadKanda(kandaId, targetChapterId = null) {
+        state.currentKandaId = kandaId;
+        state.currentChapterId = targetChapterId;
+        localStorage.setItem('srm_last_kanda', kandaId);
+        if (targetChapterId) localStorage.setItem('srm_last_chapter', targetChapterId);
+
+        // Update UI pill
+        updateKandaPill(kandaId);
+        renderTOCChapters();
+
+        // Close sidebar on mobile
+        if (window.innerWidth < 900) {
+          closeSidebar();
+        }
+
+        // Show spinner
+        els.readerBox.innerHTML = `
+          <div class="loader-box">
+            <div class="spinner"></div>
+            <div style="font-family: var(--font-header); color: var(--text-muted);">Загрузка текста...</div>
+          </div>
+        `;
+
+        try {
+          let data = state.kandaCache[kandaId];
+          if (!data) {
+            const res = await fetch(`./data/${kandaId}.json`);
+            if (!res.ok) throw new Error('Failed to load: ' + res.status);
+            data = await res.json();
+            state.kandaCache[kandaId] = data;
+          }
+
+          if (kandaId === 'intro') {
+            renderIntro(data);
+          } else if (kandaId === 'outro') {
+            renderOutro(data);
+          } else {
+            renderKanda(data);
+          }
+
+          // If target chapter is given, scroll to it
+          if (targetChapterId) {
+            setTimeout(() => {
+              const el = document.getElementById(targetChapterId);
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+                window.location.hash = targetChapterId;
+              }
+            }, 100);
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        } catch (err) {
+          console.error(err);
+          els.readerBox.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: var(--accent-sacred);">
+              <h3>Ошибка загрузки раздела ${kandaId}</h3>
+              <p>${err.message}</p>
+            </div>
+          `;
+        }
+      }
+
+      function updateKandaPill(kandaId) {
+        if (kandaId === 'intro') {
+          els.headerKandaPill.textContent = 'Вступление';
+        } else if (kandaId === 'outro') {
+          els.headerKandaPill.textContent = 'Арати Шри Рамаяне';
         } else {
-          html += `
-            <div class="lib-card">
-              <div class="lib-card-header">
-                <span class="lib-badge" style="background:var(--hl-${item.color || 'yellow'}); color:#000;">Цитата</span>
-                <span>${item.chapter}</span>
-              </div>
-              <div class="lib-text" onclick="jumpToPosition(${item.scrollY})">«${item.text}»</div>
-              ${item.note ? `<div class="lib-note">💬 ${item.note}</div>` : ''}
-              <div class="lib-actions">
-                <button class="btn-xs" onclick="editHighlightNote('${item.id}')">${item.note ? 'Заметка' : '+ Заметка'}</button>
-                <button class="btn-xs" onclick="jumpToPosition(${item.scrollY})">Перейти</button>
-                <button class="btn-xs" onclick="deleteHighlight('${item.id}')">Удалить</button>
-              </div>
-            </div>
-          `;
-        }
-      });
-      container.innerHTML = html;
-    }
-
-    function jumpToPosition(scrollY) {
-      closeDrawer();
-      window.scrollTo({ top: scrollY || 0, behavior: 'smooth' });
-    }
-
-    function deleteBookmark(id) {
-      const bms = getBookmarks().filter(b => b.id !== id);
-      saveBookmarks(bms);
-    }
-
-    function deleteHighlight(id) {
-      const hls = getHighlights().filter(h => h.id !== id);
-      saveHighlights(hls);
-      loadBook(true);
-    }
-
-    function editHighlightNote(id) {
-      const hls = getHighlights();
-      const item = hls.find(h => h.id === id);
-      if (!item) return;
-      editingHighlightId = id;
-      document.getElementById('note-quote-preview').textContent = '«' + item.text.substring(0, 100) + '...»';
-      document.getElementById('note-input').value = item.note || '';
-      document.getElementById('modal-overlay').style.display = 'flex';
-      document.getElementById('bm-modal').style.display = 'none';
-      document.getElementById('note-modal').style.display = 'block';
-    }
-
-    // Load & Live Sync with Server
-    async function loadBook(forceRender = false) {
-      try {
-        // 1. Check status first via relative URL (with cache-busting timestamp)
-        const statusRes = await fetch('./status.json?_t=' + Date.now());
-        if (!statusRes.ok) {
-          throw new Error('HTTP ' + statusRes.status + ' (' + statusRes.statusText + ')');
-        }
-        const status = await statusRes.json();
-
-        // 2. Update progress bar
-        const pct = status.percentage || 0;
-        document.getElementById('pfill').style.width = pct + '%';
-        document.getElementById('ptext').textContent = pct + '%';
-        document.getElementById('ppage').textContent = `Стр. ${status.last_completed_page || 0} / ${status.total_source_pages || 1200}`;
-
-        // 3. Fetch book markdown ONLY if modified_time changed or not yet loaded
-        const isModified = status.modified_time !== lastMtime;
-        if (isModified || !cachedMarkdown) {
-          const bookRes = await fetch('./sri_ramcharitmanas_russian_edition.md?_t=' + (status.modified_time || Date.now()));
-          if (!bookRes.ok) {
-            throw new Error('HTTP ' + bookRes.status + ' (' + bookRes.statusText + ')');
+          const k = state.toc ? state.toc.kandas.find(item => item.id === kandaId) : null;
+          if (k) {
+            els.headerKandaPill.textContent = `${k.roman}. ${k.name}`;
           }
-          cachedMarkdown = await bookRes.text();
-          lastMtime = status.modified_time;
-          renderBookContent(cachedMarkdown);
-        } else if (forceRender && cachedMarkdown) {
-          // Re-render from cache (e.g. after highlight deletion)
-          renderBookContent(cachedMarkdown);
         }
-      } catch (err) {
-        console.error('Ошибка загрузки книги:', err);
-        if (isInitialLoad || !cachedMarkdown) {
-          const contentEl = document.getElementById('content');
-          contentEl.innerHTML = `
-            <div style="text-align: center; padding: 48px 20px; color: var(--text-muted);">
-              <div style="font-size: 2.2rem; margin-bottom: 12px; color: var(--accent);">⚠️</div>
-              <h3 style="color: var(--accent); margin-bottom: 12px; font-size: 1.25rem;">Не удалось загрузить книгу</h3>
-              <p style="margin-bottom: 20px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6;">
-                Произошла ошибка при загрузке данных: ${err.message || 'Ошибка сети'}.<br>
-                Пожалуйста, проверьте интернет-соединение или попробуйте снова.
-              </p>
-              <button onclick="loadBook(true)" style="padding: 10px 24px; border-radius: 6px; border: 1px solid var(--accent); background: var(--accent); color: white; cursor: pointer; font-size: 1rem; font-weight: 500;">
-                Повторить попытку
-              </button>
+      }
+
+      // Render Intro
+      function renderIntro(data) {
+        let html = `
+          <div class="kanda-hero">
+            <div class="hero-om">ॐ</div>
+            <div class="hero-kanda-num">Священное писание</div>
+            <h1 class="hero-title">Шри Рамачаритаманаса</h1>
+            <div class="hero-subtitle">Госвами Тулсидас • Издание Гита Пресс, Горакхпур</div>
+            <div class="hero-divider">❖ ❖ ❖</div>
+          </div>
+        `;
+
+        data.sections.forEach(sec => {
+          html += `
+            <div class="chapter-section" id="${sec.id}">
+              <div class="chapter-header">
+                <div class="ch-heading-title">${sec.title}</div>
+              </div>
+              <div style="white-space: pre-wrap; font-size: 17.5px; line-height: 1.85;">${escapeHtml(sec.content)}</div>
             </div>
           `;
+        });
+
+        // Navigation button to Kanda 1
+        html += `
+          <div class="chapter-nav-row">
+            <div></div>
+            <button class="btn-ch-nav next" onclick="window.srmApp.loadKanda('kanda_1')">
+              Перейти к Бала-канде →
+            </button>
+          </div>
+        `;
+
+        els.readerBox.innerHTML = html;
+      }
+
+      // Render Outro
+      function renderOutro(data) {
+        let html = `
+          <div class="kanda-hero">
+            <div class="hero-om">ॐ</div>
+            <div class="hero-kanda-num">Священное завершение</div>
+            <h1 class="hero-title">Арати Шри Рамаяне</h1>
+            <div class="hero-subtitle">Гимн поклонения и благодарения</div>
+            <div class="hero-divider">❖ ❖ ❖</div>
+          </div>
+          <div class="chapter-section" id="outro-content">
+            <div style="white-space: pre-wrap; font-size: 18px; line-height: 1.9; text-align: center;">${escapeHtml(data.content)}</div>
+          </div>
+          <div class="chapter-nav-row">
+            <button class="btn-ch-nav" onclick="window.srmApp.loadKanda('kanda_7')">
+              ← Назад к Уттара-канде
+            </button>
+            <button class="btn-ch-nav next" onclick="window.srmApp.loadKanda('intro')">
+              В начало книги ॐ
+            </button>
+          </div>
+        `;
+        els.readerBox.innerHTML = html;
+      }
+
+      // Render Kanda Chapters
+      function renderKanda(data) {
+        let html = `
+          <div class="kanda-hero">
+            <div class="hero-om">ॐ</div>
+            <div class="hero-kanda-num">${data.title}</div>
+            <h1 class="hero-title">${data.name}</h1>
+            <div class="hero-subtitle">${data.subtitle} • Главы ${data.chapters_range}</div>
+            <div class="hero-divider">❖ ❖ ❖</div>
+          </div>
+        `;
+
+        data.chapters.forEach((ch, idx) => {
+          html += `
+            <section class="chapter-section" id="${ch.id}" data-chapter-num="${ch.number}">
+              <div class="chapter-header">
+                <div class="ch-number-badge">Глава ${ch.number}</div>
+                <h2 class="ch-heading-title">${ch.title}</h2>
+                <div class="ch-page-meta">Оригинал: Гита Пресс стр. ${ch.gp_page} • PDF стр. ${ch.pdf_page_start}–${ch.pdf_page_end}</div>
+              </div>
+          `;
+
+          // Recitation stops if any
+          if (ch.recitation_stops && ch.recitation_stops.length > 0) {
+            ch.recitation_stops.forEach(st => {
+              html += `
+                <div class="recitation-stop-banner">
+                  <div class="stop-icon">🛑</div>
+                  <div class="stop-body">
+                    <div class="stop-title">${st.text}</div>
+                    <div class="stop-sub">Священная остановка для чтения (стр. ${st.page})</div>
+                  </div>
+                </div>
+              `;
+            });
+          }
+
+          // Stanzas
+          ch.stanzas.forEach(st => {
+            html += `<div class="verse-stanza">`;
+            st.lines.forEach(l => {
+              html += `<div class="verse-line">${escapeHtml(l)}</div>`;
+            });
+            html += `</div>`;
+          });
+
+          // Footnotes
+          if (ch.footnotes && ch.footnotes.length > 0) {
+            html += `
+              <div class="chapter-footnotes-card">
+                <h4>Примечания и комментарии</h4>
+                ${ch.footnotes.map(fn => `
+                  <div class="footnote-item">${escapeHtml(fn.text)} <em style="font-size: 12px; color: var(--text-soft);">(стр. ${fn.page})</em></div>
+                `).join('')}
+              </div>
+            `;
+          }
+
+          // Chapter navigation buttons
+          const prevCh = idx > 0 ? data.chapters[idx - 1] : null;
+          const nextCh = idx < data.chapters.length - 1 ? data.chapters[idx + 1] : null;
+
+          html += `
+            <div class="chapter-nav-row">
+              ${prevCh ? `
+                <button class="btn-ch-nav" onclick="window.srmApp.scrollToChapter('${prevCh.id}')">
+                  ← Глава ${prevCh.number}
+                </button>
+              ` : `
+                <button class="btn-ch-nav" onclick="window.srmApp.navigateAdjacentKanda('${data.id}', -1)">
+                  ← Предыдущая канда
+                </button>
+              `}
+              ${nextCh ? `
+                <button class="btn-ch-nav next" onclick="window.srmApp.scrollToChapter('${nextCh.id}')">
+                  Глава ${nextCh.number} →
+                </button>
+              ` : `
+                <button class="btn-ch-nav next" onclick="window.srmApp.navigateAdjacentKanda('${data.id}', 1)">
+                  Следующая канда →
+                </button>
+              `}
+            </div>
+          `;
+
+          html += `</section>`;
+        });
+
+        els.readerBox.innerHTML = html;
+        setupChapterObserver();
+      }
+
+      function setupChapterObserver() {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const chId = entry.target.id;
+              state.currentChapterId = chId;
+              localStorage.setItem('srm_last_chapter', chId);
+
+              // Update active TOC item
+              document.querySelectorAll('.toc-chapter-item').forEach(el => el.classList.remove('active'));
+              const activeToc = document.getElementById(`toc-item-${chId}`);
+              if (activeToc) {
+                activeToc.classList.add('active');
+              }
+            }
+          });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.chapter-section').forEach(sec => observer.observe(sec));
+      }
+
+      function scrollToChapter(chId) {
+        state.currentChapterId = chId;
+        const el = document.getElementById(chId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+          window.location.hash = chId;
         }
       }
-    }
 
-    function renderBookContent(markdownText) {
-      const contentEl = document.getElementById('content');
-      contentEl.innerHTML = parseMarkdown(markdownText);
-      buildTOC();
-      renderContentHighlights();
-
-      if (isInitialLoad) {
-        isInitialLoad = false;
-        const savedY = localStorage.getItem(KEY_SCROLL);
-        if (savedY) {
-          window.scrollTo({ top: parseFloat(savedY), behavior: 'instant' });
+      function navigateAdjacentKanda(currentKandaId, direction) {
+        const kandasOrder = ['intro', 'kanda_1', 'kanda_2', 'kanda_3', 'kanda_4', 'kanda_5', 'kanda_6', 'kanda_7', 'outro'];
+        const currentIdx = kandasOrder.indexOf(currentKandaId);
+        const targetIdx = currentIdx + direction;
+        if (targetIdx >= 0 && targetIdx < kandasOrder.length) {
+          loadKanda(kandasOrder[targetIdx]);
         }
       }
-    }
 
-    // Initialize Preferences
-    const savedTheme = localStorage.getItem(KEY_THEME) || 'light';
-    changeTheme(savedTheme);
-    document.getElementById('theme-select').value = savedTheme;
+      // Settings: Theme, Font Size, Column Width
+      function applyTheme(t) {
+        state.theme = t;
+        document.body.setAttribute('data-theme', t);
+        localStorage.setItem('srm_theme', t);
 
-    const savedSize = localStorage.getItem(KEY_FONTSIZE);
-    if (savedSize) {
-      currentFontSize = parseFloat(savedSize);
-      document.getElementById('content').style.setProperty('--book-font-size', currentFontSize + 'rem');
-    }
+        document.querySelectorAll('#btn-theme-light, #btn-theme-sepia, #btn-theme-dark').forEach(b => b.classList.remove('active'));
+        if (t === 'light') document.getElementById('btn-theme-light')?.classList.add('active');
+        if (t === 'sepia') document.getElementById('btn-theme-sepia')?.classList.add('active');
+        if (t === 'dark') document.getElementById('btn-theme-dark')?.classList.add('active');
+      }
 
-    renderLibrary();
-    loadBook();
+      function applyFontSize(sz) {
+        sz = Math.max(15, Math.min(26, sz));
+        state.fontSize = sz;
+        document.body.style.setProperty('--content-font-size', sz + 'px');
+        localStorage.setItem('srm_font_size', sz);
+      }
 
-    // Auto-sync polling every 5s for growing book
-    setInterval(() => loadBook(false), 5000);
+      function applyContentWidth(w) {
+        state.contentWidth = w;
+        document.body.style.setProperty('--content-max-width', w + 'px');
+        localStorage.setItem('srm_content_width', w);
+
+        document.querySelectorAll('#btn-width-std, #btn-width-comf, #btn-width-wide').forEach(b => b.classList.remove('active'));
+        if (w === '850') document.getElementById('btn-width-std')?.classList.add('active');
+        if (w === '980') document.getElementById('btn-width-comf')?.classList.add('active');
+        if (w === '1120') document.getElementById('btn-width-wide')?.classList.add('active');
+      }
+
+      // Search Modal
+      async function openSearch() {
+        els.searchModal.classList.add('active');
+        els.searchMainInput.focus();
+
+        if (!state.searchIndex) {
+          try {
+            const res = await fetch('./data/search_index.json');
+            if (!res.ok) throw new Error('Search index failed: ' + res.status);
+            state.searchIndex = await res.json();
+          } catch (err) {
+            console.error('Failed to load search index:', err);
+          }
+        }
+      }
+
+      function closeSearch() {
+        els.searchModal.classList.remove('active');
+      }
+
+      function executeSearch(query) {
+        query = query.trim().toLowerCase();
+        if (!query || query.length < 2) {
+          els.searchResultsBox.innerHTML = `
+            <div style="text-align: center; color: var(--text-soft); padding: 40px 20px; font-size: 14px;">
+              Введите не менее 2 символов для поиска...
+            </div>
+          `;
+          return;
+        }
+
+        if (!state.searchIndex) return;
+
+        const results = [];
+        for (const item of state.searchIndex) {
+          const matchIdx = item.full_text.indexOf(query);
+          if (matchIdx !== -1) {
+            // Extract snippet around match
+            const start = Math.max(0, matchIdx - 80);
+            const end = Math.min(item.full_text.length, matchIdx + query.length + 100);
+            let snippet = item.full_text.substring(start, end);
+            if (start > 0) snippet = '...' + snippet;
+            if (end < item.full_text.length) snippet += '...';
+
+            // Highlight
+            const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
+            const highlightedSnippet = escapeHtml(snippet).replace(regex, '<mark>$1</mark>');
+
+            results.push({
+              item,
+              snippet: highlightedSnippet
+            });
+
+            if (results.length >= 40) break; // limit to 40 fast matches
+          }
+        }
+
+        if (results.length === 0) {
+          els.searchResultsBox.innerHTML = `
+            <div style="text-align: center; color: var(--text-muted); padding: 30px;">
+              Ничего не найдено по запросу «<strong>${escapeHtml(query)}</strong>».
+            </div>
+          `;
+          return;
+        }
+
+        const html = `
+          <div style="font-size: 12.5px; color: var(--text-soft); margin-bottom: 12px;">
+            Найдено совпадений: ${results.length}
+          </div>
+          ${results.map(r => `
+            <div class="search-result-card" onclick="window.srmApp.selectSearchResult('${r.item.kanda_id}', '${r.item.id}')">
+              <div class="search-result-title">${r.item.title}</div>
+              <div class="search-result-kanda">${r.item.kanda_name ? r.item.kanda_name : ''}</div>
+              <div class="search-result-snippet">${r.snippet}</div>
+            </div>
+          `).join('')}
+        `;
+        els.searchResultsBox.innerHTML = html;
+      }
+
+      function selectSearchResult(kandaId, elemId) {
+        closeSearch();
+        loadKanda(kandaId, elemId);
+      }
+
+      // TOC Filter
+      function filterTOC(query) {
+        query = query.trim().toLowerCase();
+        const items = document.querySelectorAll('.toc-chapter-item');
+        items.forEach(item => {
+          const title = item.getAttribute('data-title') || '';
+          if (!query || title.includes(query)) {
+            item.style.display = 'flex';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      }
+
+      // Sidebar Controls
+      function openSidebar() {
+        els.tocSidebar.classList.add('open');
+        els.sidebarBackdrop.classList.add('active');
+      }
+
+      function closeSidebar() {
+        els.tocSidebar.classList.remove('open');
+        els.sidebarBackdrop.classList.remove('active');
+      }
+
+      function toggleKandaGroup(kandaId) {
+        const group = document.getElementById(`toc-group-${kandaId}`);
+        if (group) {
+          group.classList.toggle('expanded');
+        }
+      }
+
+      // Event Listeners
+      function setupEventListeners() {
+        els.btnToggleToc.addEventListener('click', () => {
+          if (els.tocSidebar.classList.contains('open')) {
+            closeSidebar();
+          } else {
+            openSidebar();
+          }
+        });
+
+        els.btnCloseToc.addEventListener('click', closeSidebar);
+        els.sidebarBackdrop.addEventListener('click', closeSidebar);
+
+        els.btnGoHome.addEventListener('click', () => loadKanda('intro'));
+
+        // Theme buttons
+        document.getElementById('btn-theme-light').addEventListener('click', () => applyTheme('light'));
+        document.getElementById('btn-theme-sepia').addEventListener('click', () => applyTheme('sepia'));
+        document.getElementById('btn-theme-dark').addEventListener('click', () => applyTheme('dark'));
+
+        // Font buttons
+        document.getElementById('btn-font-dec').addEventListener('click', () => applyFontSize(state.fontSize - 1));
+        document.getElementById('btn-font-inc').addEventListener('click', () => applyFontSize(state.fontSize + 1));
+
+        // Width buttons
+        document.getElementById('btn-width-std').addEventListener('click', () => applyContentWidth('850'));
+        document.getElementById('btn-width-comf').addEventListener('click', () => applyContentWidth('980'));
+        document.getElementById('btn-width-wide').addEventListener('click', () => applyContentWidth('1120'));
+
+        // Search modal
+        els.btnOpenSearch.addEventListener('click', openSearch);
+        els.btnCloseSearch.addEventListener('click', closeSearch);
+        els.searchModal.addEventListener('click', (e) => {
+          if (e.target === els.searchModal) closeSearch();
+        });
+
+        let searchDebounceTimer;
+        els.searchMainInput.addEventListener('input', (e) => {
+          clearTimeout(searchDebounceTimer);
+          searchDebounceTimer = setTimeout(() => executeSearch(e.target.value), 200);
+        });
+
+        // TOC tabs
+        document.querySelectorAll('.toc-tab-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.toc-tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const tab = btn.getAttribute('data-tab');
+            state.activeTab = tab;
+
+            els.tocContentChapters.style.display = tab === 'chapters' ? 'block' : 'none';
+            els.tocContentStops.style.display = tab === 'stops' ? 'block' : 'none';
+            els.tocContentAbout.style.display = tab === 'about' ? 'block' : 'none';
+          });
+        });
+
+        // TOC filter input
+        els.tocFilterInput.addEventListener('input', (e) => filterTOC(e.target.value));
+
+        // Download MD button
+        els.btnDownloadMd.addEventListener('click', () => {
+          window.open('./sri_ramcharitmanas_russian_edition.md', '_blank');
+        });
+
+        // Window scroll for progress bar & back-to-top
+        window.addEventListener('scroll', () => {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+          els.progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+
+          if (scrollTop > 400) {
+            els.btnBackToTop.classList.add('visible');
+          } else {
+            els.btnBackToTop.classList.remove('visible');
+          }
+        });
+
+        els.btnBackToTop.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Keyboard shortcuts
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            closeSearch();
+            closeSidebar();
+          }
+          if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            openSearch();
+          }
+        });
+      }
+
+      // Utility Helpers
+      function escapeHtml(str) {
+        if (!str) return '';
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function escapeRegex(str) {
+        return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      }
+
+      // Expose globally for inline onclick handlers
+      window.srmApp = {
+        loadKanda,
+        scrollToChapter,
+        toggleKandaGroup,
+        navigateAdjacentKanda,
+        selectSearchResult
+      };
+
+      // Launch
+      document.addEventListener('DOMContentLoaded', init);
+    })();
   </script>
 </body>
 </html>

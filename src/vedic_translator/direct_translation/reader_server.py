@@ -1172,12 +1172,28 @@ class BookReaderHandler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:  # noqa: N802
         clean_path = self.path.split("?")[0]
+        docs_dir = Path("docs")
 
         if clean_path in ("/", "/index.html"):
+            index_file = docs_dir / "index.html"
+            content = index_file.read_bytes() if index_file.exists() else READER_HTML.encode("utf-8")
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
-            self.wfile.write(READER_HTML.encode("utf-8"))
+            self.wfile.write(content)
+
+        elif clean_path.startswith("/data/"):
+            rel_path = clean_path.lstrip("/")
+            target_file = (docs_dir / rel_path.replace("data/", "data/")).resolve()
+            if target_file.exists() and docs_dir.resolve() in target_file.parents:
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.end_headers()
+                self.wfile.write(target_file.read_bytes())
+            else:
+                self.send_response(404)
+                self.end_headers()
+                self.wfile.write(b"Not Found")
 
         elif clean_path in ("/status.json", "/api/status"):
             stats = get_translation_stats(self.translations_dir)

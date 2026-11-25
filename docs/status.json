@@ -1,9 +1,12 @@
 {
-  "total_source_pages": 1200,
-  "last_completed_page": 195,
-  "translated_pages_count": 195,
-  "percentage": 16.25,
-  "file_size": 419084,
-  "modified_time": 1795582037.4348068,
-  "chunks_count": 13
+  "status": "completed",
+  "total_source_pages": 858,
+  "last_completed_page": 858,
+  "percentage": 100.0,
+  "kandas_completed": 7,
+  "chapters_completed": 218,
+  "total_stanzas": 5915,
+  "total_footnotes": 1090,
+  "recitation_stops": 39,
+  "edition": "Полное русское издание (858 страниц)"
 }
