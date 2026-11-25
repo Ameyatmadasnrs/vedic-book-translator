@@ -4,82 +4,87 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Шри Рамачаритаманаса — Госвами Тулсидас | Полное русское издание</title>
-  <meta name="description" content="Полное русское издание поэмы «Шри Рамачаритаманаса» Госвами Тулсидаса. 7 канд, 218 глав, 39 остановок для молитвенного чтения, примечания и комментарии.">
+  <meta name="description" content="Полное русское издание эпической поэмы «Шри Рамачаритаманаса» Госвами Тулсидаса. 7 канд, 218 глав, 39 остановок для молитвенного чтения, примечания и комментарии.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,500&family=Marcellus&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-body: #f7f4ed;
+      /* Palette: Classical Warm Parchment (Light) */
+      --bg-body: #faf7f2;
       --bg-surface: #ffffff;
       --bg-surface-trans: rgba(255, 255, 255, 0.94);
-      --bg-card: #fdfbf7;
-      --bg-sidebar: #f2ece1;
+      --bg-card: #f4efe6;
+      --bg-sidebar: #f2ece0;
       --text-main: #24201d;
-      --text-muted: #6b635b;
-      --text-soft: #8f857b;
-      --border-color: #e2d9cb;
+      --text-muted: #665d55;
+      --text-soft: #8a7f74;
+      --border-color: #e0d7c7;
       --border-soft: #ede6da;
-      --accent-sacred: #9e3223;
-      --accent-sacred-hover: #b53b2a;
-      --accent-gold: #c29033;
-      --accent-gold-soft: rgba(194, 144, 51, 0.15);
-      --accent-stop: #b84a28;
-      --accent-stop-bg: #faeee7;
-      --accent-stop-border: #f0c3b2;
+      --accent-sacred: #9c2f1f;
+      --accent-sacred-hover: #b53826;
+      --accent-gold: #b37f22;
+      --accent-gold-soft: rgba(179, 127, 34, 0.12);
+      --accent-stop: #b44322;
+      --accent-stop-bg: #faefe8;
+      --accent-stop-border: #ecc2b1;
       --shadow-sm: 0 2px 6px rgba(40, 30, 20, 0.05);
       --shadow-md: 0 4px 16px rgba(40, 30, 20, 0.08);
       --shadow-lg: 0 10px 30px rgba(40, 30, 20, 0.12);
-      --font-body: 'Literata', Georgia, serif;
+      
+      /* Typography */
+      --font-body: 'Literata', Georgia, 'Times New Roman', serif;
       --font-header: 'Marcellus', 'Cinzel', serif;
       --font-display: 'Cinzel', serif;
-      --content-max-width: 960px;
-      --content-font-size: 19px;
-      --content-line-height: 1.85;
+      --content-max-width: 1020px;
+      --content-font-size: 21.5px;
+      --content-line-height: 1.72;
       --sidebar-width: 380px;
     }
 
+    [data-theme="sepia"] {
+      /* Palette: Vintage Literary Papyrus */
+      --bg-body: #f4ecda;
+      --bg-surface: #faefe0;
+      --bg-surface-trans: rgba(250, 239, 224, 0.95);
+      --bg-card: #ece1cc;
+      --bg-sidebar: #eae0cb;
+      --text-main: #33271e;
+      --text-muted: #6e5e50;
+      --text-soft: #8d7c6e;
+      --border-color: #d6c6ad;
+      --border-soft: #e2d4bd;
+      --accent-sacred: #8a2a1a;
+      --accent-sacred-hover: #a33220;
+      --accent-gold: #a6741b;
+      --accent-gold-soft: rgba(166, 116, 27, 0.14);
+      --accent-stop: #a6391d;
+      --accent-stop-bg: #f5e4d7;
+      --accent-stop-border: #e2bda9;
+    }
+
     [data-theme="dark"] {
-      --bg-body: #131518;
-      --bg-surface: #1b1e23;
-      --bg-surface-trans: rgba(27, 30, 35, 0.94);
-      --bg-card: #21252c;
-      --bg-sidebar: #17191d;
-      --text-main: #e2e1db;
-      --text-muted: #9e9ea3;
-      --text-soft: #70737a;
-      --border-color: #2c313a;
-      --border-soft: #23272e;
-      --accent-sacred: #df6451;
-      --accent-sacred-hover: #eb7765;
-      --accent-gold: #e2b467;
-      --accent-gold-soft: rgba(226, 180, 103, 0.15);
-      --accent-stop: #e6734c;
-      --accent-stop-bg: #2a1f1b;
-      --accent-stop-border: #523126;
+      /* Palette: Midnight Velvet (Non-glare, eye-strain free) */
+      --bg-body: #16181c;
+      --bg-surface: #1e2127;
+      --bg-surface-trans: rgba(30, 33, 39, 0.94);
+      --bg-card: #252932;
+      --bg-sidebar: #181a1f;
+      --text-main: #dedad2;
+      --text-muted: #9aa0aa;
+      --text-soft: #707580;
+      --border-color: #2e333e;
+      --border-soft: #242932;
+      --accent-sacred: #e26953;
+      --accent-sacred-hover: #eb7a66;
+      --accent-gold: #deb063;
+      --accent-gold-soft: rgba(222, 176, 99, 0.16);
+      --accent-stop: #e5724d;
+      --accent-stop-bg: #2b201d;
+      --accent-stop-border: #523429;
       --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
       --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
       --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    [data-theme="sepia"] {
-      --bg-body: #f4ebd8;
-      --bg-surface: #faefe0;
-      --bg-surface-trans: rgba(250, 239, 224, 0.95);
-      --bg-card: #fef7ec;
-      --bg-sidebar: #ede1cb;
-      --text-main: #342820;
-      --text-muted: #726253;
-      --text-soft: #918172;
-      --border-color: #d8c9b2;
-      --border-soft: #e3d7c3;
-      --accent-sacred: #8e2b1b;
-      --accent-sacred-hover: #a83523;
-      --accent-gold: #b37f22;
-      --accent-gold-soft: rgba(179, 127, 34, 0.15);
-      --accent-stop: #a83e20;
-      --accent-stop-bg: #f5e4d7;
-      --accent-stop-border: #e6c1ad;
     }
 
     * {
@@ -100,7 +105,11 @@
       line-height: var(--content-line-height);
       min-height: 100vh;
       overflow-x: hidden;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "kern" 1, "liga" 1;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     /* Reading Progress Bar */
@@ -121,13 +130,13 @@
       top: 0;
       z-index: 500;
       background: var(--bg-surface-trans);
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-color);
       height: 60px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
+      padding: 0 18px;
       box-shadow: var(--shadow-sm);
     }
 
@@ -141,8 +150,8 @@
       background: transparent;
       border: 1px solid transparent;
       color: var(--text-main);
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: 8px;
       cursor: pointer;
       display: inline-flex;
@@ -187,7 +196,7 @@
       font-size: 16px;
       letter-spacing: 0.5px;
       color: var(--accent-sacred);
-      line-height: 1.1;
+      line-height: 1.15;
     }
 
     .book-brand .sub-title {
@@ -198,7 +207,7 @@
 
     .header-active-kanda {
       font-family: var(--font-header);
-      font-size: 14px;
+      font-size: 13.5px;
       color: var(--text-main);
       padding: 4px 12px;
       border-radius: 20px;
@@ -206,12 +215,12 @@
       border: 1px solid var(--accent-gold);
       display: none;
       white-space: nowrap;
-      max-width: 320px;
+      max-width: 380px;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    @media (min-width: 900px) {
+    @media (min-width: 992px) {
       .header-active-kanda {
         display: inline-block;
       }
@@ -225,22 +234,30 @@
       border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 2px;
+      gap: 1px;
     }
 
     .controls-pill button {
       background: transparent;
       border: none;
       color: var(--text-main);
-      padding: 6px 10px;
+      padding: 5px 9px;
       font-size: 13px;
+      font-weight: 600;
       cursor: pointer;
       border-radius: 6px;
       font-family: var(--font-body);
-      transition: background 0.2s;
+      transition: all 0.15s;
     }
 
-    .controls-pill button:hover, .controls-pill button.active {
-      background: var(--border-color);
+    .controls-pill button:hover {
+      background: var(--border-soft);
+    }
+
+    .controls-pill button.active {
+      background: var(--accent-gold-soft);
+      color: var(--accent-sacred);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     }
 
     /* Main Container & Layout */
@@ -263,7 +280,7 @@
       display: flex;
       flex-direction: column;
       transform: translateX(-100%);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: var(--shadow-lg);
     }
 
@@ -328,7 +345,7 @@
       background: var(--bg-surface);
       color: var(--text-main);
       font-family: var(--font-body);
-      font-size: 13px;
+      font-size: 13.5px;
     }
 
     .toc-search-input:focus {
@@ -351,13 +368,13 @@
     }
 
     .toc-kanda-header {
-      padding: 12px 14px;
+      padding: 11px 14px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: space-between;
       user-select: none;
-      transition: background 0.2s;
+      transition: background 0.15s;
     }
 
     .toc-kanda-header:hover {
@@ -403,8 +420,8 @@
     }
 
     .toc-chapter-item {
-      padding: 9px 14px 9px 20px;
-      font-size: 13.5px;
+      padding: 8px 14px 8px 18px;
+      font-size: 13px;
       cursor: pointer;
       display: flex;
       align-items: baseline;
@@ -412,7 +429,7 @@
       border-left: 3px solid transparent;
       color: var(--text-main);
       transition: all 0.15s;
-      line-height: 1.4;
+      line-height: 1.35;
     }
 
     .toc-chapter-item:hover {
@@ -492,7 +509,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.45);
       z-index: 400;
       display: none;
       backdrop-filter: blur(2px);
@@ -508,34 +525,35 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 30px 16px 80px;
+      padding: 24px 20px 70px;
       width: 100%;
     }
 
     .reader-content-box {
       width: 100%;
       max-width: var(--content-max-width);
-      transition: max-width 0.25s ease;
+      transition: max-width 0.22s ease;
     }
 
     /* Kanda Title Banner */
     .kanda-hero {
       text-align: center;
-      padding: 40px 20px 30px;
-      margin-bottom: 40px;
+      padding: 32px 18px 24px;
+      margin-bottom: 32px;
       border-bottom: 1px solid var(--border-color);
       position: relative;
     }
 
     .kanda-hero .hero-om {
-      font-size: 38px;
+      font-size: 40px;
       color: var(--accent-gold);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      line-height: 1;
     }
 
     .kanda-hero .hero-kanda-num {
       font-family: var(--font-header);
-      font-size: 16px;
+      font-size: 15px;
       letter-spacing: 2px;
       color: var(--accent-gold);
       text-transform: uppercase;
@@ -545,21 +563,21 @@
 
     .kanda-hero .hero-title {
       font-family: var(--font-header);
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 700;
       color: var(--accent-sacred);
-      line-height: 1.2;
+      line-height: 1.22;
       margin-bottom: 8px;
     }
 
     .kanda-hero .hero-subtitle {
-      font-size: 16px;
+      font-size: 17px;
       font-style: italic;
       color: var(--text-muted);
     }
 
     .kanda-hero .hero-divider {
-      margin-top: 18px;
+      margin-top: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -577,49 +595,59 @@
 
     /* Chapter Section */
     .chapter-section {
-      margin-bottom: 60px;
-      scroll-margin-top: 80px;
+      margin-bottom: 48px;
+      scroll-margin-top: 75px;
     }
 
     .chapter-header {
-      padding: 16px 0 12px;
-      margin-bottom: 24px;
+      padding: 16px 0 14px;
+      margin-bottom: 22px;
       border-bottom: 1px solid var(--border-soft);
       position: relative;
     }
 
     .chapter-header .ch-number-badge {
       font-family: var(--font-header);
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 700;
       color: var(--accent-gold);
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
       margin-bottom: 4px;
     }
 
     .chapter-header .ch-heading-title {
       font-family: var(--font-header);
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 700;
       color: var(--accent-sacred);
-      line-height: 1.3;
+      line-height: 1.32;
     }
 
     .chapter-header .ch-page-meta {
-      font-size: 12.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
       color: var(--text-soft);
-      margin-top: 4px;
+      margin-top: 6px;
+    }
+
+    .ch-page-meta .meta-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 1px 8px;
+      border-radius: 4px;
     }
 
     /* Recitation Stop Banner */
     .recitation-stop-banner {
       background: var(--accent-stop-bg);
       border: 1px solid var(--accent-stop-border);
-      border-left: 5px solid var(--accent-stop);
-      padding: 14px 18px;
+      border-left: 4px solid var(--accent-stop);
+      padding: 12px 16px;
       border-radius: 8px;
-      margin: 28px 0;
+      margin: 22px 0;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -627,7 +655,7 @@
     }
 
     .recitation-stop-banner .stop-icon {
-      font-size: 24px;
+      font-size: 22px;
     }
 
     .recitation-stop-banner .stop-body {
@@ -639,6 +667,7 @@
       font-size: 15px;
       font-weight: 700;
       color: var(--accent-stop);
+      line-height: 1.25;
     }
 
     .recitation-stop-banner .stop-sub {
@@ -647,20 +676,57 @@
       margin-top: 2px;
     }
 
-    /* Stanzas & Verses */
+    /* Stanzas & Verses Formatting */
     .verse-stanza {
-      margin-bottom: 22px;
-      padding: 6px 0;
+      margin-bottom: 16px;
+      padding: 0;
+      transition: background 0.15s;
     }
 
     .verse-line {
-      margin-bottom: 2px;
-      letter-spacing: 0.1px;
+      margin-bottom: 3px;
+      line-height: 1.62;
+      letter-spacing: 0.01em;
     }
 
-    /* Footnotes section at chapter end */
+    /* Distinct type: Prayer & Invocations */
+    .verse-prayer {
+      background: var(--bg-card);
+      border-left: 3px solid var(--accent-gold);
+      border-radius: 6px;
+      padding: 12px 18px 12px 20px;
+      margin: 18px 0;
+      font-style: italic;
+    }
+
+    /* Distinct type: Dialogues */
+    .verse-dialogue {
+      padding-left: 14px;
+      border-left: 2px solid var(--border-color);
+      margin-bottom: 16px;
+    }
+
+    /* Footnote Reference in Text */
+    .fn-marker {
+      font-size: 0.76em;
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin: 0 1px;
+      cursor: pointer;
+      user-select: none;
+      vertical-align: super;
+      line-height: 0;
+      transition: color 0.15s;
+    }
+
+    .fn-marker:hover {
+      color: var(--accent-sacred);
+      text-decoration: underline;
+    }
+
+    /* Footnotes Card at Chapter End */
     .chapter-footnotes-card {
-      margin-top: 30px;
+      margin-top: 26px;
       padding: 16px 20px;
       background: var(--bg-card);
       border: 1px solid var(--border-color);
@@ -669,17 +735,20 @@
 
     .chapter-footnotes-card h4 {
       font-family: var(--font-header);
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
       color: var(--accent-gold);
       margin-bottom: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .footnote-item {
-      font-size: 14px;
-      line-height: 1.6;
+      font-size: 14.5px;
+      line-height: 1.55;
       color: var(--text-muted);
       margin-bottom: 8px;
     }
@@ -693,16 +762,16 @@
       display: flex;
       justify-content: space-between;
       gap: 12px;
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border-color);
+      margin-top: 32px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-soft);
     }
 
     .btn-ch-nav {
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      padding: 12px 18px;
+      padding: 11px 16px;
       border-radius: 8px;
       cursor: pointer;
       font-family: var(--font-header);
@@ -712,7 +781,7 @@
       gap: 8px;
       transition: all 0.2s;
       flex: 1;
-      max-width: 280px;
+      max-width: 290px;
     }
 
     .btn-ch-nav:hover {
@@ -733,7 +802,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       z-index: 900;
       display: none;
       align-items: flex-start;
@@ -751,7 +820,7 @@
       border: 1px solid var(--border-color);
       border-radius: 12px;
       width: 100%;
-      max-width: 720px;
+      max-width: 740px;
       max-height: 80vh;
       display: flex;
       flex-direction: column;
@@ -824,7 +893,7 @@
     }
 
     mark {
-      background: rgba(226, 180, 103, 0.4);
+      background: rgba(222, 176, 99, 0.4);
       color: inherit;
       padding: 1px 3px;
       border-radius: 2px;
@@ -836,8 +905,8 @@
       position: fixed;
       bottom: 24px;
       right: 24px;
-      width: 46px;
-      height: 46px;
+      width: 44px;
+      height: 44px;
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
       color: var(--accent-sacred);
@@ -851,7 +920,7 @@
       z-index: 300;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s, transform 0.2s;
+      transition: opacity 0.25s, transform 0.2s;
     }
 
     .btn-back-to-top.visible {
@@ -901,13 +970,16 @@
         padding: 10px 12px;
       }
       main.reader-container {
-        padding: 16px 10px 60px;
+        padding: 14px 12px 60px;
       }
       .chapter-header .ch-heading-title {
-        font-size: 20px;
+        font-size: 21px;
       }
       .kanda-hero .hero-title {
-        font-size: 26px;
+        font-size: 27px;
+      }
+      :root {
+        --content-font-size: 19px;
       }
     }
   </style>
@@ -920,10 +992,10 @@
   <!-- Top Navigation Bar -->
   <header class="top-bar">
     <div class="nav-left">
-      <button class="btn-icon" id="btn-toggle-toc" title="Оглавление (TOC)">
+      <button class="btn-icon" id="btn-toggle-toc" title="Оглавление (218 глав)">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
-      <div class="book-brand" id="btn-go-home">
+      <div class="book-brand" id="btn-go-home" title="В начало книги">
         <span class="symbol">ॐ</span>
         <div class="title-wrap">
           <span class="main-title">Шри Рамачаритаманаса</span>
@@ -935,7 +1007,7 @@
 
     <div class="nav-right">
       <!-- Search Button -->
-      <button class="btn-icon" id="btn-open-search" title="Поиск по всей книге">
+      <button class="btn-icon" id="btn-open-search" title="Поиск по всей книге (Ctrl+K)">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       </button>
 
@@ -945,18 +1017,18 @@
         <button id="btn-font-inc" title="Увеличить шрифт">A+</button>
       </div>
 
-      <!-- Column Width Controls -->
+      <!-- Column Width Controls (880px / 1020px / 1160px) -->
       <div class="controls-pill" title="Ширина текста">
-        <button id="btn-width-std" class="active" title="Стандартная">850</button>
-        <button id="btn-width-comf" title="Комфортная">980</button>
-        <button id="btn-width-wide" title="Широкая">1120</button>
+        <button id="btn-width-compact" title="Компактный режим (880px)">880</button>
+        <button id="btn-width-standard" class="active" title="Стандартный режим (1020px)">1020</button>
+        <button id="btn-width-wide" title="Широкий режим (1160px)">1160</button>
       </div>
 
       <!-- Theme Controls -->
       <div class="controls-pill" title="Цветовая тема">
-        <button id="btn-theme-light" class="active" title="Светлая">☀️</button>
-        <button id="btn-theme-sepia" title="Сепия">📜</button>
-        <button id="btn-theme-dark" title="Тёмная">🌙</button>
+        <button id="btn-theme-light" class="active" title="Светлая (Папирус)">☀️</button>
+        <button id="btn-theme-sepia" title="Сепия (Старинная бумага)">📜</button>
+        <button id="btn-theme-dark" title="Тёмная (Ночь)">🌙</button>
       </div>
     </div>
   </header>
@@ -971,7 +1043,7 @@
     <aside class="toc-sidebar" id="toc-sidebar">
       <div class="toc-header">
         <div class="toc-title-row">
-          <h2>Оглавление</h2>
+          <h2>Оглавление книги</h2>
           <button class="btn-icon" id="btn-close-toc" title="Закрыть оглавление">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
@@ -981,7 +1053,7 @@
           <button class="toc-tab-btn" data-tab="stops">🛑 Остановки (39)</button>
           <button class="toc-tab-btn" data-tab="about">ℹ️ Об издании</button>
         </div>
-        <input type="text" class="toc-search-input" id="toc-filter-input" placeholder="Фильтр по названию главы...">
+        <input type="text" class="toc-search-input" id="toc-filter-input" placeholder="Быстрый фильтр по названию...">
       </div>
 
       <!-- Tab 1: Chapters Accordion -->
@@ -997,17 +1069,17 @@
       <!-- Tab 3: About Edition -->
       <div class="toc-content" id="toc-content-about" style="display: none; padding: 16px;">
         <h3 style="font-family: var(--font-header); color: var(--accent-sacred); margin-bottom: 8px;">Шри Рамачаритаманаса</h3>
-        <p style="font-size: 13.5px; line-height: 1.6; margin-bottom: 12px;">«Озеро Манаса деяний Шри Рамы» — величайшая эпическая и бхакти-поэма индийской духовной литературы, сложенная Госвами Тулсидасом в XVI веке на языке авадхи.</p>
-        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; font-size: 12.5px; line-height: 1.6; margin-bottom: 14px;">
+        <p style="font-size: 14px; line-height: 1.6; margin-bottom: 12px;">«Озеро Манаса деяний Шри Рамы» — бессмертная эпическая и духовная поэма Госвами Тулсидаса, сложенная в XVI веке на языке авадхи. Полный перевод с санскрита и хинди.</p>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; font-size: 13px; line-height: 1.6; margin-bottom: 14px;">
           <div><strong>Издатель оригинала:</strong> Гита Пресс, Горакхпур (Индия)</div>
           <div><strong>Объём издания:</strong> 858 страниц PDF</div>
-          <div><strong>Канд:</strong> 7 священных ступеней</div>
+          <div><strong>Канд (ступеней):</strong> 7 ступеней</div>
           <div><strong>Всего глав:</strong> 218 глав со стихами и дохами</div>
-          <div><strong>Остановок чтений:</strong> 39 (30-дневное и 9-дневное)</div>
-          <div><strong>Примечания и сноски:</strong> 1090 разъяснений</div>
+          <div><strong>Молитвенных остановок:</strong> 39 (30-дневное и 9-дневное)</div>
+          <div><strong>Сносок и примечаний:</strong> 1 090 разъяснений</div>
         </div>
         <button class="btn-ch-nav" id="btn-download-md" style="width: 100%; max-width: 100%; justify-content: center;">
-          📄 Скачать полный текст (MD)
+          📄 Скачать полный текст (MD, 2.5 МБ)
         </button>
       </div>
     </aside>
@@ -1061,8 +1133,8 @@
         currentChapterId: null,
         activeTab: 'chapters',
         theme: localStorage.getItem('srm_theme') || 'light',
-        fontSize: parseInt(localStorage.getItem('srm_font_size') || '19', 10),
-        contentWidth: localStorage.getItem('srm_content_width') || '980'
+        fontSize: parseFloat(localStorage.getItem('srm_font_size') || '21.5'),
+        contentWidth: localStorage.getItem('srm_content_width') || '1020'
       };
 
       // DOM Elements
@@ -1121,7 +1193,6 @@
           if (savedKanda && (savedKanda === 'intro' || savedKanda === 'outro' || savedKanda.startsWith('kanda_'))) {
             await loadKanda(savedKanda, savedCh);
           } else {
-            // Default to Intro or Kanda 1
             await loadKanda('intro');
           }
         } catch (err) {
@@ -1222,20 +1293,17 @@
         localStorage.setItem('srm_last_kanda', kandaId);
         if (targetChapterId) localStorage.setItem('srm_last_chapter', targetChapterId);
 
-        // Update UI pill
-        updateKandaPill(kandaId);
+        updateKandaPill(kandaId, targetChapterId);
         renderTOCChapters();
 
-        // Close sidebar on mobile
         if (window.innerWidth < 900) {
           closeSidebar();
         }
 
-        // Show spinner
         els.readerBox.innerHTML = `
           <div class="loader-box">
             <div class="spinner"></div>
-            <div style="font-family: var(--font-header); color: var(--text-muted);">Загрузка текста...</div>
+            <div style="font-family: var(--font-header); color: var(--text-muted);">Загрузка священного текста...</div>
           </div>
         `;
 
@@ -1256,7 +1324,6 @@
             renderKanda(data);
           }
 
-          // If target chapter is given, scroll to it
           if (targetChapterId) {
             setTimeout(() => {
               const el = document.getElementById(targetChapterId);
@@ -1279,15 +1346,20 @@
         }
       }
 
-      function updateKandaPill(kandaId) {
+      function updateKandaPill(kandaId, chapterId = null) {
         if (kandaId === 'intro') {
-          els.headerKandaPill.textContent = 'Вступление';
+          els.headerKandaPill.textContent = 'Вступление и порядок чтения';
         } else if (kandaId === 'outro') {
           els.headerKandaPill.textContent = 'Арати Шри Рамаяне';
         } else {
           const k = state.toc ? state.toc.kandas.find(item => item.id === kandaId) : null;
           if (k) {
-            els.headerKandaPill.textContent = `${k.roman}. ${k.name}`;
+            let label = `${k.roman}. ${k.name}`;
+            if (chapterId && chapterId.startsWith('ch-')) {
+              const chNum = chapterId.replace('ch-', '');
+              label += ` • Глава ${chNum}`;
+            }
+            els.headerKandaPill.textContent = label;
           }
         }
       }
@@ -1299,23 +1371,23 @@
             <div class="hero-om">ॐ</div>
             <div class="hero-kanda-num">Священное писание</div>
             <h1 class="hero-title">Шри Рамачаритаманаса</h1>
-            <div class="hero-subtitle">Госвами Тулсидас • Издание Гита Пресс, Горакхпур</div>
+            <div class="hero-subtitle">Госвами Тулсидас • Полное русское издание «Гита Пресс»</div>
             <div class="hero-divider">❖ ❖ ❖</div>
           </div>
         `;
 
         data.sections.forEach(sec => {
+          const isTitle = sec.id === 'intro-title';
           html += `
             <div class="chapter-section" id="${sec.id}">
               <div class="chapter-header">
                 <div class="ch-heading-title">${sec.title}</div>
               </div>
-              <div style="white-space: pre-wrap; font-size: 17.5px; line-height: 1.85;">${escapeHtml(sec.content)}</div>
+              <div class="${isTitle ? 'verse-stanza verse-prayer' : ''}" style="white-space: pre-wrap; line-height: 1.75;">${escapeHtml(sec.content)}</div>
             </div>
           `;
         });
 
-        // Navigation button to Kanda 1
         html += `
           <div class="chapter-nav-row">
             <div></div>
@@ -1339,7 +1411,7 @@
             <div class="hero-divider">❖ ❖ ❖</div>
           </div>
           <div class="chapter-section" id="outro-content">
-            <div style="white-space: pre-wrap; font-size: 18px; line-height: 1.9; text-align: center;">${escapeHtml(data.content)}</div>
+            <div class="verse-stanza verse-prayer" style="white-space: pre-wrap; font-size: 21px; line-height: 1.8; text-align: center;">${escapeHtml(data.content)}</div>
           </div>
           <div class="chapter-nav-row">
             <button class="btn-ch-nav" onclick="window.srmApp.loadKanda('kanda_7')">
@@ -1351,6 +1423,24 @@
           </div>
         `;
         els.readerBox.innerHTML = html;
+      }
+
+      // Helper to check stanza type
+      function isPrayerStanza(stanza, chTitle) {
+        if (chTitle.toLowerCase().includes('призывани') || chTitle.toLowerCase().includes('молитв')) return true;
+        const txt = stanza.lines.join(' ').toLowerCase();
+        return txt.startsWith('чту ') || txt.startsWith('приветствую ') || txt.startsWith('склоняюсь ') || txt.startsWith('поклоняюсь ') || txt.startsWith('слава ');
+      }
+
+      function isDialogueStanza(stanza) {
+        const txt = stanza.lines.join(' ');
+        return txt.includes('«') || txt.includes('»') || stanza.lines.some(l => l.trim().startsWith('—') || l.trim().startsWith('-'));
+      }
+
+      // Helper to format line with interactive footnote markers
+      function formatVerseLine(lineText, chId) {
+        const escaped = escapeHtml(lineText);
+        return escaped.replace(/([*†‡§]+)/g, `<sup class="fn-marker" onclick="window.srmApp.scrollToFootnotes('${chId}')" title="Перейти к примечанию">$1</sup>`);
       }
 
       // Render Kanda Chapters
@@ -1371,7 +1461,10 @@
               <div class="chapter-header">
                 <div class="ch-number-badge">Глава ${ch.number}</div>
                 <h2 class="ch-heading-title">${ch.title}</h2>
-                <div class="ch-page-meta">Оригинал: Гита Пресс стр. ${ch.gp_page} • PDF стр. ${ch.pdf_page_start}–${ch.pdf_page_end}</div>
+                <div class="ch-page-meta">
+                  <span class="meta-pill">Гита Пресс: стр. ${ch.gp_page}</span>
+                  <span class="meta-pill">PDF: стр. ${ch.pdf_page_start}–${ch.pdf_page_end}</span>
+                </div>
               </div>
           `;
 
@@ -1383,7 +1476,7 @@
                   <div class="stop-icon">🛑</div>
                   <div class="stop-body">
                     <div class="stop-title">${st.text}</div>
-                    <div class="stop-sub">Священная остановка для чтения (стр. ${st.page})</div>
+                    <div class="stop-sub">Священная остановка для молитвенного чтения (PDF стр. ${st.page})</div>
                   </div>
                 </div>
               `;
@@ -1392,9 +1485,13 @@
 
           // Stanzas
           ch.stanzas.forEach(st => {
-            html += `<div class="verse-stanza">`;
+            const prayer = isPrayerStanza(st, ch.title);
+            const dialogue = !prayer && isDialogueStanza(st);
+            const stanzaClass = prayer ? 'verse-stanza verse-prayer' : (dialogue ? 'verse-stanza verse-dialogue' : 'verse-stanza');
+
+            html += `<div class="${stanzaClass}">`;
             st.lines.forEach(l => {
-              html += `<div class="verse-line">${escapeHtml(l)}</div>`;
+              html += `<div class="verse-line">${formatVerseLine(l, ch.id)}</div>`;
             });
             html += `</div>`;
           });
@@ -1402,8 +1499,8 @@
           // Footnotes
           if (ch.footnotes && ch.footnotes.length > 0) {
             html += `
-              <div class="chapter-footnotes-card">
-                <h4>Примечания и комментарии</h4>
+              <div class="chapter-footnotes-card" id="fn-${ch.id}">
+                <h4><span>✎</span> Примечания и комментарии к главе ${ch.number}</h4>
                 ${ch.footnotes.map(fn => `
                   <div class="footnote-item">${escapeHtml(fn.text)} <em style="font-size: 12px; color: var(--text-soft);">(стр. ${fn.page})</em></div>
                 `).join('')}
@@ -1453,6 +1550,9 @@
               state.currentChapterId = chId;
               localStorage.setItem('srm_last_chapter', chId);
 
+              // Update top bar pill
+              updateKandaPill(state.currentKandaId, chId);
+
               // Update active TOC item
               document.querySelectorAll('.toc-chapter-item').forEach(el => el.classList.remove('active'));
               const activeToc = document.getElementById(`toc-item-${chId}`);
@@ -1461,7 +1561,7 @@
               }
             }
           });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.18 });
 
         document.querySelectorAll('.chapter-section').forEach(sec => observer.observe(sec));
       }
@@ -1472,6 +1572,15 @@
         if (el) {
           el.scrollIntoView({ behavior: 'smooth' });
           window.location.hash = chId;
+        }
+      }
+
+      function scrollToFootnotes(chId) {
+        const fnEl = document.getElementById(`fn-${chId}`);
+        if (fnEl) {
+          fnEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          fnEl.style.outline = '2px solid var(--accent-gold)';
+          setTimeout(() => { fnEl.style.outline = 'none'; }, 1500);
         }
       }
 
@@ -1497,7 +1606,7 @@
       }
 
       function applyFontSize(sz) {
-        sz = Math.max(15, Math.min(26, sz));
+        sz = Math.max(16, Math.min(27, sz));
         state.fontSize = sz;
         document.body.style.setProperty('--content-font-size', sz + 'px');
         localStorage.setItem('srm_font_size', sz);
@@ -1508,10 +1617,10 @@
         document.body.style.setProperty('--content-max-width', w + 'px');
         localStorage.setItem('srm_content_width', w);
 
-        document.querySelectorAll('#btn-width-std, #btn-width-comf, #btn-width-wide').forEach(b => b.classList.remove('active'));
-        if (w === '850') document.getElementById('btn-width-std')?.classList.add('active');
-        if (w === '980') document.getElementById('btn-width-comf')?.classList.add('active');
-        if (w === '1120') document.getElementById('btn-width-wide')?.classList.add('active');
+        document.querySelectorAll('#btn-width-compact, #btn-width-standard, #btn-width-wide').forEach(b => b.classList.remove('active'));
+        if (w === '880') document.getElementById('btn-width-compact')?.classList.add('active');
+        if (w === '1020') document.getElementById('btn-width-standard')?.classList.add('active');
+        if (w === '1160') document.getElementById('btn-width-wide')?.classList.add('active');
       }
 
       // Search Modal
@@ -1539,7 +1648,7 @@
         if (!query || query.length < 2) {
           els.searchResultsBox.innerHTML = `
             <div style="text-align: center; color: var(--text-soft); padding: 40px 20px; font-size: 14px;">
-              Введите не менее 2 символов для поиска...
+              Введите не менее 2 символов для поиска по всей книге...
             </div>
           `;
           return;
@@ -1551,14 +1660,12 @@
         for (const item of state.searchIndex) {
           const matchIdx = item.full_text.indexOf(query);
           if (matchIdx !== -1) {
-            // Extract snippet around match
             const start = Math.max(0, matchIdx - 80);
             const end = Math.min(item.full_text.length, matchIdx + query.length + 100);
             let snippet = item.full_text.substring(start, end);
             if (start > 0) snippet = '...' + snippet;
             if (end < item.full_text.length) snippet += '...';
 
-            // Highlight
             const regex = new RegExp(`(${escapeRegex(query)})`, 'gi');
             const highlightedSnippet = escapeHtml(snippet).replace(regex, '<mark>$1</mark>');
 
@@ -1567,7 +1674,7 @@
               snippet: highlightedSnippet
             });
 
-            if (results.length >= 40) break; // limit to 40 fast matches
+            if (results.length >= 40) break;
           }
         }
 
@@ -1652,14 +1759,14 @@
         document.getElementById('btn-theme-sepia').addEventListener('click', () => applyTheme('sepia'));
         document.getElementById('btn-theme-dark').addEventListener('click', () => applyTheme('dark'));
 
-        // Font buttons
-        document.getElementById('btn-font-dec').addEventListener('click', () => applyFontSize(state.fontSize - 1));
-        document.getElementById('btn-font-inc').addEventListener('click', () => applyFontSize(state.fontSize + 1));
+        // Font buttons (step 1.5px)
+        document.getElementById('btn-font-dec').addEventListener('click', () => applyFontSize(state.fontSize - 1.5));
+        document.getElementById('btn-font-inc').addEventListener('click', () => applyFontSize(state.fontSize + 1.5));
 
-        // Width buttons
-        document.getElementById('btn-width-std').addEventListener('click', () => applyContentWidth('850'));
-        document.getElementById('btn-width-comf').addEventListener('click', () => applyContentWidth('980'));
-        document.getElementById('btn-width-wide').addEventListener('click', () => applyContentWidth('1120'));
+        // Width buttons (880px / 1020px / 1160px)
+        document.getElementById('btn-width-compact').addEventListener('click', () => applyContentWidth('880'));
+        document.getElementById('btn-width-standard').addEventListener('click', () => applyContentWidth('1020'));
+        document.getElementById('btn-width-wide').addEventListener('click', () => applyContentWidth('1160'));
 
         // Search modal
         els.btnOpenSearch.addEventListener('click', openSearch);
@@ -1703,7 +1810,7 @@
           const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
           els.progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
 
-          if (scrollTop > 400) {
+          if (scrollTop > 350) {
             els.btnBackToTop.classList.add('visible');
           } else {
             els.btnBackToTop.classList.remove('visible');
@@ -1746,6 +1853,7 @@
       window.srmApp = {
         loadKanda,
         scrollToChapter,
+        scrollToFootnotes,
         toggleKandaGroup,
         navigateAdjacentKanda,
         selectSearchResult
