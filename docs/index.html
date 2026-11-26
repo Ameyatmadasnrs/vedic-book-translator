@@ -687,6 +687,17 @@
       margin-bottom: 3px;
       line-height: 1.62;
       letter-spacing: 0.01em;
+      padding-left: 1.85rem;
+      text-indent: -1.85rem;
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    /* Centered verses (e.g. outro prayer) do not use hanging indent */
+    .verse-stanza[style*="text-align: center"] .verse-line,
+    .verse-stanza[style*="text-align:center"] .verse-line {
+      padding-left: 0;
+      text-indent: 0;
     }
 
     /* Distinct type: Prayer & Invocations */
@@ -1295,6 +1306,10 @@
       .publisher-paragraph {
         text-indent: 1.2em;
         text-align: left;
+      }
+      .verse-line {
+        padding-left: 1.45rem;
+        text-indent: -1.45rem;
       }
       :root {
         --content-font-size: 19px;
