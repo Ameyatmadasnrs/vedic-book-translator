@@ -757,6 +757,303 @@
       margin-bottom: 0;
     }
 
+    /* Introduction & Ritual Sections */
+    .intro-card-title-prayer {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-gold);
+      border-radius: 10px;
+      padding: 30px 24px;
+      margin: 10px 0 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .publisher-paragraph {
+      margin-bottom: 16px;
+      line-height: 1.78;
+      text-indent: 1.8em;
+      text-align: justify;
+    }
+
+    .publisher-signature {
+      text-align: right;
+      font-weight: 700;
+      margin-top: 24px;
+      font-style: italic;
+      color: var(--accent-sacred);
+    }
+
+    .reading-order-container {
+      margin-top: 14px;
+    }
+
+    .ritual-block {
+      margin-bottom: 30px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .ritual-subtitle {
+      font-family: var(--font-header);
+      color: var(--accent-sacred);
+      font-size: 20px;
+      margin-bottom: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    .ritual-desc {
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-size: 17.5px;
+      line-height: 1.6;
+    }
+
+    .ritual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .ritual-item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px 16px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .ritual-item-card:hover {
+      border-color: var(--accent-gold);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .ritual-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .ritual-item-name {
+      font-weight: 700;
+      color: var(--accent-sacred);
+      font-size: 16px;
+    }
+
+    .ritual-item-dir {
+      font-size: 12.5px;
+      color: var(--text-soft);
+      font-style: italic;
+    }
+
+    .ritual-item-prayer {
+      font-size: 15.5px;
+      line-height: 1.58;
+      color: var(--text-main);
+      font-style: italic;
+    }
+
+    .ritual-viniyoga-card {
+      background: var(--accent-gold-soft);
+      border-left: 3px solid var(--accent-gold);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 18px 0;
+      font-size: 16.5px;
+      line-height: 1.65;
+    }
+
+    .viniyoga-label {
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+
+    .ritual-upacharas-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 18px 0;
+    }
+
+    .upachara-title {
+      font-weight: 700;
+      color: var(--accent-sacred);
+      margin-bottom: 12px;
+      font-size: 16.5px;
+    }
+
+    .upachara-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .upachara-item {
+      color: var(--text-main);
+    }
+
+    .nyasa-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .nyasa-step-row {
+      background: var(--bg-card);
+      border-left: 3px solid var(--accent-gold);
+      border-radius: 6px;
+      padding: 12px 16px;
+    }
+
+    .nyasa-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nyasa-limb {
+      font-weight: 700;
+      color: var(--accent-sacred);
+      font-size: 16.5px;
+    }
+
+    .nyasa-mantra {
+      font-weight: 600;
+      color: var(--accent-gold);
+      font-size: 15px;
+      font-family: var(--font-header);
+    }
+
+    .nyasa-verse {
+      font-size: 15.5px;
+      line-height: 1.55;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .nyasa-action {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .table-responsive-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 16px 0 28px;
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .parayana-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 640px;
+      font-size: 15px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+    }
+
+    .parayana-table th {
+      background: var(--bg-card);
+      color: var(--accent-sacred);
+      font-family: var(--font-header);
+      font-weight: 700;
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--border-color);
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .parayana-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border-soft);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    .parayana-table tr:hover td {
+      background: var(--border-soft);
+    }
+
+    .table-kanda-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+
+    .table-ch-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    .btn-table-jump {
+      padding: 6px 14px;
+      font-size: 13px;
+      border-radius: 6px;
+      background: var(--accent-gold-soft);
+      color: var(--accent-sacred);
+      border: 1px solid var(--accent-gold);
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-table-jump:hover {
+      background: var(--accent-sacred);
+      color: #ffffff;
+      border-color: var(--accent-sacred);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .epigraph-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent-gold);
+      border-radius: 8px;
+      padding: 22px 28px;
+      text-align: center;
+      margin: 28px 0;
+      font-style: italic;
+      font-size: 20px;
+      line-height: 1.75;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .epigraph-icon {
+      font-size: 22px;
+      color: var(--accent-gold);
+      margin-bottom: 8px;
+    }
+
+    .schedule-intro-text {
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
     /* Chapter Navigation Buttons */
     .chapter-nav-row {
       display: flex;
@@ -970,13 +1267,34 @@
         padding: 10px 12px;
       }
       main.reader-container {
-        padding: 14px 12px 60px;
+        padding: 12px 14px 60px;
       }
       .chapter-header .ch-heading-title {
         font-size: 21px;
       }
       .kanda-hero .hero-title {
         font-size: 27px;
+      }
+      .ritual-grid {
+        grid-template-columns: 1fr;
+      }
+      .upachara-grid {
+        grid-template-columns: 1fr;
+      }
+      .intro-card-title-prayer {
+        padding: 18px 14px;
+      }
+      .epigraph-card {
+        padding: 16px 16px;
+        font-size: 17.5px;
+      }
+      .parayana-table th, .parayana-table td {
+        padding: 9px 10px;
+        font-size: 13px;
+      }
+      .publisher-paragraph {
+        text-indent: 1.2em;
+        text-align: left;
       }
       :root {
         --content-font-size: 19px;
@@ -1377,22 +1695,159 @@
         `;
 
         data.sections.forEach(sec => {
-          const isTitle = sec.id === 'intro-title';
-          html += `
-            <div class="chapter-section" id="${sec.id}">
-              <div class="chapter-header">
-                <div class="ch-heading-title">${sec.title}</div>
+          if (sec.type === 'title_prayer') {
+            html += `
+              <div class="chapter-section" id="${sec.id}">
+                <div class="intro-card-title-prayer">
+                  <div class="prayer-lines" style="white-space: pre-wrap; font-size: 20px; line-height: 1.82; text-align: center;">${escapeHtml(sec.content)}</div>
+                </div>
               </div>
-              <div class="${isTitle ? 'verse-stanza verse-prayer' : ''}" style="white-space: pre-wrap; line-height: 1.75;">${escapeHtml(sec.content)}</div>
-            </div>
-          `;
+            `;
+          } else if (sec.type === 'publisher_note') {
+            html += `
+              <div class="chapter-section" id="${sec.id}">
+                <div class="chapter-header">
+                  <h2 class="ch-heading-title">${escapeHtml(sec.title)}</h2>
+                </div>
+                <div class="publisher-note-body">
+                  ${sec.paragraphs.map(p => {
+                    const isSig = p.startsWith('—');
+                    return `<p class="${isSig ? 'publisher-signature' : 'publisher-paragraph'}">${escapeHtml(p)}</p>`;
+                  }).join('')}
+                </div>
+              </div>
+            `;
+          } else if (sec.type === 'reading_order') {
+            html += `
+              <div class="chapter-section" id="${sec.id}">
+                <div class="chapter-header">
+                  <h2 class="ch-heading-title">${escapeHtml(sec.title)}</h2>
+                </div>
+                <div class="reading-order-container">
+            `;
+            sec.subsections.forEach(sub => {
+              html += `
+                <div class="ritual-block" id="sub-${sub.id}">
+                  <h3 class="ritual-subtitle">❖ ${escapeHtml(sub.title)}</h3>
+                  ${sub.description ? `<p class="ritual-desc">${escapeHtml(sub.description)}</p>` : ''}
+              `;
+              if (sub.items) {
+                html += `<div class="ritual-grid">`;
+                sub.items.forEach(it => {
+                  html += `
+                    <div class="ritual-item-card">
+                      <div class="ritual-item-header">
+                        <span class="ritual-item-name">${escapeHtml(it.name)}</span>
+                        ${it.direction ? `<span class="ritual-item-dir">Направление: ${escapeHtml(it.direction)}</span>` : ''}
+                      </div>
+                      <div class="ritual-item-prayer">${escapeHtml(it.prayer)}</div>
+                    </div>
+                  `;
+                });
+                html += `</div>`;
+              }
+              if (sub.verses) {
+                html += `<div class="verse-stanza verse-prayer">`;
+                sub.verses.forEach(v => {
+                  html += `<div class="verse-line" style="margin-bottom: 8px;">${escapeHtml(v)}</div>`;
+                });
+                html += `</div>`;
+              }
+              if (sub.viniyoga) {
+                html += `
+                  <div class="ritual-viniyoga-card">
+                    <div class="viniyoga-label">Виниога (Осознанное посвящение):</div>
+                    <div class="viniyoga-text">${escapeHtml(sub.viniyoga)}</div>
+                  </div>
+                `;
+              }
+              if (sub.upacharas) {
+                html += `
+                  <div class="ritual-upacharas-box">
+                    <div class="upachara-title">Шестнадцать подношений почитания (Шодашопачара):</div>
+                    <div class="upachara-grid">
+                      ${sub.upacharas.map(u => `<div class="upachara-item">🌿 ${escapeHtml(u)}</div>`).join('')}
+                    </div>
+                  </div>
+                `;
+              }
+              if (sub.steps) {
+                html += `<div class="nyasa-steps-list">`;
+                sub.steps.forEach(st => {
+                  const label = st.fingers || st.limb || '';
+                  html += `
+                    <div class="nyasa-step-row">
+                      <div class="nyasa-header">
+                        <span class="nyasa-limb">${escapeHtml(label)}</span>
+                        <span class="nyasa-mantra">${escapeHtml(st.mantra)}</span>
+                      </div>
+                      <div class="nyasa-verse"><em>${escapeHtml(st.verse)}</em></div>
+                      <div class="nyasa-action">${escapeHtml(st.action)}</div>
+                    </div>
+                  `;
+                });
+                html += `</div>`;
+              }
+              html += `</div>`;
+            });
+            html += `</div></div>`;
+          } else if (sec.type === 'recitation_schedule') {
+            html += `
+              <div class="chapter-section" id="${sec.id}">
+                <div class="chapter-header">
+                  <h2 class="ch-heading-title">${escapeHtml(sec.title)}</h2>
+                </div>
+                <p class="schedule-intro-text">${escapeHtml(sec.description)}</p>
+                <div class="table-responsive-wrapper">
+                  <table class="parayana-table">
+                    <thead>
+                      <tr>
+                        <th style="width: 75px; text-align: center;">День</th>
+                        <th>Канда и глава</th>
+                        <th style="width: 135px; text-align: center;">Русский PDF</th>
+                        <th style="width: 135px; text-align: center;">Гита Пресс</th>
+                        <th style="width: 110px; text-align: center;">Переход</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${sec.stops.map(st => `
+                        <tr>
+                          <td style="text-align: center;"><strong>День ${st.day}</strong></td>
+                          <td>
+                            <div class="table-kanda-tag">${escapeHtml(st.kanda_name)}</div>
+                            <div class="table-ch-title">Глава ${st.chapter_num}. ${escapeHtml(st.title)}</div>
+                          </td>
+                          <td style="text-align: center;"><span class="meta-pill">стр. ${st.pdf_page}</span></td>
+                          <td style="text-align: center;"><span class="meta-pill">стр. ${st.gp_page}</span></td>
+                          <td style="text-align: center;">
+                            <button class="btn-table-jump" onclick="window.srmApp.loadKanda('${st.kanda_id}', '${st.chapter_id}')">
+                              Читать →
+                            </button>
+                          </td>
+                        </tr>
+                      `).join('')}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            `;
+          } else if (sec.type === 'epigraph') {
+            html += `
+              <div class="chapter-section" id="${sec.id}">
+                <div class="epigraph-card">
+                  <div class="epigraph-icon">❖ ❖ ❖</div>
+                  <div class="epigraph-content" style="white-space: pre-wrap;">${escapeHtml(sec.content)}</div>
+                </div>
+              </div>
+            `;
+          }
         });
 
         html += `
           <div class="chapter-nav-row">
             <div></div>
             <button class="btn-ch-nav next" onclick="window.srmApp.loadKanda('kanda_1')">
-              Перейти к Бала-канде →
+              Перейти к чтению: Бала-канда, Глава 1 →
             </button>
           </div>
         `;
@@ -1406,12 +1861,27 @@
           <div class="kanda-hero">
             <div class="hero-om">ॐ</div>
             <div class="hero-kanda-num">Священное завершение</div>
-            <h1 class="hero-title">Арати Шри Рамаяне</h1>
-            <div class="hero-subtitle">Гимн поклонения и благодарения</div>
+            <h1 class="hero-title">${escapeHtml(data.title)}</h1>
+            <div class="hero-subtitle">${escapeHtml(data.subtitle)} • PDF стр. ${data.page}</div>
             <div class="hero-divider">❖ ❖ ❖</div>
           </div>
           <div class="chapter-section" id="outro-content">
-            <div class="verse-stanza verse-prayer" style="white-space: pre-wrap; font-size: 21px; line-height: 1.8; text-align: center;">${escapeHtml(data.content)}</div>
+            <p class="outro-conclusion" style="text-align: center; font-style: italic; margin-bottom: 26px; font-size: 20.5px; color: var(--accent-sacred); line-height: 1.6;">
+              ${escapeHtml(data.conclusion)}
+            </p>
+            <div class="verse-stanza verse-prayer" style="font-size: 21px; line-height: 1.8; text-align: center; max-width: 840px; margin: 0 auto 30px;">
+              ${data.stanzas.map(st => `
+                <div style="margin-bottom: 18px;">
+                  ${st.lines.map(l => `<div class="verse-line">${escapeHtml(l)}</div>`).join('')}
+                </div>
+              `).join('')}
+            </div>
+            ${data.footnote ? `
+              <div class="chapter-footnotes-card" style="max-width: 840px; margin: 24px auto 0;">
+                <h4><span>✎</span> Примечание к Арати</h4>
+                <div class="footnote-item">* ${escapeHtml(data.footnote)}</div>
+              </div>
+            ` : ''}
           </div>
           <div class="chapter-nav-row">
             <button class="btn-ch-nav" onclick="window.srmApp.loadKanda('kanda_7')">
